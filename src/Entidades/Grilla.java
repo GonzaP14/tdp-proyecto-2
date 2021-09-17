@@ -3,6 +3,8 @@ package Entidades;
 
 	import java.awt.Color;
 
+
+
 	public class Grilla {
 	    //Atributos
 	    private Color grilla[][];
@@ -26,7 +28,7 @@ package Entidades;
 	    		if(t.dondeMoverIzquierda()[i]==null || t.dondeMoverDerecha()[i]==null || t.dondeMoverAbajo()==null) {
 	    			retorno=true;
 	    		}
-	    		if( !grilla[t.dondeMoverIzquierda()[i].getX()][t.dondeMoverIzquierda()[i].getY()].getColorComponents(enCoordenada).equals(negro) || !grilla[t.dondeMoverDerecha()[i].getX()][t.dondeMoverDerecha()[i].getY()].getColorComponents(enCoordenada).equals(negro) || !grilla[t.dondeMoverAbajo()[i].getX()][t.dondeMoverAbajo()[i].getY()].getColorComponents(enCoordenada).equals(negro)) {
+	    		if( !grilla[t.dondeMoverIzquierda()[i].getX()][t.dondeMoverIzquierda()[i].getY()].equals(negro) || !grilla[t.dondeMoverDerecha()[i].getX()][t.dondeMoverDerecha()[i].getY()].equals(negro) || !grilla[t.dondeMoverAbajo()[i].getX()][t.dondeMoverAbajo()[i].getY()].equals(negro)) {
 	    			retorno= true;
 	    		}
 	    	}
@@ -37,11 +39,11 @@ package Entidades;
 	    public boolean evaluarLinea(int x) {
 	    	
 	    	boolean aEliminar=false;
-	    	float[] enCoordenada=null;
+
 	    	Color negro=new Color(0,0,0);
 	    	
 	    	for(int columnas=0;columnas<10;columnas++) {
-	    		if(grilla[x][columnas].getColorComponents(enCoordenada).equals(negro) ) {
+	    		if(grilla[x][columnas].equals(negro) ) {
 	    			aEliminar=true; 
 	    		}
 	    	}
@@ -58,7 +60,20 @@ package Entidades;
 	    	}
 	    }
 	    
+	    
 	    //Obtener color de celda
-
+	    public Color obtenerColorCelda(Par p) {
+	    	return grilla[p.getX()][p.getY()];
+	    }
+	    
+	    
+	    
+	    public static void main(String args[]) {
+			Grilla g=new Grilla();
+			Par p= new Par (1,1);
+			System.out.println(g.obtenerColorCelda(p));
+			
+			
+		}
 	}
 
