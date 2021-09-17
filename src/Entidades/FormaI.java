@@ -4,88 +4,97 @@ import java.awt.Color;
 
 public class FormaI extends Tetrimino {
 	
-	public FormaI (Par [] posicionesCuadrados, Color color) {
-		this.posicionesCuadrados = posicionesCuadrados;
-		this.color = color;
-		this.rotacionActual = 0;
+	public FormaI() {
+		rotacionActual = 0;
+		posicionesCuadrados = new Par[4];
+		for( int i = 0; i < cantidadCuadrados ; i++) {
+			posicionesCuadrados[i] = new Par(i,0);
+		}
+		color = new Color(0,255,255);
 	}
-	
-	@Override
+
+
 	public void rotarDerecha() {
-		// TODO Auto-generated method stub
+		if(rotacionActual == 0) {
+			rotacionActual = 270;
+			posicionesCuadrados = dondeRotarDerecha();
+		}
+		else {
+			rotacionActual -= 90;
+			posicionesCuadrados = dondeRotarDerecha();
+		}
 		
 	}
 
 	@Override
 	public void rotarIzquierda() {
-		// TODO Auto-generated method stub
+		if(rotacionActual == 270) {
+			rotacionActual = 0;
+			posicionesCuadrados = dondeRotarIzquierda();
+		}
+		else {
+			rotacionActual += 90;
+			posicionesCuadrados = dondeRotarIzquierda();
+		}
 		
 	}
 
 	@Override
-	public Par[] dondeMoverIzquierda() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Par[] dondeMoverDerecha() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Par[] dondeMoverAbajo() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
+	//Hay que modificar rotaciones,no estan bien todavia
 	public Par[] dondeRotarDerecha() {
-		// TODO Auto-generated method stub
-		return null;
+		Par[] posicionesARotar = new Par[4];
+		if( rotacionActual == 0 || rotacionActual == 180 ) {
+			for(int i = 0; i < cantidadCuadrados ; i++) {
+				posicionesARotar[i] = new Par( posicionesCuadrados[i].getX() + 1 , posicionesCuadrados[i].getY() );
+			}
+		}
+		else {
+			for(int i = 0; i < cantidadCuadrados ; i++) {
+				posicionesARotar[i] = new Par( posicionesCuadrados[i].getX() + 1 , posicionesCuadrados[i].getY() );
+			}
+		}
+		return posicionesARotar;
 	}
 
 	@Override
 	public Par[] dondeRotarIzquierda() {
-		// TODO Auto-generated method stub
-		return null;
+		Par[] posicionesARotar = new Par[4];
+		if( rotacionActual == 0 || rotacionActual == 180 ) {
+			for(int i = 0; i < cantidadCuadrados ; i++) {
+				posicionesARotar[i] = new Par( posicionesCuadrados[i].getX() + 1 , posicionesCuadrados[i].getY() );
+			}
+		}
+		else {
+			for(int i = 0; i < cantidadCuadrados ; i++) {
+				posicionesARotar[i] = new Par( posicionesCuadrados[i].getX() + 1 , posicionesCuadrados[i].getY() );
+			}
+		}
+		return posicionesARotar;
 	}
+
 
 	@Override
 	public Par[] getPosicionesCuadrado() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setPosicionesCuadrado(Par[] posicionesCuadrados) {
-		// TODO Auto-generated method stub
-		
+		return posicionesCuadrados;
 	}
 
 	@Override
 	public Color getColor() {
-		// TODO Auto-generated method stub
-		return null;
+		return color;
 	}
+
 
 	@Override
 	public void setColor(Color color) {
-		// TODO Auto-generated method stub
+		color = this.color;
 		
 	}
+
 
 	@Override
 	public int getRotacion() {
-		// TODO Auto-generated method stub
-		return 0;
+		return rotacionActual;
 	}
 
-	@Override
-	public void setRotacion(int rotacionActual) {
-		// TODO Auto-generated method stub
-		
-	}
 	
 }

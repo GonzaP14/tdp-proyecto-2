@@ -27,19 +27,37 @@ public abstract class Tetrimino {
 	 * Retorna las posiciones a las cuales se trasladaría el tetrimino con un movimiento a izquierda.
 	 * @return Posiciones del tetrimino con movimiento a izquierda.
 	 */
-	public abstract Par[] dondeMoverIzquierda();
+	public Par[] dondeMoverIzquierda() {
+		Par[] posicionesAMover = new Par[4];
+		for(int i = 0; i < cantidadCuadrados ; i++) {
+			posicionesAMover[i] = new Par( posicionesCuadrados[i].getX() - 1 , posicionesCuadrados[i].getY() );
+		}
+		return posicionesAMover;
+	}
 		
 	/**
 	 * Retorna las posiciones a las cuales se trasladaría el tetrimino con un movimiento a derecha.
 	 * @return Posiciones del tetrimino con movimiento a derecha.
 	 */
-	public abstract Par[] dondeMoverDerecha();
+	public Par[] dondeMoverDerecha() {
+		Par[] posicionesAMover = new Par[4];
+		for(int i = 0; i < cantidadCuadrados ; i++) {
+			posicionesAMover[i] = new Par( posicionesCuadrados[i].getX() + 1 , posicionesCuadrados[i].getY() );
+		}
+		return posicionesAMover;
+	}
 	
 	/**
 	 * Retorna las posiciones a las cuales se trasladaría el tetrimino con un movimiento hacia abajo.
 	 * @return Posiciones del tetrimino con movimiento hacia a abajo.
 	 */
-	public abstract Par[] dondeMoverAbajo();
+	public Par[] dondeMoverAbajo() {
+		Par[] posicionesAMover = new Par[4];
+		for(int i = 0; i < cantidadCuadrados ; i++) {
+			posicionesAMover[i] = new Par( posicionesCuadrados[i].getX() , posicionesCuadrados[i].getY() - 1 );
+		}
+		return posicionesAMover;
+	}
 	
 	/**
 	 * Retorna las posiciones a las cuales se trasladaría el tetrimino con una rotación a derecha.
@@ -58,13 +76,7 @@ public abstract class Tetrimino {
 	 * @return Posiciones del tetrimino.
 	 */
 	public abstract Par [] getPosicionesCuadrado();
-	
-	/**
-	 * Establece las posiciones del tetrimino. 
-	 * @param posicionesCuadrados Posiciones nuevas del tetrimino.
-	 */
-	public abstract void setPosicionesCuadrado(Par [] posicionesCuadrados);
-	
+		
 	/**
 	 * Retorna el color del tetrimino. 
 	 * @return Color del tetrimino.
@@ -87,5 +99,4 @@ public abstract class Tetrimino {
 	 * Establece la rotación del tetrimino.
 	 * @param rotacionActual Rotacion nueva del tetrimino.
 	 */
-	public abstract void setRotacion(int rotacionActual);
 }
