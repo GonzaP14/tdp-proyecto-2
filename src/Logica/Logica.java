@@ -64,4 +64,17 @@ public class Logica {
     public void rotarTetrimonioActual() {
 
     }
+
+	public int getNivelActual() {
+		return nivelActual;
+	}
+
+	public int getPuntajeActual() {
+		return puntajeActual;
+	}
+
+	public boolean getEstaPausado() {
+		return estaPausado;
+	}
+ 
 }

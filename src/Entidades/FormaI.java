@@ -10,33 +10,7 @@ public class FormaI extends Tetrimino {
 		for( int i = 0; i < cantidadCuadrados ; i++) {
 			posicionesCuadrados[i] = new Par(i,0);
 		}
-		color = new Color(0,255,255);
-	}
-
-
-	public void rotarDerecha() {
-		if(rotacionActual == 0) {
-			rotacionActual = 270;
-			posicionesCuadrados = dondeRotarDerecha();
-		}
-		else {
-			rotacionActual -= 90;
-			posicionesCuadrados = dondeRotarDerecha();
-		}
-		
-	}
-
-	@Override
-	public void rotarIzquierda() {
-		if(rotacionActual == 270) {
-			rotacionActual = 0;
-			posicionesCuadrados = dondeRotarIzquierda();
-		}
-		else {
-			rotacionActual += 90;
-			posicionesCuadrados = dondeRotarIzquierda();
-		}
-		
+		color = Color.cyan;
 	}
 
 	@Override
@@ -71,30 +45,5 @@ public class FormaI extends Tetrimino {
 		}
 		return posicionesARotar;
 	}
-
-
-	@Override
-	public Par[] getPosicionesCuadrado() {
-		return posicionesCuadrados;
-	}
-
-	@Override
-	public Color getColor() {
-		return color;
-	}
-
-
-	@Override
-	public void setColor(Color color) {
-		color = this.color;
-		
-	}
-
-
-	@Override
-	public int getRotacion() {
-		return rotacionActual;
-	}
-
 	
 }

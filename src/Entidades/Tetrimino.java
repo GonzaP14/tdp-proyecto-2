@@ -16,12 +16,30 @@ public abstract class Tetrimino {
 	/**
 	 * Rota el tetrimino hacia la derecha.
 	 */
-	public abstract void rotarDerecha();
+	public void rotarDerecha() {
+		if(rotacionActual == 0) {
+			rotacionActual = 270;
+			posicionesCuadrados = dondeRotarDerecha();
+		}
+		else {
+			rotacionActual -= 90;
+			posicionesCuadrados = dondeRotarDerecha();
+		}
+	}
 	
 	/**
 	 * Rota el tetrimino hacia la izquierda.
 	 */
-	public abstract void rotarIzquierda();
+	public void rotarIzquierda() {
+		if(rotacionActual == 270) {
+			rotacionActual = 0;
+			posicionesCuadrados = dondeRotarIzquierda();
+		}
+		else {
+			rotacionActual += 90;
+			posicionesCuadrados = dondeRotarIzquierda();
+		}
+	}
 	
 	/**
 	 * Retorna las posiciones a las cuales se trasladaría el tetrimino con un movimiento a izquierda.
@@ -75,28 +93,31 @@ public abstract class Tetrimino {
 	 * Retorna las posiciones actuales del tetrimino.
 	 * @return Posiciones del tetrimino.
 	 */
-	public abstract Par [] getPosicionesCuadrado();
+	public Par [] getPosicionesCuadrado() {
+		return posicionesCuadrados;
+	}
 		
 	/**
 	 * Retorna el color del tetrimino. 
 	 * @return Color del tetrimino.
 	 */
-	public abstract Color getColor();
+	public Color getColor() {
+		return color;
+	}
 	
 	/**
 	 * Establece el color del tetrimino.
 	 * @param color Color nuevo del tetrimino.
 	 */
-	public abstract void setColor(Color color);
+	public void setColor(Color color) {
+		this.color = color;
+	}
 	
 	/**
 	 * Retorna la rotacion actual del tetrimino.
 	 * @return Rotacion actual del tetrimino.
 	 */
-	public abstract int getRotacion();
-	
-	/**
-	 * Establece la rotación del tetrimino.
-	 * @param rotacionActual Rotacion nueva del tetrimino.
-	 */
+	public int getRotacion() {
+		return rotacionActual;
+	}
 }
