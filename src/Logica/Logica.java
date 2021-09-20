@@ -69,4 +69,17 @@ public class Logica {
     public void rotarTetriminoActual () {
 
     }
+
+	public int getNivelActual() {
+		return nivelActual;
+	}
+
+	public int getPuntajeActual() {
+		return puntajeActual;
+	}
+
+	public boolean getEstaPausado() {
+		return estaPausado;
+	}
+ 
 }

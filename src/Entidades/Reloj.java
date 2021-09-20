@@ -11,7 +11,7 @@ public class Reloj implements Runnable{
 	@Override
 	public void run() {
 		while (true) {
-	        if(!LOGICA.estaPausado() && !LOGICA.gameOver()) {
+	        if( !LOGICA.getEstaPausado() ) {
 	        	try {
 					LOGICA.bajarForma();
 					Thread.sleep(1400 - 200* LOGICA.getNivelActual());

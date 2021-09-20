@@ -9,36 +9,6 @@ public class FormaZ extends Tetrimino {
 		this.color = color;
 		this.rotacionActual = 0;
 	}
-	
-	@Override
-	public void rotarDerecha() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void rotarIzquierda() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public Par[] dondeMoverIzquierda() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Par[] dondeMoverDerecha() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Par[] dondeMoverAbajo() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public Par[] dondeRotarDerecha() {
@@ -52,40 +22,4 @@ public class FormaZ extends Tetrimino {
 		return null;
 	}
 
-	@Override
-	public Par[] getPosicionesCuadrado() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setPosicionesCuadrado(Par[] posicionesCuadrados) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public Color getColor() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setColor(Color color) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public int getRotacion() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public void setRotacion(int rotacionActual) {
-		// TODO Auto-generated method stub
-		
-	}
-	
 }
