@@ -1,22 +1,27 @@
 package Logica;
 
 public class Logica {
-    //Atributos
-    private int nivelActual,puntajeActual;
+    
+	// Atributos de instancia.
+	
+    private int nivelActual;
+    private int puntajeActual;
     private boolean estaPausado;
 
-    //Constructor
+    // Constructor.
+   
     public Logica() {
         nivelActual = 0;
         puntajeActual = 0;
         estaPausado = false;
     }
 
-    //Comandos
+    // Métodos.
+       
     public void pausar() {
         estaPausado = true;
     }
-
+    
     public void reanudar() {
         estaPausado = false;
     }
@@ -61,7 +66,7 @@ public class Logica {
 
     }
 
-    public void rotarTetrimonioActual() {
+    public void rotarTetriminoActual () {
 
     }
 }

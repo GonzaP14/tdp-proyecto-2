@@ -1,5 +1,7 @@
 package Entidades;
+
 import Logica.Logica;
+
 public class Reloj implements Runnable{
 	Logica LOGICA;
 	public Reloj(Logica LOGICA) {

@@ -1,9 +1,6 @@
 package Entidades;
 
-
 	import java.awt.Color;
-
-
 
 	public class Grilla {
 	    //Atributos
