@@ -4,46 +4,17 @@ import java.awt.Color;
 
 public class FormaI extends Tetrimino {
 	
-	public FormaI() {
+	public FormaI(Grilla miGrilla) {
 		rotacionActual = 0;
-		posicionesCuadrados = new Par[4];
-		for( int i = 0; i < cantidadCuadrados ; i++) {
-			posicionesCuadrados[i] = new Par(i,0);
-		}
-		color = Color.cyan;
+		rotaciones = new Par[][]
+				{ { new Par(0, 1), new Par(1, 1), new Par(2, 1), new Par(3, 1) },
+					{ new Par(1, 0), new Par(1, 1), new Par(1, 2), new Par(1, 3) },
+					{ new Par(0, 1), new Par(1, 1), new Par(2, 1), new Par(3, 1) },
+					{ new Par(1, 0), new Par(1, 1), new Par(1, 2), new Par(1, 3) } };
+			posicionesActuales = rotaciones[0];
+			color = Color.cyan;
+		centroPieza = origenGrilla;
+		this.miGrilla = miGrilla;
 	}
 
-	@Override
-	//Hay que modificar rotaciones,no estan bien todavia
-	public Par[] dondeRotarDerecha() {
-		Par[] posicionesARotar = new Par[4];
-		if( rotacionActual == 0 || rotacionActual == 180 ) {
-			for(int i = 0; i < cantidadCuadrados ; i++) {
-				posicionesARotar[i] = new Par( posicionesCuadrados[i].getX() + 1 , posicionesCuadrados[i].getY() );
-			}
-		}
-		else {
-			for(int i = 0; i < cantidadCuadrados ; i++) {
-				posicionesARotar[i] = new Par( posicionesCuadrados[i].getX() + 1 , posicionesCuadrados[i].getY() );
-			}
-		}
-		return posicionesARotar;
-	}
-
-	@Override
-	public Par[] dondeRotarIzquierda() {
-		Par[] posicionesARotar = new Par[4];
-		if( rotacionActual == 0 || rotacionActual == 180 ) {
-			for(int i = 0; i < cantidadCuadrados ; i++) {
-				posicionesARotar[i] = new Par( posicionesCuadrados[i].getX() + 1 , posicionesCuadrados[i].getY() );
-			}
-		}
-		else {
-			for(int i = 0; i < cantidadCuadrados ; i++) {
-				posicionesARotar[i] = new Par( posicionesCuadrados[i].getX() + 1 , posicionesCuadrados[i].getY() );
-			}
-		}
-		return posicionesARotar;
-	}
-	
 }

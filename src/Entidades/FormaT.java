@@ -4,22 +4,17 @@ import java.awt.Color;
 
 public class FormaT extends Tetrimino {
 	
-	public FormaT (Par [] posicionesCuadrados, Color color) {
-		this.posicionesCuadrados = posicionesCuadrados;
-		this.color = color;
-		this.rotacionActual = 0;
-	}
-
-	@Override
-	public Par[] dondeRotarDerecha() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Par[] dondeRotarIzquierda() {
-		// TODO Auto-generated method stub
-		return null;
+	public FormaT (Grilla miGrilla) {	
+		rotacionActual = 0;
+		rotaciones = new Par[][]
+			{ { new Par(1, 0), new Par(0, 1), new Par(1, 1), new Par(2, 1) },
+			{ new Par(1, 0), new Par(0, 1), new Par(1, 1), new Par(1, 2) },
+			{ new Par(0, 1), new Par(1, 1), new Par(2, 1), new Par(1, 2) },
+			{ new Par(1, 0), new Par(1, 1), new Par(2, 1), new Par(1, 2) } };
+		posicionesActuales = rotaciones[0];
+		color = Color.magenta;
+		centroPieza = origenGrilla;
+		this.miGrilla = miGrilla;
 	}
 
 }
