@@ -27,7 +27,7 @@ public class Logica {
         miReloj = new Reloj(this);
         //tetriminoActual = nuevo tetrimino random;
         //tetriminoSiguiente = nuevo tetrimino random;
-        arregloTetriminos = new Tetrimino[]{new FormaCubo(miGrilla), new FormaI(miGrilla), new FormaJ(miGrilla), new FormaL(miGrilla), new FormaS(miGrilla, new FormaT(miGrilla), new FormaZ(miGrilla)};
+        arregloTetriminos = new Tetrimino[]{new FormaCubo(miGrilla), new FormaI(miGrilla), new FormaJ(miGrilla), new FormaL(miGrilla), new FormaS(miGrilla), new FormaT(miGrilla), new FormaZ(miGrilla)};
         tetriminoGuardado = null;
         miGui = new GUI();
         

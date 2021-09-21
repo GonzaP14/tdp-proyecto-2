@@ -10,7 +10,14 @@ public class BloqueGrafico {
         this.cuadrado =new ImageIcon();
        	this.imagenes = new String[]{"/Imagenes/CuadradoAmarillo.png", "/Imagenes/CuadradoAzul.png","/Imagenes/CuadradoCyan.png","/Imagenes/CuadradoNaranja.png","/Imagenes/CuadradoNegro.png","/Imagenes/CuadradoRojo.png","/Imagenes/CuadradoVerde.png","/Imagenes/CuadradoVioleta.png"};
     }
-
+    
+    public void actualizar (int indice) {
+    	if(indice<this.imagenes.length) {
+    		ImageIcon imageIcon= new ImageIcon(this.getClass().getResource(this.imagenes[indice]));
+    		this.cuadrado.setImage(imageIcon.getImage());
+    	}
+    }
+    
 	public ImageIcon getCuadrado() {
 		return cuadrado;
 	}

@@ -1,12 +1,14 @@
-package Entidades;
+package PartesGraficas;
 
 	import java.awt.Color;
 
-	public class Grilla {
+import Entidades.Bloque;
+
+	public class GrillaGrafica {
 	    //Atributos
 		private Bloque grilla[][];
 
-	    public Grilla() {
+	    public GrillaGrafica() {
 	    	 grilla = new Bloque[22][10];
 		        Bloque b=new Bloque();
 		        b.setIndice(4);
