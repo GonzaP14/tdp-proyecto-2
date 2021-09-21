@@ -13,7 +13,7 @@ public class FormaL extends Tetrimino {
 			{ new Par(1, 0), new Par(1, 1), new Par(1, 2), new Par(2, 0) } };
 		posicionesActuales = rotaciones[0];
 		color = Color.orange;
-		centroPieza = origenGrilla;
+		centroPieza = miGrilla.getOrigenGrilla();
 		this.miGrilla = miGrilla;
 	}
 

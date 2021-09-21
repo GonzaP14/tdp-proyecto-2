@@ -13,7 +13,7 @@ public class FormaZ extends Tetrimino {
 			{ new Par(1, 0), new Par(0, 1), new Par(1, 1), new Par(0, 2) } };
 		posicionesActuales = rotaciones[0];
 		color = Color.green;
-		centroPieza = origenGrilla;
+		centroPieza = miGrilla.getOrigenGrilla();
 		this.miGrilla = miGrilla;
 	}
 

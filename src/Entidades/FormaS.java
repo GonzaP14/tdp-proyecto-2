@@ -13,9 +13,8 @@ public class FormaS extends Tetrimino {
 			{ new Par(0, 0), new Par(0, 1), new Par(1, 1), new Par(1, 2) } };
 		posicionesActuales = rotaciones[0];
 		color = Color.red;
-		centroPieza = origenGrilla;
+		centroPieza = miGrilla.getOrigenGrilla();
 		this.miGrilla = miGrilla;
-	
-}
+	}
 
 }

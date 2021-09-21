@@ -1,9 +1,13 @@
 package Entidades;
 
 	import java.awt.Color;
+import java.util.Collections;
 
 	public class Grilla {
-	    //Atributos
+		// Atributos de clase
+		protected static final Par origenGrilla = new Par(5, 0);
+		
+	    //Atributos de instancia
 		private Bloque grilla[][];
 
 	    public Grilla() {
@@ -25,6 +29,11 @@ package Entidades;
 	    public Bloque getBloque(int x,int y) {
 			return grilla[x][y];
 		}
+	    
+	    public Par getOrigenGrilla() {
+	    	return origenGrilla;
+	    }
+	    
 		public void setBloque(int x, int y, Bloque b) {
 			grilla[x][y]=b;
 		}
@@ -39,6 +48,10 @@ package Entidades;
 	    	for(int i=0;i<4;i++) {
 	    		grilla[posiciones[i].getX()][posiciones[i].getY()]=t.getColor();
 	    	}*/
+	    }
+	    
+	    public void nuevoTetrimino(Tetrimino nuevoTetrimino) {
+	    	// to-do
 	    }
 	}
 	

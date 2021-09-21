@@ -1,13 +1,14 @@
 package Entidades;
 
 import java.awt.Color;
+import java.awt.Point;
+import java.util.Collections;
 
 public abstract class Tetrimino {
 
     // Atributos de clase.
 	
     protected static final int cantidadCuadrados = 4;
-    protected static final Par origenGrilla = new Par(5, 0);
     
     // Atributos de instancia.
     

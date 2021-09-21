@@ -31,7 +31,6 @@ public class Logica {
         arregloTetriminos = new Tetrimino[]{new FormaCubo(miGrilla), new FormaI(miGrilla), new FormaJ(miGrilla), new FormaL(miGrilla), new FormaS(miGrilla), new FormaT(miGrilla), new FormaZ(miGrilla)};
         tetriminoGuardado = null;
         miGui = new GUI();
-        
         nivelActual = 0;
         puntajeActual = 0;
         estaPausado = false;
@@ -51,6 +50,10 @@ public class Logica {
     
     public int getNivelActual() {
     	return nivelActual;
+    }
+    
+    public Tetrimino getTetriminoActual() {
+    	return tetriminoActual;
     }
     
     public void pausar() {
@@ -112,7 +115,7 @@ public class Logica {
 		}
 	}
 
-    public void aumentarPuntaje(int puntosNuevos) {
+    private void aumentarPuntaje(int puntosNuevos) {
     	puntajeActual += puntosNuevos;
 	    if (puntajeActual >= 2000) {
 	    	nivelActual = 4;
@@ -133,40 +136,40 @@ public class Logica {
     		agregarAGrilla();
     	}
 		//miGrilla.actualizar(); // a decidir
-		// GUI.actualizarGrilla(); ó GrillaGUI.actualizar();
+    	//GrillaGrafica.actualizar();
     }
 
     public void moverIzquierda() {
     	if (tetriminoActual.moverIzquierda()) {
     		//miGrilla.actualizar(); // a decidir
-    		// GUI.actualizarGrilla(); ó GrillaGUI.actualizar();
+    		//GrillaGrafica.actualizar();
     	}
     }
 
     public void moverDerecha() {
     	if (tetriminoActual.moverDerecha()) {
     	    //miGrilla.actualizar(); // a decidir
-    		// GUI.actualizarGrilla(); ó GrillaGUI.actualizar();
+    		//GrillaGrafica.actualizar();
     	}
     }
 
 	public void rotarDerecha() {
 		if (tetriminoActual.rotarDerecha()) {
     		//miGrilla.actualizar(); // a decidir
-    		// GUI.actualizarGrilla(); ó GrillaGUI.actualizar();
+			//GrillaGrafica.actualizar();
 		}
 	}
 	public void rotarIzquierda() {
 		if (tetriminoActual.rotarIzquierda()) {
     		//miGrilla.actualizar(); // a decidir
-    		// GUI.actualizarGrilla(); ó GrillaGUI.actualizar();
+			//GrillaGrafica.actualizar();
 		}
 	}
 	
 	private void agregarAGrilla() {
 
 		miGrilla.ocuparCelda(tetriminoActual);
-		// GUI.actualizarGrilla(); ó GrillaGUI.actualizar();
+		//GrillaGrafica.actualizar();
 		
 		borrarLineas();
 		caeNuevoTetrimino();
@@ -179,12 +182,16 @@ public class Logica {
     
     private void caeNuevoTetrimino() {
     	setTetriminoActual();
-    	
+    	setTetriminoSiguiente();
+    	// to-complete acá
+    	miGrilla.nuevoTetrimino(getTetriminoActual());
+    	//GrillaGrafica.actualizar();
+    	//GUI.actualizarSiguiente();
     }
     
     private void setTetriminoActual() {
     	tetriminoActual = tetriminoSiguiente;
-    	setTetriminoSiguiente();
+
     }
 
     private void setTetriminoSiguiente() {

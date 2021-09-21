@@ -13,7 +13,7 @@ public class FormaCubo extends Tetrimino {
 			{ new Par(0, 0), new Par(0, 1), new Par(1, 0), new Par(1, 1) } };
 		posicionesActuales = rotaciones[0];
 		color = Color.yellow;
-		centroPieza = origenGrilla;
+		centroPieza = miGrilla.getOrigenGrilla();
 		this.miGrilla = miGrilla;
 	}
 	
