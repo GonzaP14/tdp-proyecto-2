@@ -1,5 +1,7 @@
 package PartesGraficas;
 
+import java.awt.Toolkit;
+
 import javax.swing.ImageIcon;
 
 public class BloqueGrafico {
@@ -7,7 +9,7 @@ public class BloqueGrafico {
     private String[] imagenes;
 
     public BloqueGrafico () {
-        this.cuadrado =new ImageIcon();
+        this.cuadrado =new ImageIcon(Toolkit.getDefaultToolkit().getImage(BloqueGrafico.class.getResource("/Imagenes/CuadradoNegro.png")));
        	this.imagenes = new String[]{"/Imagenes/CuadradoAmarillo.png", "/Imagenes/CuadradoAzul.png","/Imagenes/CuadradoCyan.png","/Imagenes/CuadradoNaranja.png","/Imagenes/CuadradoNegro.png","/Imagenes/CuadradoRojo.png","/Imagenes/CuadradoVerde.png","/Imagenes/CuadradoVioleta.png"};
     }
     

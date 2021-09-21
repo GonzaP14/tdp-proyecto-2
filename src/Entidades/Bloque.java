@@ -10,7 +10,7 @@ public class Bloque {
 		
 		public Bloque() {
 			this.color = Color.black;
-			this.indice = null;
+			this.indice = 4;
 			this.bloqueGrafico= new BloqueGrafico();
 		}
 		

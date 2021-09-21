@@ -10,10 +10,11 @@ import Entidades.Bloque;
 
 	    public GrillaGrafica() {
 	    	 grilla = new Bloque[22][10];
-		        Bloque b=new Bloque();
-		        b.setIndice(4);
+		        
 	        for(int filas=0;filas<22;filas++) {
-	        	for(int columnas=0;columnas<10;columnas++) {	        		
+	        	for(int columnas=0;columnas<10;columnas++) {	   
+	        		Bloque b=new Bloque();
+			
 	        		grilla[filas][columnas]=b;	   
 	        }
 	        }

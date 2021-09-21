@@ -71,11 +71,9 @@ public class GUI {
 		
 		for(int i=0;i<22;i++) {
 			for(int j=0;j<10;j++) {				
-				if(i==0 && j==0) {				
-					grilla.actualizarColorBloque(i,j, 6);
+				if(i==1 && j==4 ||i==1 && j==5 || i==1 && j==6 ||i==2 && j==5 ) {				
+					grilla.actualizarColorBloque(i,j, 6);				
 				}
-				
-
 					JLabel cuadrado=new JLabel();	
 					cuadrado.setBounds(0, 0,30, 30);				
 					cuadrado.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
@@ -87,7 +85,7 @@ public class GUI {
 				
 			}
 		}
-				
+		
 		
 	}
 }
