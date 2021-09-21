@@ -96,5 +96,5 @@ public abstract class Tetrimino {
 	public Par getCentroPieza() {
 		return centroPieza;
 	}
-
+	
 }

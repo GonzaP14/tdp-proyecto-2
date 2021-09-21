@@ -1,6 +1,7 @@
 package Entidades;
 
 	import java.awt.Color;
+import java.awt.Point;
 import java.util.Collections;
 
 	public class Grilla {
@@ -10,20 +11,24 @@ import java.util.Collections;
 	    //Atributos de instancia
 		private Bloque grilla[][];
 
+		// Constructor
 	    public Grilla() {
-	    	 grilla = new Bloque[22][10];
-		        Bloque b=new Bloque();
-		        b.setIndice(4);
-	        for(int filas=0;filas<21;filas++) {
-	        	for(int columnas=0;columnas<10;columnas++) {	        		
-	        		grilla[filas][columnas]=b;	   
-	        }
+	    	grilla = new Bloque[22][10];
+	        for(int filas = 0; filas<21; filas++) {
+	        	for(int columnas = 0; columnas < 10; columnas++) {	        		
+	        		grilla[filas][columnas] = new Bloque();	   
+	        	}
 	        }
 	    }
 
 	    //Buscar Colisiones
-	    public boolean buscarColisiones(int valorX, int valorY, Par[] bloquesTetrimino) {
-	    	return false;
+	    public boolean buscarColisiones(int valorX, int valorY, Par[] posicionesActuales) {
+	    	for (Par parBloqueActual : posicionesActuales) {
+				if (grilla[parBloqueActual.getX() + valorX][parBloqueActual.getY() + valorY].getColor() != Color.BLACK) {
+					return true;
+				}
+			}
+			return false;
 	    }
 	    
 	    public Bloque getBloque(int x,int y) {
@@ -43,15 +48,11 @@ import java.util.Collections;
 		
 		//OcuparCelda
 	    public void  ocuparCelda(Tetrimino t) {
-	    	/*Par[]posiciones=t.getPosicionesCuadrado();
+	    	Par[] posicionesAOcupar = t.getPosicionesActuales();
 	    	
-	    	for(int i=0;i<4;i++) {
-	    		grilla[posiciones[i].getX()][posiciones[i].getY()]=t.getColor();
-	    	}*/
-	    }
-	    
-	    public void nuevoTetrimino(Tetrimino nuevoTetrimino) {
-	    	// to-do
+	    	for(int i = 0; i < 4; i++) {
+	    		grilla[posicionesAOcupar[i].getX() + t.getCentroPieza().getX()][posicionesAOcupar[i].getY() + t.getCentroPieza().getY()].getColor() = t.getColor();
+	    	}
 	    }
 	}
 	
