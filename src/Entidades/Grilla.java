@@ -18,6 +18,10 @@ package Entidades;
 	    }
 
 	    //Buscar Colisiones
+	    public boolean buscarColisiones(int valorX, int valorY, Par[] bloquesTetrimino) {
+	    	return false;
+	    }
+	    
 	    public Bloque getBloque(int x,int y) {
 			return grilla[x][y];
 		}
@@ -28,6 +32,14 @@ package Entidades;
 			grilla[x][y].setIndice(indice);
 		}		
 		
+		//OcuparCelda
+	    public void  ocuparCelda(Tetrimino t) {
+	    	/*Par[]posiciones=t.getPosicionesCuadrado();
+	    	
+	    	for(int i=0;i<4;i++) {
+	    		grilla[posiciones[i].getX()][posiciones[i].getY()]=t.getColor();
+	    	}*/
+	    }
 	}
 	
 

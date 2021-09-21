@@ -1,6 +1,7 @@
 package Logica;
 
 import java.awt.Color;
+import java.awt.Point;
 import java.util.Random;
 
 import Entidades.*;
@@ -66,15 +67,18 @@ public class Logica {
 
     private void borrarLineas() {
 		boolean lineaCompleta;
-		int lineasBorradas = 0;
-		
-		for (int j = 21; j > 0; j--) {
+		int lineasBorradas = 0, limiteSuperior, limiteInferior, valorCentroEnX;
+		valorCentroEnX = tetriminoActual.getCentroPieza().getX();
+		limiteSuperior = (valorCentroEnX == 0)? valorCentroEnX : valorCentroEnX - 1;
+		limiteInferior = (valorCentroEnX > 18)? 21 : valorCentroEnX + 2;
+
+		for (int j = limiteInferior; j > limiteSuperior; j--) {
 			lineaCompleta = true;
 			for (int i = 1; i < 11; i++) {
-				if (miGrilla[i][j] == Color.BLACK) {
+				/*if (miGrilla[i][j] == Color.BLACK) {
 					lineaCompleta = false;
 					break;
-				}
+				}*/
 			}
 			if (lineaCompleta) {
 				limpiarFila(j);
@@ -103,11 +107,10 @@ public class Logica {
     private void limpiarFila(int fila) {
 		for (int j = fila - 1; j > 0; j--) {
 			for (int i = 1; i < 11; i++) {
-				miGrilla[i][j+1] = miGrilla[i][j];
+				//miGrilla[i][j+1] = miGrilla[i][j];
 			}
 		}
 	}
-    
 
     public void aumentarPuntaje(int puntosNuevos) {
     	puntajeActual += puntosNuevos;
@@ -126,54 +129,74 @@ public class Logica {
     }
 
     public void moverAbajo() {
-    	// to-do
+    	if (!tetriminoActual.moverAbajo()) {
+    		agregarAGrilla();
+    	}
+		//miGrilla.actualizar(); // a decidir
+		// GUI.actualizarGrilla(); ó GrillaGUI.actualizar();
     }
 
     public void moverIzquierda() {
     	if (tetriminoActual.moverIzquierda()) {
-    		miGrilla.actualizar(); // a decidir
+    		//miGrilla.actualizar(); // a decidir
     		// GUI.actualizarGrilla(); ó GrillaGUI.actualizar();
     	}
     }
 
     public void moverDerecha() {
     	if (tetriminoActual.moverDerecha()) {
-    		miGrilla.actualizar(); // a decidir
+    	    //miGrilla.actualizar(); // a decidir
     		// GUI.actualizarGrilla(); ó GrillaGUI.actualizar();
+    	}
     }
 
 	public void rotarDerecha() {
 		if (tetriminoActual.rotarDerecha()) {
-    		miGrilla.actualizar(); // a decidir
+    		//miGrilla.actualizar(); // a decidir
     		// GUI.actualizarGrilla(); ó GrillaGUI.actualizar();
 		}
 	}
 	public void rotarIzquierda() {
 		if (tetriminoActual.rotarIzquierda()) {
-    		miGrilla.actualizar(); // a decidir
+    		//miGrilla.actualizar(); // a decidir
     		// GUI.actualizarGrilla(); ó GrillaGUI.actualizar();
 		}
 	}
+	
+	private void agregarAGrilla() {
+
+		miGrilla.ocuparCelda(tetriminoActual);
+		// GUI.actualizarGrilla(); ó GrillaGUI.actualizar();
+		
+		borrarLineas();
+		caeNuevoTetrimino();
+	}
     	
-    public Tetrimino elegirNuevoTetrimino() {
+    private Tetrimino elegirNuevoTetrimino() {
     	int aleatorio = new Random().nextInt(arregloTetriminos.length);
     	return arregloTetriminos[aleatorio];
     }
     
-    public void setTetriminoActual() {
+    private void caeNuevoTetrimino() {
+    	setTetriminoActual();
+    	
+    }
+    
+    private void setTetriminoActual() {
     	tetriminoActual = tetriminoSiguiente;
     	setTetriminoSiguiente();
     }
 
-    public void setTetriminoSiguiente() {
+    private void setTetriminoSiguiente() {
     	tetriminoSiguiente = elegirNuevoTetrimino();
     }
     private void terminarJuego() {
     	gameOver = true; // to-do
     }
 
-    public void iniciarReloj() {
+    private void iniciarReloj() {
     	relojThread.start();
     }
-
+    
 }
+    

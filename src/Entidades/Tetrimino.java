@@ -1,3 +1,5 @@
+package Entidades;
+
 import java.awt.Color;
 
 public abstract class Tetrimino {
@@ -21,13 +23,12 @@ public abstract class Tetrimino {
      */
     public boolean rotarDerecha() {
     	int rotacionSiguiente = (rotacionActual == 3) ? 0 : (rotacionActual + 1) % 4; 
-    	boolean check = !miGrilla.buscarColisiones (centroPieza.getX(), centroPieza.getY(), rotaciones [rotacionSiguiente]);
+    	boolean check = miGrilla.buscarColisiones (centroPieza.getX(), centroPieza.getY(), rotaciones [rotacionSiguiente]);
     	
-    	if (check) {
+    	if (!check) 
     		posicionesActuales = rotaciones [rotacionSiguiente];
-    	}
     	
-    	return check;
+    	return !check;
     }
 
     /*
@@ -35,14 +36,12 @@ public abstract class Tetrimino {
      */
     public boolean rotarIzquierda() {
     	int rotacionSiguiente = (rotacionActual == 0) ? 3 : (rotacionActual - 1) % 4;
-    	boolean check = !miGrilla.buscarColisiones (centroPieza.getX(), centroPieza.getY(), rotaciones [rotacionSiguiente]);
+    	boolean check = miGrilla.buscarColisiones (centroPieza.getX(), centroPieza.getY(), rotaciones [rotacionSiguiente]);
     	
-    	if (check) {
+    	if (!check) 
     		posicionesActuales = rotaciones [rotacionSiguiente];
-    	}
     	
-    	return check;
- 
+    	return !check;
     }
     
     /**
@@ -50,27 +49,31 @@ public abstract class Tetrimino {
      * @return
      */
     public boolean moverDerecha() {
-        boolean check = !miGrilla.buscarColisiones(centroPieza.getX(), centroPieza.getY(), rotacionActual);
+        boolean check = miGrilla.buscarColisiones(centroPieza.getX() + 1, centroPieza.getY(), rotaciones[rotacionActual]);
         
-        if (check) {
+        if (!check) 
             centroPieza.setX(centroPieza.getX() + 1);
-            check = true;
-        }
         
-        return check;
+        return !check;
     }
     
     /*
      * Mueve el tetrimino a izquierda.
      */
     public boolean moverIzquierda() {
-        boolean check = !miGrilla.buscarColisiones(centroPieza.getX(), centroPieza.getY(), rotacionActual);
+        boolean check = miGrilla.buscarColisiones(centroPieza.getX() - 1, centroPieza.getY(), rotaciones[rotacionActual]);
         
-        if (check) {
+        if (!check) 
             centroPieza.setX(centroPieza.getX() - 1);
-        }
         
-        return check;
+        return !check;
+    }
+    
+    public boolean moverAbajo() {
+    	boolean check = miGrilla.buscarColisiones(centroPieza.getX(), centroPieza.getY() + 1, rotaciones[rotacionActual]);
+    	if (!check) 
+    		centroPieza.setY(centroPieza.getY() + 1);	
+    	return !check;
     }
 
     /*
@@ -88,5 +91,9 @@ public abstract class Tetrimino {
     public Color getColor() {
         return color;
     }
+
+	public Par getCentroPieza() {
+		return centroPieza;
+	}
 
 }
