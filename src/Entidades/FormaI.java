@@ -4,7 +4,7 @@ import java.awt.Color;
 
 public class FormaI extends Tetrimino {
 	
-	public FormaI(Grilla miGrilla) {
+	public FormaI (Grilla miGrilla) {
 		rotacionActual = 0;
 		rotaciones = new Par[][]{
 			{ new Par(0, 1), new Par(1, 1), new Par(2, 1), new Par(3, 1) },
@@ -18,4 +18,11 @@ public class FormaI extends Tetrimino {
 		this.miGrilla = miGrilla;
 	}
 
+	public Tetrimino clone() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	
+	
 }

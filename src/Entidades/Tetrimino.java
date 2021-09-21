@@ -64,16 +64,16 @@ public abstract class Tetrimino {
     public boolean moverIzquierda() {
         boolean check = miGrilla.buscarColisiones(centroPieza.getX() - 1, centroPieza.getY(), rotaciones[rotacionActual]);
         
-        if (!check) 
-            centroPieza.setX(centroPieza.getX() - 1);
+        if (!check) centroPieza.setX(centroPieza.getX() - 1);
         
         return !check;
     }
     
     public boolean moverAbajo() {
     	boolean check = miGrilla.buscarColisiones(centroPieza.getX(), centroPieza.getY() + 1, rotaciones[rotacionActual]);
-    	if (!check) 
-    		centroPieza.setY(centroPieza.getY() + 1);	
+    	
+    	if (!check) centroPieza.setY(centroPieza.getY() + 1);	
+    	
     	return !check;
     }
 
@@ -96,5 +96,7 @@ public abstract class Tetrimino {
 	public Par getCentroPieza() {
 		return centroPieza;
 	}
-
+	
+	public abstract Tetrimino clone();
+	
 }

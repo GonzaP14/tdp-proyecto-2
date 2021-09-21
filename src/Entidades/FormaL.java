@@ -17,4 +17,10 @@ public class FormaL extends Tetrimino {
 		this.miGrilla = miGrilla;
 	}
 
+	@Override
+	public Tetrimino clone() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

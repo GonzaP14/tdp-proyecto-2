@@ -1,25 +1,27 @@
 package Entidades;
 
-	import java.awt.Color;
-import java.util.Collections;
-
-	public class Grilla {
-		// Atributos de clase
-		protected static final Par origenGrilla = new Par(5, 0);
+public class Grilla {
 		
-	    //Atributos de instancia
-		private Bloque grilla[][];
+	// Atributos de clase
+		
+	protected static final Par origenGrilla = new Par(5, 0);
+		
+	   
+	//Atributos de instancia
+		
+	private Bloque grilla[][];
 
-	    public Grilla() {
-	    	 grilla = new Bloque[22][10];
-		        Bloque b=new Bloque();
-		        b.setIndice(4);
-	        for(int filas=0;filas<21;filas++) {
-	        	for(int columnas=0;columnas<10;columnas++) {	        		
-	        		grilla[filas][columnas]=b;	   
+	    
+	public Grilla() {
+		grilla = new Bloque [22][10];
+	      
+		for (int filas = 0; filas < 21; filas++) {
+			for (int columnas = 0; columnas < 11; columnas ++) {
+	        	grilla [filas][columnas] = new Bloque();	   
+	        	grilla [filas][columnas].setIndice(4);
 	        }
-	        }
-	    }
+		}  
+	}
 
 	    //Buscar Colisiones
 	    public boolean buscarColisiones(int valorX, int valorY, Par[] bloquesTetrimino) {
@@ -42,16 +44,28 @@ import java.util.Collections;
 		}		
 		
 		//OcuparCelda
-	    public void  ocuparCelda(Tetrimino t) {
+	    public void agregarNuevoTetrimino (Tetrimino t) {
 	    	/*Par[]posiciones=t.getPosicionesCuadrado();
 	    	
 	    	for(int i=0;i<4;i++) {
 	    		grilla[posiciones[i].getX()][posiciones[i].getY()]=t.getColor();
 	    	}*/
+	    	
+	    	//GrillaGrafica.actualizar();
+			
+			//borrarLineas();
 	    }
 	    
-	    public void nuevoTetrimino(Tetrimino nuevoTetrimino) {
-	    	// to-do
+	    public void actualizar () {
+	    	//GrillaGrafica.actualizar();
+	    }
+	    
+	    public void intercambiarBloques (int i1, int j1, int i2, int j2) {
+	    	Bloque auxiliar;
+	    	
+	    	auxiliar = grilla [i1][j1];
+	    	grilla [i1][j1] = grilla [i2][j2];
+	    	grilla [i2][j2] = auxiliar;
 	    }
 	}
 	

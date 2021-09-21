@@ -17,5 +17,11 @@ public class FormaJ extends Tetrimino {
 		centroPieza = miGrilla.getOrigenGrilla();
 		this.miGrilla = miGrilla;
 	}
+
+	@Override
+	public Tetrimino clone() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }
