@@ -1,31 +1,34 @@
 package Entidades;
 
-public class Grilla {
-		
-	// Atributos de clase
-		
-	protected static final Par origenGrilla = new Par(5, 0);
-		
-	   
-	//Atributos de instancia
-		
-	private Bloque grilla[][];
+	import java.awt.Color;
+import java.awt.Point;
+import java.util.Collections;
 
-	    
-	public Grilla() {
-		grilla = new Bloque [22][10];
-	      
-		for (int filas = 0; filas < 21; filas++) {
-			for (int columnas = 0; columnas < 11; columnas ++) {
-	        	grilla [filas][columnas] = new Bloque();	   
-	        	grilla [filas][columnas].setIndice(4);
+	public class Grilla {
+		// Atributos de clase
+		protected static final Par origenGrilla = new Par(5, 0);
+		
+	    //Atributos de instancia
+		private Bloque grilla[][];
+
+		// Constructor
+	    public Grilla() {
+	    	grilla = new Bloque[22][10];
+	        for(int filas = 0; filas<21; filas++) {
+	        	for(int columnas = 0; columnas < 10; columnas++) {	        		
+	        		grilla[filas][columnas] = new Bloque();	   
+	        	}
 	        }
-		}  
-	}
+	    }
 
 	    //Buscar Colisiones
-	    public boolean buscarColisiones(int valorX, int valorY, Par[] bloquesTetrimino) {
-	    	return false;
+	    public boolean buscarColisiones(int valorX, int valorY, Par[] posicionesActuales) {
+	    	for (Par parBloqueActual : posicionesActuales) {
+				if (grilla[parBloqueActual.getX() + valorX][parBloqueActual.getY() + valorY].getColor() != Color.BLACK) {
+					return true;
+				}
+			}
+			return false;
 	    }
 	    
 	    public Bloque getBloque(int x,int y) {
@@ -44,28 +47,12 @@ public class Grilla {
 		}		
 		
 		//OcuparCelda
-	    public void agregarNuevoTetrimino (Tetrimino t) {
-	    	/*Par[]posiciones=t.getPosicionesCuadrado();
+	    public void  ocuparCelda(Tetrimino t) {
+	    	Par[] posicionesAOcupar = t.getPosicionesActuales();
 	    	
-	    	for(int i=0;i<4;i++) {
-	    		grilla[posiciones[i].getX()][posiciones[i].getY()]=t.getColor();
-	    	}*/
-	    	
-	    	//GrillaGrafica.actualizar();
-			
-			//borrarLineas();
-	    }
-	    
-	    public void actualizar () {
-	    	//GrillaGrafica.actualizar();
-	    }
-	    
-	    public void intercambiarBloques (int i1, int j1, int i2, int j2) {
-	    	Bloque auxiliar;
-	    	
-	    	auxiliar = grilla [i1][j1];
-	    	grilla [i1][j1] = grilla [i2][j2];
-	    	grilla [i2][j2] = auxiliar;
+	    	for(int i = 0; i < 4; i++) {
+	    		grilla[posicionesAOcupar[i].getX() + t.getCentroPieza().getX()][posicionesAOcupar[i].getY() + t.getCentroPieza().getY()].getColor() = t.getColor();
+	    	}
 	    }
 	}
 	
