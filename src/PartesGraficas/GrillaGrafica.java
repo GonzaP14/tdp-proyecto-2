@@ -12,7 +12,7 @@ import Entidades.Bloque;
 	    	 grilla = new Bloque[22][10];
 		        Bloque b=new Bloque();
 		        b.setIndice(4);
-	        for(int filas=0;filas<21;filas++) {
+	        for(int filas=0;filas<22;filas++) {
 	        	for(int columnas=0;columnas<10;columnas++) {	        		
 	        		grilla[filas][columnas]=b;	   
 	        }
