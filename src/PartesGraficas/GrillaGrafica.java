@@ -3,6 +3,8 @@ package PartesGraficas;
 	import java.awt.Color;
 
 import Entidades.Bloque;
+import Entidades.Par;
+import Entidades.Tetrimino;
 
 	public class GrillaGrafica {
 	    //Atributos
@@ -29,6 +31,26 @@ import Entidades.Bloque;
 		}
 		public void actualizarColorBloque(int x,int y,int indice) {
 			grilla[x][y].setIndice(indice);
+		}
+
+		public void acoplarTetriminoAGrillaGrafica(Par[] posicionesActuales) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		public static void actualizar(Par[] posicionesNuevas) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		public void mostrarNuevoTetrimino(Tetrimino tetriminoActual) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		public void reacomodarGrillaGrafica(int fila) {
+			// TODO Auto-generated method stub
+			
 		}		
 		
 	}

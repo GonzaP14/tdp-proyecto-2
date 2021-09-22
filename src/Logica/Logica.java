@@ -7,11 +7,12 @@ import java.util.Random;
 
 import Entidades.*;
 import GUI.GUI;
+import PartesGraficas.GrillaGrafica;
 
 public class Logica {
 	
     //Atributos de instancia.
-    
+    private GrillaGrafica miGrillaGrafica;
 	private Grilla miGrilla;
     private Reloj miReloj;
     private Tetrimino tetriminoActual;
@@ -129,7 +130,7 @@ public class Logica {
     /**
      * Borra las línea 
      */
-    public void borrarLineas() {
+    /* public void borrarLineas() {
     	boolean hueco;
     	int filasEliminadas = 0;
     	
@@ -162,7 +163,7 @@ public class Logica {
 	    	break;
 	    	
 	    	case 4: aumentarPuntaje(800);
-	    	break;
+	    	break; 
     	
     	}
     	
@@ -174,54 +175,11 @@ public class Logica {
     			miGrilla.intercambiarBloques(i, j + 1, i, j);
     		}
     	}
-	}
+    	miGrillaGrafica.eliminarLinea(fila);
+	} */
     
-    /*
-     * for (int j = row-1; j > 0; j--) {
-			for (int i = 1; i < 11; i++) {
-				well[i][j+1] = well[i][j];
-			}
-		}
-     */
-
-	/*
-     * 	public void clearRows() {
-		boolean gap;
-		int numClears = 0;
-		
-		for (int j = 21; j > 0; j--) {
-			gap = false;
-			for (int i = 1; i < 11; i++) {
-				if (well[i][j] == Color.BLACK) {
-					gap = true;
-					break;
-				}
-			}
-			if (!gap) {
-				deleteRow(j);
-				j += 1;
-				numClears += 1;
-			}
-		}
-		
-		switch (numClears) {
-		case 1:
-			score += 100;
-			break;
-		case 2:
-			score += 300;
-			break;
-		case 3:
-			score += 500;
-			break;
-		case 4:
-			score += 800;
-			break;
-		}
-	}
-     */
     
-    /*
+    
     private void borrarLineas() {
 		boolean lineaCompleta;
 		int lineasBorradas = 0, limiteSuperior, limiteInferior, valorCentroEnX;
@@ -232,7 +190,7 @@ public class Logica {
 		for (int j = limiteInferior; j > limiteSuperior; j--) {
 			lineaCompleta = true;
 			for (int i = 1; i < 11; i++) {
-				if (miGrilla[i][j] == Color.BLACK) {
+				if (miGrilla.getBloque(i, j).getColor() == Color.black) {
 					lineaCompleta = false;
 					break;
 				}
@@ -260,16 +218,13 @@ public class Logica {
 		}
 
     }
-    */
-    /*
+    
+    
     private void limpiarFila(int fila) {
-		for (int j = fila - 1; j > 0; j--) {
-			for (int i = 1; i < 11; i++) {
-				//miGrilla[i][j+1] = miGrilla[i][j];
-			}
-		}
+		miGrilla.reacomodarGrilla(fila);
+		miGrillaGrafica.reacomodarGrillaGrafica(fila);
 	}
-	*/
+	
 
     private void aumentarPuntaje(int puntosNuevos) {
     	puntajeActual += puntosNuevos;
@@ -290,35 +245,41 @@ public class Logica {
 
     public void moverAbajo() {
     	if (tetriminoActual.moverAbajo()) {
-    		miGrilla.actualizar();
+    		Par[] posicionesNuevas = tetriminoActual.getPosicionesActuales();
+    		GrillaGrafica.actualizar(posicionesNuevas);
     	}
     }
 
     public void moverIzquierda() {
     	if (tetriminoActual.moverIzquierda()) {
-    		miGrilla.actualizar();
+    		Par[] posicionesNuevas = tetriminoActual.getPosicionesActuales();
+    		GrillaGrafica.actualizar(posicionesNuevas);
     	}
     }
 
     public void moverDerecha() {
     	if (tetriminoActual.moverDerecha()) {
-    	    miGrilla.actualizar();
+    		Par[] posicionesNuevas = tetriminoActual.getPosicionesActuales();
+    		GrillaGrafica.actualizar(posicionesNuevas);
     	}
     }
 
 	public void rotarDerecha() {
 		if (tetriminoActual.rotarDerecha()) {
-			miGrilla.actualizar();
+			Par[] posicionesNuevas = tetriminoActual.getPosicionesActuales();
+			GrillaGrafica.actualizar(posicionesNuevas);
 		}
 	}
 	public void rotarIzquierda() {
 		if (tetriminoActual.rotarIzquierda()) {
-    		miGrilla.actualizar();
+			Par[] posicionesNuevas = tetriminoActual.getPosicionesActuales();
+    		GrillaGrafica.actualizar(posicionesNuevas);
 		}
 	}
 	
 	private void agregarAGrilla() {
-		miGrilla.agregarNuevoTetrimino (tetriminoActual);
+		miGrilla.acoplarTetriminoAGrilla(tetriminoActual);
+		miGrillaGrafica.acoplarTetriminoAGrillaGrafica(tetriminoActual.getPosicionesActuales());
 	}
     	
     private Tetrimino nuevoTetrimino() {
@@ -329,20 +290,8 @@ public class Logica {
     private void agregarNuevoTetrimino() {
     	tetriminoActual = tetriminoSiguiente.clone();
     	tetriminoSiguiente = nuevoTetrimino();
-    	miGrilla.actualizar();
-    	
+    	miGrillaGrafica.mostrarNuevoTetrimino(tetriminoActual);
     }
-    
-    /*
-    private void setTetriminoActual() {
-    	tetriminoActual = tetriminoSiguiente;
-
-    }
-
-    private void setTetriminoSiguiente() {
-    	tetriminoSiguiente = nuevoTetrimino();
-    }
-    */
     
     private void terminarJuego() {
     	gameOver = true;

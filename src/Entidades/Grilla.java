@@ -42,17 +42,25 @@ import java.util.Collections;
 		public void setBloque(int x, int y, Bloque b) {
 			grilla[x][y]=b;
 		}
-		public void actualizarColorBloque(int x,int y,int indice) {
+		public void actualizarColorBloque(int x, int y, int indice) {
 			grilla[x][y].setIndice(indice);
 		}		
 		
-		//OcuparCelda
-	    public void  ocuparCelda(Tetrimino t) {
-	    	Par[] posicionesAOcupar = t.getPosicionesActuales();
+	    
+	    public void reacomodarGrilla(int fila) {
+	    	for (int j = fila - 1; j > 0; j--) {
+				for (int i = 1; i < 11; i++) {
+					grilla[i][j+1] = grilla[i][j];
+				}
+			}
+	    }
+
+		public void acoplarTetriminoAGrilla(Tetrimino t) {
+			Par[] posicionesAOcupar = t.getPosicionesActuales();
 	    	
 	    	for(int i = 0; i < 4; i++) {
-	    		grilla[posicionesAOcupar[i].getX() + t.getCentroPieza().getX()][posicionesAOcupar[i].getY() + t.getCentroPieza().getY()].getColor() = t.getColor();
-	    	}
+	    		grilla[posicionesAOcupar[i].getX() + t.getCentroPieza().getX()][posicionesAOcupar[i].getY() + t.getCentroPieza().getY()].setColor(t.getColor());
+	    	}		
 	    }
 	}
 	

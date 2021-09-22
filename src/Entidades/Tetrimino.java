@@ -97,4 +97,6 @@ public abstract class Tetrimino {
 		return centroPieza;
 	}
 	
+	public abstract Tetrimino clone();
+	
 }
