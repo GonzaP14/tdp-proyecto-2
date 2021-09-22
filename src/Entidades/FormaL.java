@@ -1,26 +1,31 @@
+
+
 package Entidades;
 
 import java.awt.Color;
 
 public class FormaL extends Tetrimino {
-	
-	public FormaL (Grilla miGrilla) {	
-		rotacionActual = 0;
-		rotaciones = new Par[][]
-			{ { new Par(0, 1), new Par(1, 1), new Par(2, 1), new Par(2, 2) },
+
+    public FormaL (Grilla miGrilla) {
+        this (miGrilla, 0, miGrilla.getOrigenGrilla());
+    }
+
+    public FormaL (Grilla miGrilla, int r, Par centro) {
+        rotaciones =  new Par [][] { 
+        	{ new Par(0, 1), new Par(1, 1), new Par(2, 1), new Par(2, 2) },
 			{ new Par(1, 0), new Par(1, 1), new Par(1, 2), new Par(0, 2) },
 			{ new Par(0, 1), new Par(1, 1), new Par(2, 1), new Par(0, 0) },
-			{ new Par(1, 0), new Par(1, 1), new Par(1, 2), new Par(2, 0) } };
-		posicionesActuales = rotaciones[0];
-		color = Color.orange;
-		centroPieza = miGrilla.getOrigenGrilla();
-		this.miGrilla = miGrilla;
-	}
+			{ new Par(1, 0), new Par(1, 1), new Par(1, 2), new Par(2, 0) } 
+		};
+        rotacionActual = r;
+        posicionesActuales = rotaciones[rotacionActual];
+        color = color.orange;
+        centroPieza = centro;
+        this.miGrilla = miGrilla;
+    }
 
-	@Override
-	public Tetrimino clone() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    public Tetrimino clone() {
+        return new FormaL (miGrilla, rotacionActual, centroPieza.clone());
+    }
 
 }
