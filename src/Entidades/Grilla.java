@@ -6,7 +6,7 @@ import java.util.Collections;
 
 	public class Grilla {
 		// Atributos de clase
-		protected static final Par origenGrilla = new Par(5, 0);
+		protected static final Par origenGrilla = new Par(3, 0);
 		
 	    //Atributos de instancia
 		private Bloque grilla[][];
@@ -23,8 +23,13 @@ import java.util.Collections;
 
 	    //Buscar Colisiones
 	    public boolean buscarColisiones(int valorX, int valorY, Par[] posicionesActuales) {
+	    
 	    	for (Par parBloqueActual : posicionesActuales) {
-				if (grilla[parBloqueActual.getX() + valorX][parBloqueActual.getY() + valorY].getColor() != Color.BLACK) {
+	    
+	    		if(valorX+parBloqueActual.getX()>9 || valorX+parBloqueActual.getX()<0 || valorY+parBloqueActual.getY()>21 ){
+	    			return true;
+	    		}
+	    		if (grilla[parBloqueActual.getY() + valorY][parBloqueActual.getX() + valorX].getColor() != Color.BLACK) {
 					return true;
 				}
 			}
@@ -57,7 +62,7 @@ import java.util.Collections;
 
 		public void acoplarTetriminoAGrilla(Tetrimino t) {
 			Par[] posicionesAOcupar = t.getPosicionesActuales();
-	    	
+
 	    	for(int i = 0; i < 4; i++) {
 	    		grilla[posicionesAOcupar[i].getX() + t.getCentroPieza().getX()][posicionesAOcupar[i].getY() + t.getCentroPieza().getY()].setColor(t.getColor());
 	    	}		

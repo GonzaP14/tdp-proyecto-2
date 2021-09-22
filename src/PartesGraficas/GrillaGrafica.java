@@ -44,8 +44,9 @@ public class GrillaGrafica {
 	}
 
 	public void actualizar (Par [] posiciones, Color color) {
+		
 		for (int i = 0; i < 4; i ++) {
-			grilla [posiciones [i].getX()][posiciones [i].getY()].setColor(color); 
+			grilla [posiciones [i].getY()][posiciones [i].getX()].setColor(color); 
 		}
 	}
 

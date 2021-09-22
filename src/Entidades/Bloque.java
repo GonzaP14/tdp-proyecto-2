@@ -121,20 +121,28 @@ public class Bloque {
 			
 		if (color == Color.yellow){
 			indice = 0;
+			this.bloqueGrafico.actualizar(this.indice);
 		} else if (color == Color.blue){
 			indice = 1;
+			this.bloqueGrafico.actualizar(this.indice);
 		} else if (color == Color.cyan) {
 			indice = 2;
+			this.bloqueGrafico.actualizar(this.indice);
 		} else if (color == Color.orange) {
 			indice = 3;
+			this.bloqueGrafico.actualizar(this.indice);
 		} else if (color == Color.black) {
 			indice = 4;
+			this.bloqueGrafico.actualizar(this.indice);
 		} else if (color == Color.red) {
 			indice = 5;
+			this.bloqueGrafico.actualizar(this.indice);
 		} else if (color == Color.green) {
 			indice = 6;
+			this.bloqueGrafico.actualizar(this.indice);
 		} else if (color == Color.magenta) {
 			indice = 7;
+			this.bloqueGrafico.actualizar(this.indice);
 		}
 	}
 		

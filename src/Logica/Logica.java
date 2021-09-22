@@ -35,6 +35,8 @@ public class Logica {
      * @param miGui Gui asociada al juego.
      */
     public Logica (GUI miGui) {
+    	miGrilla = new Grilla ();
+    	miGrillaGrafica=new GrillaGrafica();
         arregloTetriminos = new Tetrimino[] { 
         new FormaO(miGrilla), 
         new FormaI(miGrilla), 
@@ -45,7 +47,7 @@ public class Logica {
         new FormaZ(miGrilla) 
         };
         
-        miGrilla = new Grilla ();
+        
         tetriminoGuardado = null;
         this.miGui = miGui;
         nivelActual = 0;
@@ -106,6 +108,9 @@ public class Logica {
      */
     public Tetrimino getTetriminoSiguiente () {
     	return tetriminoSiguiente;
+    }
+    public GrillaGrafica getGrillaGrafica(){
+    	return miGrillaGrafica;
     }
     
     /**
@@ -263,11 +268,12 @@ public class Logica {
      * Desplaza el TetriminoActual de la partida un movimiento hacia abajo.
      */
     public void moverAbajo() {
+    	
     	Par [] posicionesViejas = tetriminoActual.getPosicionesActuales();
     	Color auxiliar = tetriminoActual.getColor();
-    	
+
     	if (tetriminoActual.moverAbajo()) {
-    		miGrillaGrafica.actualizar(posicionesViejas, Color.black);
+    		miGrillaGrafica.actualizar(posicionesParaGUI(posicionesViejas), Color.black);
     		Par[] posicionesNuevas = tetriminoActual.getPosicionesActuales();
     		miGrillaGrafica.actualizar(posicionesParaGUI(posicionesNuevas), auxiliar);
     	}
@@ -280,6 +286,7 @@ public class Logica {
      * Desplaza el TetriminoActual de la partida un movimiento hacia la izquierda.
      */
     public void moverIzquierda() {
+    	System.out.println("mover izquierda");
     	Par [] posicionesViejas = tetriminoActual.getPosicionesActuales();
     	Color auxiliar = tetriminoActual.getColor();
     	
@@ -294,6 +301,7 @@ public class Logica {
      * Desplaza el TetriminoActual de la partida un movimiento hacia la derecha.
      */
     public void moverDerecha() {
+    	System.out.println("mover derecha");
     	Par [] posicionesViejas = tetriminoActual.getPosicionesActuales();
     	Color auxiliar = tetriminoActual.getColor();
     	
@@ -347,6 +355,7 @@ public class Logica {
 	private Par[] posicionesParaGUI(Par[] posicionesNuevas) {
 		Par[] posicionesParaGUI = new Par[4];
 		for (int i = 0; i < 4; i++) {
+			posicionesParaGUI[i]=new Par(0,0);
 			posicionesParaGUI[i].setX(posicionesNuevas[i].getX() + tetriminoActual.getCentroPieza().getX()); 
 			posicionesParaGUI[i].setY(posicionesNuevas[i].getY() + tetriminoActual.getCentroPieza().getY()); 
 		}
