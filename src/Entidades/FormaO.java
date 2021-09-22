@@ -2,9 +2,9 @@ package Entidades;
 
 import java.awt.Color;
 
-public class FormaCuadrado extends Tetrimino {
+public class FormaO extends Tetrimino {
 	
-	public FormaCuadrado (Grilla miGrilla , int r , Par centro) {
+	public FormaO (Grilla miGrilla , int r , Par centro) {
 		rotacionActual = r;
 		rotaciones = new Par[][]
 			{ { new Par(0, 0), new Par(0, 1), new Par(1, 0), new Par(1, 1) },
@@ -17,12 +17,20 @@ public class FormaCuadrado extends Tetrimino {
 		this.miGrilla = miGrilla;
 	}
 	
-	public FormaCuadrado (Grilla miGrilla) {
+	public FormaO (Grilla miGrilla) {
         this (miGrilla, 0, miGrilla.getOrigenGrilla());
     }
 
+	public boolean rotarDerecha() {
+		return false;
+	}
+	
+	public boolean rotarIzquierda() {
+		return false;
+	}
+	
 	public Tetrimino clone() {
-        return new FormaCuadrado (miGrilla, rotacionActual, centroPieza.clone());
+        return new FormaO (miGrilla, rotacionActual, centroPieza.clone());
     }
 	
 }

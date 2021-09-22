@@ -1,10 +1,7 @@
 package Logica;
 
 import java.awt.Color;
-//import java.awt.Color;
-//import java.awt.Point;
 import java.util.Random;
-
 import Entidades.*;
 import GUI.GUI;
 import PartesGraficas.GrillaGrafica;
@@ -40,7 +37,7 @@ public class Logica {
         tetriminoSiguiente = nuevoTetrimino();
         
         arregloTetriminos = new Tetrimino[] { 
-        new FormaCuadrado(miGrilla), 
+        new FormaO(miGrilla), 
         new FormaI(miGrilla), 
         new FormaJ(miGrilla), 
         new FormaL(miGrilla), 
@@ -82,6 +79,14 @@ public class Logica {
      */
     public int getNivelActual() {
     	return nivelActual;
+    }
+    
+    /**
+     * Retorna el puntaje actual de la partida en curso
+     * @return puntaje actual.
+     */
+    public int getPuntajeActual() {
+    	return puntajeActual;
     }
     
     /**
@@ -246,40 +251,47 @@ public class Logica {
     public void moverAbajo() {
     	if (tetriminoActual.moverAbajo()) {
     		Par[] posicionesNuevas = tetriminoActual.getPosicionesActuales();
-    		GrillaGrafica.actualizar(posicionesNuevas);
+    		miGrillaGrafica.actualizar(posicionesNuevas);
+    	}
+    	else {
+    		agregarAGrilla();
     	}
     }
 
     public void moverIzquierda() {
     	if (tetriminoActual.moverIzquierda()) {
     		Par[] posicionesNuevas = tetriminoActual.getPosicionesActuales();
-    		GrillaGrafica.actualizar(posicionesNuevas);
+    		miGrillaGrafica.actualizar(posicionesNuevas);
     	}
     }
 
     public void moverDerecha() {
     	if (tetriminoActual.moverDerecha()) {
     		Par[] posicionesNuevas = tetriminoActual.getPosicionesActuales();
-    		GrillaGrafica.actualizar(posicionesNuevas);
+    		miGrillaGrafica.actualizar(posicionesNuevas);
     	}
     }
 
 	public void rotarDerecha() {
 		if (tetriminoActual.rotarDerecha()) {
 			Par[] posicionesNuevas = tetriminoActual.getPosicionesActuales();
-			GrillaGrafica.actualizar(posicionesNuevas);
+			miGrillaGrafica.actualizar(posicionesNuevas);
 		}
 	}
 	public void rotarIzquierda() {
 		if (tetriminoActual.rotarIzquierda()) {
 			Par[] posicionesNuevas = tetriminoActual.getPosicionesActuales();
-    		GrillaGrafica.actualizar(posicionesNuevas);
+    		miGrillaGrafica.actualizar(posicionesNuevas);
 		}
 	}
 	
 	private void agregarAGrilla() {
 		miGrilla.acoplarTetriminoAGrilla(tetriminoActual);
 		miGrillaGrafica.acoplarTetriminoAGrillaGrafica(tetriminoActual.getPosicionesActuales());
+		
+		borrarLineas();
+		
+		agregarNuevoTetrimino();
 	}
     	
     private Tetrimino nuevoTetrimino() {
@@ -290,7 +302,13 @@ public class Logica {
     private void agregarNuevoTetrimino() {
     	tetriminoActual = tetriminoSiguiente.clone();
     	tetriminoSiguiente = nuevoTetrimino();
-    	miGrillaGrafica.mostrarNuevoTetrimino(tetriminoActual);
+    	boolean check = miGrilla.buscarColisiones(tetriminoActual.getCentroPieza().getX(), tetriminoActual.getCentroPieza().getY(), tetriminoActual.getPosicionesActuales());
+    	if (check) {
+    		terminarJuego();
+    	}
+    	else {
+    		miGrillaGrafica.mostrarNuevoTetrimino(tetriminoActual);
+    	}
     }
     
     private void terminarJuego() {

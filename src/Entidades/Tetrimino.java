@@ -1,8 +1,6 @@
 package Entidades;
 
 import java.awt.Color;
-import java.awt.Point;
-import java.util.Collections;
 
 public abstract class Tetrimino {
 

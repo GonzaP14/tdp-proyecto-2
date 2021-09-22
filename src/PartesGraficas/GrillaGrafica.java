@@ -38,14 +38,13 @@ import Entidades.Tetrimino;
 			
 		}
 
-		public static void actualizar(Par[] posicionesNuevas) {
+		public void actualizar(Par[] posicionesNuevas) {
 			// TODO Auto-generated method stub
 			
 		}
 
 		public void mostrarNuevoTetrimino(Tetrimino tetriminoActual) {
 			// TODO Auto-generated method stub
-			
 		}
 
 		public void reacomodarGrillaGrafica(int fila) {
