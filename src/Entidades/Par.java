@@ -25,5 +25,9 @@ public class Par {
 	public void setY(int y) {
 		this.y = y;
 	}
+	
+	public Par clone() {
+		return new Par (x, y);
+	}
 
 }
