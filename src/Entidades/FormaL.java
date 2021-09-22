@@ -1,5 +1,3 @@
-
-
 package Entidades;
 
 import java.awt.Color;
@@ -19,7 +17,7 @@ public class FormaL extends Tetrimino {
 		};
         rotacionActual = r;
         posicionesActuales = rotaciones[rotacionActual];
-        color = color.orange;
+        color = Color.orange;
         centroPieza = centro;
         this.miGrilla = miGrilla;
     }
@@ -27,5 +25,4 @@ public class FormaL extends Tetrimino {
     public Tetrimino clone() {
         return new FormaL (miGrilla, rotacionActual, centroPieza.clone());
     }
-
 }

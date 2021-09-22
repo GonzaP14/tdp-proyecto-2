@@ -17,7 +17,7 @@ public class FormaS extends Tetrimino {
 		};
         rotacionActual = r;
         posicionesActuales = rotaciones[rotacionActual];
-        color = color.red;
+        color = Color.red;
         centroPieza = centro;
         this.miGrilla = miGrilla;
     }
