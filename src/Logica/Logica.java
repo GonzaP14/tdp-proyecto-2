@@ -30,12 +30,6 @@ public class Logica {
      * @param miGui Gui asociada al juego.
      */
     public Logica (GUI miGui) {
-    	miGrilla = new Grilla ();
-        miReloj = new Reloj (this);
-        
-        tetriminoActual = nuevoTetrimino();
-        tetriminoSiguiente = nuevoTetrimino();
-        
         arregloTetriminos = new Tetrimino[] { 
         new FormaO(miGrilla), 
         new FormaI(miGrilla), 
@@ -46,15 +40,17 @@ public class Logica {
         new FormaZ(miGrilla) 
         };
         
+        miGrilla = new Grilla ();
         tetriminoGuardado = null;
         this.miGui = miGui;
         nivelActual = 0;
         puntajeActual = 0;
         estaPausado = false;
         gameOver = false;
-        
+        miReloj = new Reloj (this);
         relojThread = new Thread(miReloj);
-        iniciarReloj();
+        
+        iniciarJuego(); 
     }
 
     /**
@@ -251,7 +247,7 @@ public class Logica {
     public void moverAbajo() {
     	if (tetriminoActual.moverAbajo()) {
     		Par[] posicionesNuevas = tetriminoActual.getPosicionesActuales();
-    		miGrillaGrafica.actualizar(posicionesNuevas);
+    		miGrillaGrafica.actualizar(posicionesParaGUI(posicionesNuevas));
     	}
     	else {
     		agregarAGrilla();
@@ -261,28 +257,47 @@ public class Logica {
     public void moverIzquierda() {
     	if (tetriminoActual.moverIzquierda()) {
     		Par[] posicionesNuevas = tetriminoActual.getPosicionesActuales();
-    		miGrillaGrafica.actualizar(posicionesNuevas);
+    		miGrillaGrafica.actualizar(posicionesParaGUI(posicionesNuevas));
     	}
     }
 
     public void moverDerecha() {
     	if (tetriminoActual.moverDerecha()) {
     		Par[] posicionesNuevas = tetriminoActual.getPosicionesActuales();
-    		miGrillaGrafica.actualizar(posicionesNuevas);
+    		miGrillaGrafica.actualizar(posicionesParaGUI(posicionesNuevas));
     	}
     }
 
 	public void rotarDerecha() {
 		if (tetriminoActual.rotarDerecha()) {
 			Par[] posicionesNuevas = tetriminoActual.getPosicionesActuales();
-			miGrillaGrafica.actualizar(posicionesNuevas);
+			miGrillaGrafica.actualizar(posicionesParaGUI(posicionesNuevas));
 		}
 	}
 	public void rotarIzquierda() {
 		if (tetriminoActual.rotarIzquierda()) {
 			Par[] posicionesNuevas = tetriminoActual.getPosicionesActuales();
-    		miGrillaGrafica.actualizar(posicionesNuevas);
+			for (Par parBloqueActual : posicionesNuevas) {
+				parBloqueActual.setX(parBloqueActual.getX() + tetriminoActual.getCentroPieza().getX());
+				parBloqueActual.setY(parBloqueActual.getY() + tetriminoActual.getCentroPieza().getY());
+			}
+    		miGrillaGrafica.actualizar(posicionesParaGUI(posicionesNuevas));
 		}
+	}
+	
+	
+	/**
+	 * 
+	 * @param posicionesNuevas El conjunto de pares referido a la posicion de los bloques del tetrimino sin sumarle centroPieza
+	 * @return Devuelve el conjunto de pares final referido a la posicion de los bloques del tetrimino (le suma el valor de centroPieza a la rotacion actual)
+	 */
+	private Par[] posicionesParaGUI(Par[] posicionesNuevas) {
+		Par[] posicionesParaGUI = new Par[4];
+		for (int i = 0; i < 4; i++) {
+			posicionesParaGUI[i].setX(posicionesNuevas[i].getX() + tetriminoActual.getCentroPieza().getX()); 
+			posicionesParaGUI[i].setY(posicionesNuevas[i].getY() + tetriminoActual.getCentroPieza().getY()); 
+		}
+		return posicionesParaGUI;
 	}
 	
 	private void agregarAGrilla() {
@@ -294,11 +309,19 @@ public class Logica {
 		agregarNuevoTetrimino();
 	}
     	
+	/**
+	 * 
+	 * @return Devuelve un nuevo tetrimino aleatorio entre las siete formas posibles
+	 */
     private Tetrimino nuevoTetrimino() {
     	int aleatorio = new Random().nextInt(arregloTetriminos.length);
     	return arregloTetriminos[aleatorio];
     }
     
+    /**
+     * Establece el tetrimino siguiente como tetrimino actual de la partida, un nuevo tetrimino aleatorio como siguiente tetrimino,
+     * y decide si es posible mostrar un nuevo tetrimino en la partida, o bien, el jugador pierde (por colisión en el spawn / origen de la grilla)
+     */
     private void agregarNuevoTetrimino() {
     	tetriminoActual = tetriminoSiguiente.clone();
     	tetriminoSiguiente = nuevoTetrimino();
@@ -309,6 +332,13 @@ public class Logica {
     	else {
     		miGrillaGrafica.mostrarNuevoTetrimino(tetriminoActual);
     	}
+    }
+    
+    public void iniciarJuego() {
+    	tetriminoSiguiente = nuevoTetrimino();
+    	agregarNuevoTetrimino();
+    	
+    	iniciarReloj();
     }
     
     private void terminarJuego() {
