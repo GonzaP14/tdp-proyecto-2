@@ -1,6 +1,6 @@
 package Entidades;
 
-import java.awt.Color;
+import javax.swing.ImageIcon;
 
 public abstract class Tetrimino {
 
@@ -13,7 +13,7 @@ public abstract class Tetrimino {
     protected Grilla miGrilla;
     protected Par [][] rotaciones;
     protected Par [] posicionesActuales;
-    protected Color color;
+    protected ImageIcon color;
     protected int rotacionActual;
     protected Par centroPieza;
 
@@ -86,13 +86,12 @@ public abstract class Tetrimino {
     }
 
     /*
-     * Retorna el color del tetrimino. 
-     * @return Color del tetrimino.
+     * @return ImageIcon del Color del tetrimino.
      */
-    public Color getColor() {
-        return color;
+    public ImageIcon getColor () {
+    	return color;
     }
-
+ 
 	public Par getCentroPieza() {
 		return centroPieza;
 	}

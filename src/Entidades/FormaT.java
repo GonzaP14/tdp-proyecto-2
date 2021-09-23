@@ -1,6 +1,7 @@
 package Entidades;
 
-import java.awt.Color;
+import java.awt.Toolkit;
+import javax.swing.ImageIcon;
 
 public class FormaT extends Tetrimino {
 
@@ -17,7 +18,7 @@ public class FormaT extends Tetrimino {
     };
         rotacionActual = rotacion;
         posicionesActuales = rotaciones [rotacionActual];
-        this.color = Color.magenta;
+        color = new ImageIcon(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/Imagenes/CuadradoMagenta.png")));
         centroPieza = centro;
         this.miGrilla = miGrilla;
     }

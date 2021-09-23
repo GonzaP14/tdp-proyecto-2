@@ -1,6 +1,8 @@
 package Entidades;
 
-import java.awt.Color;
+import java.awt.Toolkit;
+
+import javax.swing.ImageIcon;
 
 public class FormaZ extends Tetrimino {
 
@@ -17,7 +19,7 @@ public class FormaZ extends Tetrimino {
     };
         rotacionActual = rotacion;
         posicionesActuales = rotaciones[rotacionActual];
-        this.color = Color.green;
+        color = new ImageIcon(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/Imagenes/CuadradoVerde.png")));
         centroPieza = centro;
         this.miGrilla = miGrilla;
     }

@@ -57,7 +57,8 @@ import java.util.Collections;
                 }
             }
         }
-
+        
+        /*
         public void acoplarTetriminoAGrilla(Tetrimino t) {
             Par[] posicionesAOcupar = t.getPosicionesActuales();
 
@@ -65,4 +66,5 @@ import java.util.Collections;
                 grilla[posicionesAOcupar[i].getY() + t.getCentroPieza().getY()][posicionesAOcupar[i].getX() + t.getCentroPieza().getX()].setColor(t.getColor());
             }       
         }
+        */
     }

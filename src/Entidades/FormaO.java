@@ -1,6 +1,7 @@
 package Entidades;
 
-import java.awt.Color;
+import java.awt.Toolkit;
+import javax.swing.ImageIcon;
 
 public class FormaO extends Tetrimino {
 	
@@ -12,7 +13,7 @@ public class FormaO extends Tetrimino {
 			{ new Par(0, 0), new Par(0, 1), new Par(1, 0), new Par(1, 1) },
 			{ new Par(0, 0), new Par(0, 1), new Par(1, 0), new Par(1, 1) } };
 		posicionesActuales = rotaciones[rotacionActual];
-		color = Color.yellow;
+		color = new ImageIcon(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/Imagenes/CuadradoAmarillo.png")));
 		centroPieza = centro;
 		this.miGrilla = miGrilla;
 	}
