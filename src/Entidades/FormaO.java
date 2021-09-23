@@ -7,11 +7,7 @@ public class FormaO extends Tetrimino {
 	
 	public FormaO (Grilla miGrilla , int r , Par centro) {
 		rotacionActual = r;
-		rotaciones = new Par[][]
-			{ { new Par(0, 0), new Par(0, 1), new Par(1, 0), new Par(1, 1) },
-			{ new Par(0, 0), new Par(0, 1), new Par(1, 0), new Par(1, 1) },
-			{ new Par(0, 0), new Par(0, 1), new Par(1, 0), new Par(1, 1) },
-			{ new Par(0, 0), new Par(0, 1), new Par(1, 0), new Par(1, 1) } };
+		rotaciones = new Par[][] {{ new Par(0, 0), new Par(0, 1), new Par(1, 0), new Par(1, 1) }};
 		posicionesActuales = rotaciones[rotacionActual];
 		color = new ImageIcon(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/Imagenes/CuadradoAmarillo.png")));
 		centroPieza = centro;

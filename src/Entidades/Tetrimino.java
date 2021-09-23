@@ -47,35 +47,44 @@ public abstract class Tetrimino {
     }
     
     /**
-     * Mueve el tetrimino a derecha.
-     * @return
+     * @return true si el movimiento a derecha fue posible y false en caso contrario.
      */
     public boolean moverDerecha() {
-        boolean check = miGrilla.buscarColisiones(centroPieza.getX() + 1, centroPieza.getY(), rotaciones[rotacionActual]);
-        
-        if (!check) 
-            centroPieza.setX(centroPieza.getX() + 1);
-        	
-        return !check;
+        return moverLateralmente(1);
     }
     
-    /*
-     * Mueve el tetrimino a izquierda.
+    /**
+     * @return true si el movimiento a izquierda fue posible y false en caso contrario.
      */
     public boolean moverIzquierda() {
-        boolean check = miGrilla.buscarColisiones(centroPieza.getX() - 1, centroPieza.getY(), rotaciones[rotacionActual]);
-        
-        if (!check) 
-            centroPieza.setX(centroPieza.getX() - 1);
-        
-        return !check;
+        return moverLateralmente(-1);
     }
     
+    /**
+     * @param i parametro de desplazamiento: 1 (movimiento a derecha) y -1 (movimiento a izquierda)
+     * @return true si el movimiento lateral fue posible y false en caso contrario.
+     */
+    private boolean moverLateralmente(int i) {
+    	boolean check = miGrilla.buscarColisiones(centroPieza.getX() + i, centroPieza.getY(), rotaciones[rotacionActual]);
+        
+        if (!check) {
+            centroPieza.setX(centroPieza.getX() + i);
+        }
+        
+        return (!check);	
+    }
+    
+    /**
+     * @return true si el movimiento hacia abajo fue posible y false en caso contrario.
+     */
     public boolean moverAbajo() {
     	boolean check = miGrilla.buscarColisiones(centroPieza.getX(), centroPieza.getY() + 1, rotaciones[rotacionActual]);
-    	if (!check) 
+    	
+    	if (!check) {
     		centroPieza.setY(centroPieza.getY() + 1);
-    	return !check;
+    	}
+    	
+    	return (!check);
     }
 
     /*
