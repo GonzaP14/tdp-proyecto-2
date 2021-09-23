@@ -11,6 +11,8 @@ import PartesGraficas.GrillaGrafica;
 
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -18,13 +20,17 @@ import java.awt.Color;
 import javax.swing.border.TitledBorder;
 
 import Entidades.Bloque;
+import Logica.Logica;
 
 import javax.swing.border.BevelBorder;
 
 public class GUI {
-
+	// attributes
 	private JFrame frame;
-	private GrillaGrafica grilla;
+	private GrillaGrafica miGrillaGrafica;
+	private Logica miLogica;
+	
+	
 	/**
 	 * Launch the application.
 	 */
@@ -37,6 +43,7 @@ public class GUI {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
+				
 			}
 		});
 	}
@@ -45,8 +52,9 @@ public class GUI {
 	 * Create the application.
 	 */
 	public GUI() {
-		grilla= new GrillaGrafica();
+		miGrillaGrafica = new GrillaGrafica();
 		initialize();
+		miLogica = new Logica(miGrillaGrafica, this);
 	}
 
 	/**
@@ -60,32 +68,38 @@ public class GUI {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JPanel contentPane = new JPanel();
-		contentPane.setBackground(Color.WHITE);
-		contentPane.setBounds(23, 11, 320, 720);
-		frame.getContentPane().add(contentPane);
+		frame.add(miGrillaGrafica);
 		
-		contentPane.setLayout(new GridLayout(22, 10, 0, 0));
-		
-		
-		
-		for(int i=0;i<22;i++) {
-			for(int j=0;j<10;j++) {				
-				if(i==1 && j==4 ||i==1 && j==5 || i==1 && j==6 ||i==2 && j==5 ) {				
-					grilla.actualizarColorBloque(i,j, 6);				
-				}
-					JLabel cuadrado=new JLabel();	
-					cuadrado.setBounds(0, 0,30, 30);				
-					cuadrado.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-					ImageIcon ico= new ImageIcon();
-					ico= grilla.getBloque(i, j).getBloqueGrafico().getCuadrado();
-					ImageIcon img =new ImageIcon(ico.getImage().getScaledInstance(cuadrado.getWidth(), cuadrado.getHeight(), Image.SCALE_SMOOTH));
-					cuadrado.setIcon(img);
-					contentPane.add(cuadrado);	
-				
-			}
-		}
-		
-		
+		frame.addKeyListener(new KeyListener () {
+            public void keyTyped(KeyEvent e) {
+            }
+            public void keyPressed(KeyEvent e) {
+                switch (e.getKeyCode()) {
+	                case KeyEvent.VK_SPACE:
+	                    miLogica.moverAbajo();
+	                    //repintar();
+	                    break;
+	                case KeyEvent.VK_LEFT:
+	                	miLogica.moverIzquierda();
+	                    //repintar();
+	                    break;
+	                case KeyEvent.VK_RIGHT:
+	                	miLogica.moverDerecha();
+	                    //repintar();
+	                    break;
+	                case KeyEvent.VK_DOWN:
+	                	miLogica.rotarDerecha();
+	                    //repintar();
+	                    break;
+	                case KeyEvent.VK_UP:
+	                	miLogica.rotarIzquierda();
+	                    //repintar();
+	                    break;
+                }
+            }
+            public void keyReleased(KeyEvent e) {
+            }
+		});
 	}
 }
+

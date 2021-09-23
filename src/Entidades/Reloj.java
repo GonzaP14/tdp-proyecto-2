@@ -19,6 +19,9 @@ public class Reloj implements Runnable{
 					e.printStackTrace();
 				}
 	        }
+	        else if (LOGICA.gameOver()) {
+	        	System.out.println("PERDIO");
+	        }
 		}
 	}	
 }

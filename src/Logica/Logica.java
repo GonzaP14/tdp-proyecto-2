@@ -29,7 +29,11 @@ public class Logica {
      * Crea una nueva lógica.
      * @param miGui Gui asociada al juego.
      */
-    public Logica (GUI miGui) {
+    public Logica (GrillaGrafica miGrillaGrafica, GUI miGui) {
+    	this.miGrillaGrafica = miGrillaGrafica;
+    	this.miGui = miGui;
+    	miGrilla = new Grilla ();
+    	
         arregloTetriminos = new Tetrimino[] { 
         new FormaO(miGrilla), 
         new FormaI(miGrilla), 
@@ -38,18 +42,16 @@ public class Logica {
         new FormaS(miGrilla), 
         new FormaT(miGrilla), 
         new FormaZ(miGrilla) 
-        };
+        };   
         
-        miGrilla = new Grilla ();
         tetriminoGuardado = null;
-        this.miGui = miGui;
         nivelActual = 0;
         puntajeActual = 0;
         estaPausado = false;
         gameOver = false;
+
         miReloj = new Reloj (this);
         relojThread = new Thread(miReloj);
-        
         iniciarJuego(); 
     }
 
@@ -126,62 +128,10 @@ public class Logica {
     	if (tetriminoGuardado != null) {
     		tetriminoGuardado = null;
     	}
-    }
-    
-    /**
-     * Borra las línea 
-     */
-    /* public void borrarLineas() {
-    	boolean hueco;
-    	int filasEliminadas = 0;
-    	
-    	for (int i = 21; i > 0; i --) { 
-    		hueco = false;
-    		
-    		for (int j = 0; j < 11; j ++) {
-    			if (miGrilla.getBloque(i, j).getColor() == Color.black) {
-    				hueco = true;
-    				break;
-    			}
-    		}
-    		
-    		if (!hueco) {
-    			eliminarLinea (i);
-    			i ++;
-    			filasEliminadas ++;
-    		}	
-    	}
-    	
-    	switch (filasEliminadas) {
-    	
-	    	case 1: aumentarPuntaje(100);;
-	    	break;
-	    	
-	    	case 2: aumentarPuntaje(300);
-	    	break;
-	    	
-	    	case 3: aumentarPuntaje(500);
-	    	break;
-	    	
-	    	case 4: aumentarPuntaje(800);
-	    	break; 
-    	
-    	}
-    	
-    }
-    
-    private void eliminarLinea(int fila) {
-    	for (int j = fila - 1; j > 0; j --) {
-    		for (int i = 1; i < 11; i ++) {
-    			miGrilla.intercambiarBloques(i, j + 1, i, j);
-    		}
-    	}
-    	miGrillaGrafica.eliminarLinea(fila);
-	} */
+    }    
     
     
-    
-    private void borrarLineas() {
+    /*private void borrarLineas() {
 		boolean lineaCompleta;
 		int lineasBorradas = 0, limiteSuperior, limiteInferior, valorCentroEnX;
 		valorCentroEnX = tetriminoActual.getCentroPieza().getX();
@@ -218,12 +168,56 @@ public class Logica {
 			break;
 		}
 
+    }*/
+    
+    public void borrarLineas() {
+    	boolean hueco;
+    	int filasEliminadas = 0;
+    	
+    	for (int i = 21; i > 0; i --) { 
+    		hueco = false;
+    		
+    		for (int j = 0; j < 10; j ++) {
+    			if (miGrilla.getBloque(i, j).getColor() == Color.black) {
+    				hueco = true;
+    				break;
+    			}
+    		}
+    		
+    		if (!hueco) {
+    			eliminarLinea (i);
+    			i ++;
+    			filasEliminadas ++;
+    		}	
+    	}
+    	
+    	switch (filasEliminadas) {
+    	
+	    	case 1: aumentarPuntaje(100);;
+	    	break;
+	    	
+	    	case 2: aumentarPuntaje(300);
+	    	break;
+	    	
+	    	case 3: aumentarPuntaje(500);
+	    	break;
+	    	
+	    	case 4: aumentarPuntaje(800);
+	    	break; 
+    	
+    	}
+    	
     }
+    
+    private void eliminarLinea(int fila) {
+    	miGrilla.eliminarLinea(fila);
+		miGrillaGrafica.eliminarLinea(fila);
+	} 
     
     
     private void limpiarFila(int fila) {
-		miGrilla.reacomodarGrilla(fila);
-		miGrillaGrafica.reacomodarGrillaGrafica(fila);
+		miGrilla.eliminarLinea(fila);
+		miGrillaGrafica.eliminarLinea(fila);
 	}
 	
 
@@ -245,10 +239,16 @@ public class Logica {
     }
 
     public void moverAbajo() {
+    	// Si puede mover abajo
     	if (tetriminoActual.moverAbajo()) {
     		Par[] posicionesNuevas = tetriminoActual.getPosicionesActuales();
-    		miGrillaGrafica.actualizar(posicionesParaGUI(posicionesNuevas));
+    		miGrillaGrafica.actualizar(posicionesParaGUI(posicionesNuevas), tetriminoActual.getColor());
     	}
+    	// Si no puede mover abajo, y además colisiona en el spawn / origen de la grilla, pierde
+    	else if (tetriminoActual.getCentroPieza().getX() == miGrilla.getOrigenGrilla().getX() && tetriminoActual.getCentroPieza().getY() == miGrilla.getOrigenGrilla().getY()){
+    		terminarJuego();
+    	}
+    	// Si no puede mover abajo, y colisiona en un lugar diferente al spawn / origen de la grilla, se acopla el tetrimino a la imagen de bloques apilados
     	else {
     		agregarAGrilla();
     	}
@@ -257,21 +257,21 @@ public class Logica {
     public void moverIzquierda() {
     	if (tetriminoActual.moverIzquierda()) {
     		Par[] posicionesNuevas = tetriminoActual.getPosicionesActuales();
-    		miGrillaGrafica.actualizar(posicionesParaGUI(posicionesNuevas));
+    		miGrillaGrafica.actualizar(posicionesParaGUI(posicionesNuevas), tetriminoActual.getColor());
     	}
     }
 
     public void moverDerecha() {
     	if (tetriminoActual.moverDerecha()) {
     		Par[] posicionesNuevas = tetriminoActual.getPosicionesActuales();
-    		miGrillaGrafica.actualizar(posicionesParaGUI(posicionesNuevas));
+    		miGrillaGrafica.actualizar(posicionesParaGUI(posicionesNuevas), tetriminoActual.getColor());
     	}
     }
 
 	public void rotarDerecha() {
 		if (tetriminoActual.rotarDerecha()) {
 			Par[] posicionesNuevas = tetriminoActual.getPosicionesActuales();
-			miGrillaGrafica.actualizar(posicionesParaGUI(posicionesNuevas));
+			miGrillaGrafica.actualizar(posicionesParaGUI(posicionesNuevas), tetriminoActual.getColor());
 		}
 	}
 	public void rotarIzquierda() {
@@ -281,7 +281,7 @@ public class Logica {
 				parBloqueActual.setX(parBloqueActual.getX() + tetriminoActual.getCentroPieza().getX());
 				parBloqueActual.setY(parBloqueActual.getY() + tetriminoActual.getCentroPieza().getY());
 			}
-    		miGrillaGrafica.actualizar(posicionesParaGUI(posicionesNuevas));
+    		miGrillaGrafica.actualizar(posicionesParaGUI(posicionesNuevas), tetriminoActual.getColor());
 		}
 	}
 	
@@ -294,6 +294,7 @@ public class Logica {
 	private Par[] posicionesParaGUI(Par[] posicionesNuevas) {
 		Par[] posicionesParaGUI = new Par[4];
 		for (int i = 0; i < 4; i++) {
+			posicionesParaGUI[i] = new Par(0, 0);
 			posicionesParaGUI[i].setX(posicionesNuevas[i].getX() + tetriminoActual.getCentroPieza().getX()); 
 			posicionesParaGUI[i].setY(posicionesNuevas[i].getY() + tetriminoActual.getCentroPieza().getY()); 
 		}
@@ -302,7 +303,7 @@ public class Logica {
 	
 	private void agregarAGrilla() {
 		miGrilla.acoplarTetriminoAGrilla(tetriminoActual);
-		miGrillaGrafica.acoplarTetriminoAGrillaGrafica(tetriminoActual.getPosicionesActuales());
+		miGrillaGrafica.acoplarTetriminoAGrillaGrafica(posicionesParaGUI(tetriminoActual.getPosicionesActuales()), tetriminoActual.getColor());
 		
 		borrarLineas();
 		
@@ -327,10 +328,9 @@ public class Logica {
     	tetriminoSiguiente = nuevoTetrimino();
     	boolean check = miGrilla.buscarColisiones(tetriminoActual.getCentroPieza().getX(), tetriminoActual.getCentroPieza().getY(), tetriminoActual.getPosicionesActuales());
     	if (check) {
-    		terminarJuego();
     	}
     	else {
-    		miGrillaGrafica.mostrarNuevoTetrimino(tetriminoActual);
+    		miGrillaGrafica.mostrarNuevoTetrimino(posicionesParaGUI(tetriminoActual.getPosicionesActuales()), tetriminoActual.getColor());
     	}
     }
     
@@ -350,4 +350,3 @@ public class Logica {
     }
     
 }
-    

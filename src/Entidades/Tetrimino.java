@@ -26,6 +26,7 @@ public abstract class Tetrimino {
     	
     	if (!check) 
     		posicionesActuales = rotaciones [rotacionSiguiente];
+    		rotacionActual = rotacionSiguiente;
     	
     	return !check;
     }
@@ -39,6 +40,7 @@ public abstract class Tetrimino {
     	
     	if (!check) 
     		posicionesActuales = rotaciones [rotacionSiguiente];
+    		rotacionActual = rotacionSiguiente;
     	
     	return !check;
     }
@@ -52,7 +54,7 @@ public abstract class Tetrimino {
         
         if (!check) 
             centroPieza.setX(centroPieza.getX() + 1);
-        
+        	
         return !check;
     }
     
@@ -71,7 +73,7 @@ public abstract class Tetrimino {
     public boolean moverAbajo() {
     	boolean check = miGrilla.buscarColisiones(centroPieza.getX(), centroPieza.getY() + 1, rotaciones[rotacionActual]);
     	if (!check) 
-    		centroPieza.setY(centroPieza.getY() + 1);	
+    		centroPieza.setY(centroPieza.getY() + 1);
     	return !check;
     }
 

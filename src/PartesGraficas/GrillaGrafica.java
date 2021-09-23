@@ -1,57 +1,111 @@
 package PartesGraficas;
 
-	import java.awt.Color;
+import java.awt.Color;
+import java.awt.GridLayout;
+import java.awt.Image;
+import java.util.ArrayList;
+import java.util.List;
 
-import Entidades.Bloque;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.border.BevelBorder;
 import Entidades.Par;
-import Entidades.Tetrimino;
 
-	public class GrillaGrafica {
-	    //Atributos
-		private Bloque grilla[][];
 
-	    public GrillaGrafica() {
-	    	 grilla = new Bloque[22][10];
-		        
-	        for(int filas=0;filas<22;filas++) {
-	        	for(int columnas=0;columnas<10;columnas++) {	   
-	        		Bloque b=new Bloque();
+
+public class GrillaGrafica extends JPanel{
+	
+	private static final long serialVersionUID = -3857957447580442863L;
+	private final BloqueGrafico bloqueNegro = new BloqueGrafico();
+	private Par[] posicionesAntiguas;
+	private final List<JLabel> lista = new ArrayList<JLabel>();
+	 
+	 /**
+	  * Se inicializa la grilla grafica en negro
+	  */
+    public GrillaGrafica() {	
+		setBackground(Color.WHITE);
+		setBounds(23, 11, 320, 720);
+		setLayout(new GridLayout(10, 22, 0, 0));
+    	for (int i = 0; i < 10 * 22; i++) {
+            //modular
+            JLabel cuadrado = new JLabel();
+            cuadrado.setBounds(0, 0,30, 30);				
+			cuadrado.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+			ImageIcon ico = new ImageIcon();
+			ico = bloqueNegro.getCuadrado();
+			ImageIcon img = new ImageIcon(ico.getImage().getScaledInstance(cuadrado.getWidth(), cuadrado.getHeight(), Image.SCALE_SMOOTH));
+			cuadrado.setIcon(img);			
 			
-	        		grilla[filas][columnas]=b;	   
-	        }
-	        }
-	    }
+			lista.add(cuadrado);
+			this.add(cuadrado);
+        }
+    	
+    }
+    /**
+     * 
+     * @param f Indice folumna del componente 
+     * @param c Indice columna del componente
+     * @return Devuelve el componente grafico en la posicion (f, c) de la grilla grafica. 
+     */
+    private JLabel getJLabelAt(int f, int c) {
+    	 int index = c * 10 + f;
+         return lista.get(index);
+    }
 
-	    //Buscar Colisiones
-	    public Bloque getBloque(int x,int y) {
-			return grilla[x][y];
-		}
-		public void setBloque(int x, int y, Bloque b) {
-			grilla[x][y]=b;
-		}
-		public void actualizarColorBloque(int x,int y,int indice) {
-			grilla[x][y].setIndice(indice);
-		}
+    // Buscar Colisiones
 
-		public void acoplarTetriminoAGrillaGrafica(Par[] posicionesActuales) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		public void actualizar(Par[] posicionesNuevas) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		public void mostrarNuevoTetrimino(Tetrimino tetriminoActual) {
-			// TODO Auto-generated method stub
-		}
-
-		public void reacomodarGrillaGrafica(int fila) {
-			// TODO Auto-generated method stub
-			
-		}		
-		
+    
+    /**
+     * Al colisionar con los bloques ya apilados o llegar al suelo, el tetrimino se incorpora a la imagen de bloques apilados.
+     * @param posicionesActuales Las posiciones que ocupa el tetrimino en la grilla
+     * @param color El color del tetrimino a apilar
+     */
+	public void acoplarTetriminoAGrillaGrafica(Par[] posicionesActuales, Color color) {
+		for	(Par parNuevoActual : posicionesActuales) 
+			getJLabelAt(parNuevoActual.getX(), parNuevoActual.getY()).setIcon(bloqueNegro.getCuadrado(color));
 	}
+
+	public void actualizar(Par[] posicionesNuevas, Color color) {
+		for	(Par parAntiguoActual : posicionesAntiguas) 
+			getJLabelAt(parAntiguoActual.getX(), parAntiguoActual.getY()).setIcon(bloqueNegro.getCuadrado());
+		
+		for	(Par parNuevoActual : posicionesNuevas) 
+			getJLabelAt(parNuevoActual.getX(), parNuevoActual.getY()).setIcon(bloqueNegro.getCuadrado(color));
+		
+		posicionesAntiguas = posicionesNuevas;
+	}
+
+	/**
+	 * Muestra un nuevo tetrimino cayendo en pantalla
+	 * @param posicionesNuevas Las posiciones que ocupa el tetrimino en la grilla
+	 * @param color El color del tetrimino a mostrar en pantalla
+	 */
+	public void mostrarNuevoTetrimino(Par[] posicionesNuevas, Color color) {
+		posicionesAntiguas = posicionesNuevas.clone();
+
+		for	(Par parNuevoActual : posicionesNuevas) 
+			getJLabelAt(parNuevoActual.getX(), parNuevoActual.getY()).setIcon(bloqueNegro.getCuadrado(color));
+	}
+
+	
+	/**
+	 * Elimina una linea completa de la grilla grafica
+	 * @param fila fila a eliminar
+	 */
+	public void eliminarLinea(int fila) {
+		JLabel elDeArriba; JLabel elDeAbajo;
+		for (int i = fila - 1; i > 0; i--) {
+			for (int j = 1; j < 10; j++) {
+				for (int k = 0; k < 4; k++) {
+					elDeAbajo = getJLabelAt(fila + 1, posicionesAntiguas[k].getY());
+					elDeArriba = getJLabelAt(fila, posicionesAntiguas[k].getY());
+					elDeAbajo.setIcon(elDeArriba.getIcon());
+				}
+			}
+		}	
+	}		
+}
 	
 
