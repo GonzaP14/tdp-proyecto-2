@@ -268,7 +268,6 @@ public class Logica {
      * Desplaza el TetriminoActual de la partida un movimiento hacia abajo.
      */
     public void moverAbajo() {
-    	
     	Par [] posicionesViejas = tetriminoActual.getPosicionesActuales();
     	Color auxiliar = tetriminoActual.getColor();
 
@@ -286,7 +285,6 @@ public class Logica {
      * Desplaza el TetriminoActual de la partida un movimiento hacia la izquierda.
      */
     public void moverIzquierda() {
-    	System.out.println("mover izquierda");
     	Par [] posicionesViejas = tetriminoActual.getPosicionesActuales();
     	Color auxiliar = tetriminoActual.getColor();
     	
@@ -301,7 +299,6 @@ public class Logica {
      * Desplaza el TetriminoActual de la partida un movimiento hacia la derecha.
      */
     public void moverDerecha() {
-    	System.out.println("mover derecha");
     	Par [] posicionesViejas = tetriminoActual.getPosicionesActuales();
     	Color auxiliar = tetriminoActual.getColor();
     	

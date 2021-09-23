@@ -5,23 +5,15 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-
-import PartesGraficas.GrillaGrafica;
 
 import java.awt.GridLayout;
 import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import java.awt.Color;
-import javax.swing.border.TitledBorder;
 
-import Entidades.Bloque;
 import Entidades.Par;
 import Logica.Logica;
 
@@ -71,7 +63,7 @@ public class GUI {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		 contentPane = new JPanel();
+		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBounds(23, 11, 320, 720);
 		
@@ -86,18 +78,25 @@ public class GUI {
 			public void keyPressed(KeyEvent e) {
 				switch (e.getKeyCode()) {
 				
-				case KeyEvent.VK_DOWN:
+				case KeyEvent.VK_SPACE:
 					logica.moverAbajo();;
-					repintar() ;
+					repintar();
 					break;
 				case KeyEvent.VK_LEFT:
 					logica.moverIzquierda();
-					repintar() ;
+					repintar();
 					break;
 				case KeyEvent.VK_RIGHT:
 					logica.moverDerecha();
-					repintar() ;
-					
+					repintar();	
+					break;
+				case KeyEvent.VK_DOWN:
+					logica.rotarDerecha();
+					repintar();
+					break;
+				case KeyEvent.VK_UP:
+					logica.rotarIzquierda();
+					repintar();
 					break;
 				}
 				
@@ -109,7 +108,6 @@ public class GUI {
 	
 		public void repintar() {
 			Par[] coordenadas=logica.getTetriminoActual().getPosicionesActuales();
-	        
 	        for(int i=0;i<22;i++) {
 	            for(int j=0;j<10;j++) {        
 	            	if(coordenadas[0].getY()==i && coordenadas[0].getX()+logica.getTetriminoActual().getCentroPieza().getX()==j ||coordenadas[1].getY()==i && coordenadas[1].getX()+logica.getTetriminoActual().getCentroPieza().getX()==j ||coordenadas[2].getY()==i && coordenadas[2].getX()+logica.getTetriminoActual().getCentroPieza().getX()==j ||coordenadas[3].getY()==i && coordenadas[3].getX()+logica.getTetriminoActual().getCentroPieza().getX()==j  ){

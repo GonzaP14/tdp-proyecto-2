@@ -23,15 +23,13 @@ import java.util.Collections;
 
 	    //Buscar Colisiones
 	    public boolean buscarColisiones(int valorX, int valorY, Par[] posicionesActuales) {
-	    
+	    	int nuevoValorEnX,nuevoValorEnY;
 	    	for (Par parBloqueActual : posicionesActuales) {
-	    
-	    		if(valorX+parBloqueActual.getX()>9 || valorX+parBloqueActual.getX()<0 || valorY+parBloqueActual.getY()>21 ){
+	    		nuevoValorEnX = valorX + parBloqueActual.getX();
+	    		nuevoValorEnY = valorY + parBloqueActual.getY();
+	    		if(nuevoValorEnX>9 || nuevoValorEnX<0 || nuevoValorEnY>=21 ||  grilla[nuevoValorEnY][nuevoValorEnX].getColor() != Color.BLACK){
 	    			return true;
 	    		}
-	    		if (grilla[parBloqueActual.getY() + valorY][parBloqueActual.getX() + valorX].getColor() != Color.BLACK) {
-					return true;
-				}
 			}
 			return false;
 	    }
@@ -64,7 +62,7 @@ import java.util.Collections;
 			Par[] posicionesAOcupar = t.getPosicionesActuales();
 
 	    	for(int i = 0; i < 4; i++) {
-	    		grilla[posicionesAOcupar[i].getX() + t.getCentroPieza().getX()][posicionesAOcupar[i].getY() + t.getCentroPieza().getY()].setColor(t.getColor());
+	    		grilla[posicionesAOcupar[i].getY() + t.getCentroPieza().getY()][posicionesAOcupar[i].getX() + t.getCentroPieza().getX()].setColor(t.getColor());
 	    	}		
 	    }
 	}
