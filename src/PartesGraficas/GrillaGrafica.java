@@ -6,12 +6,11 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.border.BevelBorder;
+import javax.swing.border.LineBorder;
+
 import Entidades.Par;
 
 
@@ -44,7 +43,7 @@ public class GrillaGrafica extends JPanel{
     private JLabel nuevoCuadradoNegro() {
     	JLabel cuadrado = new JLabel();
         cuadrado.setBounds(0, 0,30, 30);				
-		cuadrado.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		cuadrado.setBorder(new LineBorder(Color.gray));
 		ImageIcon imagenNegra = negro;
 		ImageIcon img = new ImageIcon(imagenNegra.getImage().getScaledInstance(cuadrado.getWidth(), cuadrado.getHeight(), Image.SCALE_SMOOTH));
 		cuadrado.setIcon(img);	
@@ -105,16 +104,14 @@ public class GrillaGrafica extends JPanel{
 	 * @param fila fila a eliminar
 	 */
 	public void eliminarLinea(int fila) {
-        JLabel elDeArriba; JLabel elDeAbajo;
-
-        for (int i = fila; i > 0; i--) {
+		for(int filas=fila;filas>0;filas--) {
             for (int j = 0; j < 10; j++) {
-                    elDeAbajo = getJLabelAt(i, j);
-                    elDeArriba = getJLabelAt(i - 1, j);
-                    elDeAbajo.setIcon(elDeArriba.getIcon());
+                getJLabelAt(j, filas).setIcon(getJLabelAt(j, filas-1).getIcon());
             }
         }
     }		
+	
+	
 }
 	
 
