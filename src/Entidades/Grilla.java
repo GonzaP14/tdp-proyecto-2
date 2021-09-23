@@ -57,6 +57,12 @@ import java.util.Collections;
                 }
             }
         }
+
+
+		public void acoplarTetriminoAGrilla(Tetrimino tetriminoActual) {
+			// TODO Auto-generated method stub
+			
+		}
         
         /*
         public void acoplarTetriminoAGrilla(Tetrimino t) {

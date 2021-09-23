@@ -3,6 +3,7 @@ package PartesGraficas;
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +18,7 @@ import Entidades.Par;
 public class GrillaGrafica extends JPanel{
 	
 	private static final long serialVersionUID = -3857957447580442863L;
-	private final BloqueGrafico bloqueNegro = new BloqueGrafico();
+	private final ImageIcon negro = new ImageIcon(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/Imagenes/CuadradoNegro.png")));
 	private Par[] posicionesAntiguas;
 	private final List<JLabel> lista = new ArrayList<JLabel>();
 	 
@@ -43,7 +44,7 @@ public class GrillaGrafica extends JPanel{
     	JLabel cuadrado = new JLabel();
         cuadrado.setBounds(0, 0,30, 30);				
 		cuadrado.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		ImageIcon imagenNegra = bloqueNegro.getCuadrado();
+		ImageIcon imagenNegra = negro;
 		ImageIcon img = new ImageIcon(imagenNegra.getImage().getScaledInstance(cuadrado.getWidth(), cuadrado.getHeight(), Image.SCALE_SMOOTH));
 		cuadrado.setIcon(img);	
 		return cuadrado;
@@ -65,9 +66,9 @@ public class GrillaGrafica extends JPanel{
      * @param posicionesActuales Las posiciones que ocupa el tetrimino en la grilla
      * @param color El color del tetrimino a apilar
      */
-	public void acoplarTetriminoAGrillaGrafica(Par[] posicionesActuales, Color color) {
+	public void acoplarTetriminoAGrillaGrafica(Par[] posicionesActuales, ImageIcon color) {
 		for	(Par parNuevoActual : posicionesActuales) 
-			getJLabelAt(parNuevoActual.getX(), parNuevoActual.getY()).setIcon(bloqueNegro.getCuadrado(color));
+			getJLabelAt(parNuevoActual.getX(), parNuevoActual.getY()).setIcon(color);
 	}
 
 	/**
@@ -75,12 +76,12 @@ public class GrillaGrafica extends JPanel{
 	 * @param posicionesNuevas Las nuevas posiciones que ocupa el tetrimino en la grilla
 	 * @param color El color del en movimiento
 	 */
-	public void actualizar(Par[] posicionesNuevas, Color color) {
+	public void actualizar(Par[] posicionesNuevas, ImageIcon color) {
 		for	(Par parAntiguoActual : posicionesAntiguas) 
-			getJLabelAt(parAntiguoActual.getX(), parAntiguoActual.getY()).setIcon(bloqueNegro.getCuadrado());
+			getJLabelAt(parAntiguoActual.getX(), parAntiguoActual.getY()).setIcon(negro);
 		
 		for	(Par parNuevoActual : posicionesNuevas) 
-			getJLabelAt(parNuevoActual.getX(), parNuevoActual.getY()).setIcon(bloqueNegro.getCuadrado(color));
+			getJLabelAt(parNuevoActual.getX(), parNuevoActual.getY()).setIcon(color);
 		
 		posicionesAntiguas = posicionesNuevas;
 	}
@@ -90,11 +91,11 @@ public class GrillaGrafica extends JPanel{
 	 * @param posicionesNuevas Las posiciones que ocupa el tetrimino en la grilla
 	 * @param color El color del tetrimino a mostrar en pantalla
 	 */
-	public void mostrarNuevoTetrimino(Par[] posicionesNuevas, Color color) {
+	public void mostrarNuevoTetrimino(Par[] posicionesNuevas, ImageIcon color) {
 		posicionesAntiguas = posicionesNuevas.clone();
 
 		for	(Par parNuevoActual : posicionesNuevas) 
-			getJLabelAt(parNuevoActual.getX(), parNuevoActual.getY()).setIcon(bloqueNegro.getCuadrado(color));
+			getJLabelAt(parNuevoActual.getX(), parNuevoActual.getY()).setIcon(color);
 	}
 
 	
