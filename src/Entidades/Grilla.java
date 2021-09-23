@@ -57,8 +57,8 @@ import javax.swing.ImageIcon;
                     grilla[j+1][i] = grilla[j][i];
                 }
             }
+
         }
-     
         public void acoplarTetriminoAGrilla(Tetrimino t) {
             Par[] posicionesAOcupar = t.getPosicionesActuales();
 

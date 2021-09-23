@@ -21,12 +21,13 @@ public abstract class Tetrimino {
      * Rota el tetrimino hacia la derecha.
      */
     public boolean rotarDerecha() {
-    	int rotacionSiguiente = (rotacionActual == 3) ? 0 : (rotacionActual + 1) % 4; 
+    	int rotacionSiguiente = (rotacionActual + 1) % 4; 
     	boolean check = miGrilla.buscarColisiones (centroPieza.getX(), centroPieza.getY(), rotaciones [rotacionSiguiente]);
     	
-    	if (!check) 
+    	if (!check) {
     		posicionesActuales = rotaciones [rotacionSiguiente];
     		rotacionActual = rotacionSiguiente;
+    	}
     	
     	return !check;
     }
@@ -35,13 +36,13 @@ public abstract class Tetrimino {
      * Rota el tetrimino hacia la izquierda.
      */
     public boolean rotarIzquierda() {
-    	int rotacionSiguiente = (rotacionActual == 0) ? 3 : (rotacionActual - 1) % 4;
+    	int rotacionSiguiente = (rotacionActual == 0) ? 3 : (rotacionActual - 1) ;
     	boolean check = miGrilla.buscarColisiones (centroPieza.getX(), centroPieza.getY(), rotaciones [rotacionSiguiente]);
     	
-    	if (!check) 
+    	if (!check) {
     		posicionesActuales = rotaciones [rotacionSiguiente];
     		rotacionActual = rotacionSiguiente;
-    	
+    	}
     	return !check;
     }
     

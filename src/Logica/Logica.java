@@ -228,12 +228,6 @@ public class Logica {
     	miGrilla.eliminarLinea(fila);
 		miGrillaGrafica.eliminarLinea(fila);
 	} 
-    
-    
-    private void limpiarFila(int fila) {
-		miGrilla.eliminarLinea(fila);
-		miGrillaGrafica.eliminarLinea(fila);
-	}
 	
 
     private void aumentarPuntaje(int puntosNuevos) {
@@ -292,10 +286,6 @@ public class Logica {
 	public void rotarIzquierda() {
 		if (tetriminoActual.rotarIzquierda()) {
 			Par[] posicionesNuevas = tetriminoActual.getPosicionesActuales();
-			for (Par parBloqueActual : posicionesNuevas) {
-				parBloqueActual.setX(parBloqueActual.getX() + tetriminoActual.getCentroPieza().getX());
-				parBloqueActual.setY(parBloqueActual.getY() + tetriminoActual.getCentroPieza().getY());
-			}
     		miGrillaGrafica.actualizar(posicionesParaGUI(posicionesNuevas), tetriminoActual.getColor());
 		}
 	}

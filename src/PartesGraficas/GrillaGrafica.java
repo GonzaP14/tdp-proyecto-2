@@ -7,6 +7,7 @@ import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -105,10 +106,11 @@ public class GrillaGrafica extends JPanel{
 	 */
 	public void eliminarLinea(int fila) {
         JLabel elDeArriba; JLabel elDeAbajo;
-        for (int i = fila - 1; i > 0; i--) {
-            for (int j = 0; j < 9; j++) {
-                    elDeAbajo = getJLabelAt(i + 1, j);
-                    elDeArriba = getJLabelAt(i, j);
+
+        for (int i = fila; i > 0; i--) {
+            for (int j = 0; j < 10; j++) {
+                    elDeAbajo = getJLabelAt(i, j);
+                    elDeArriba = getJLabelAt(i - 1, j);
                     elDeAbajo.setIcon(elDeArriba.getIcon());
             }
         }
