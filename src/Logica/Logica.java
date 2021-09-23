@@ -22,6 +22,7 @@ public class Logica {
     private Tetrimino tetriminoGuardado;
     private GUI miGui;
     private int nivelActual;
+    private int lineasEliminadas;
     private int puntajeActual;
     private boolean estaPausado;
     private boolean gameOver;
@@ -93,6 +94,7 @@ public class Logica {
     public int getNivelActual() {
     	return nivelActual;
     }
+ 
     
     /**
      * Retorna el puntaje actual de la partida en curso
@@ -227,23 +229,30 @@ public class Logica {
     private void eliminarLinea(int fila) {
     	miGrilla.eliminarLinea(fila);
 		miGrillaGrafica.eliminarLinea(fila);
+		lineasEliminadas++;
+		miGui.aumentarLineasEliminadas(lineasEliminadas);
 	} 
+    
 	
 
     private void aumentarPuntaje(int puntosNuevos) {
     	puntajeActual += puntosNuevos;
-    	
+    	miGui.aumentarPuntaje(puntajeActual);
 	    if (puntajeActual >= 2000) {
 	    	nivelActual = 4;
+	    	miGui.aumentarNivel(nivelActual);
 	    }
 	    else if (puntajeActual >= 1200) {
 	    	nivelActual = 3;
+	    	miGui.aumentarNivel(nivelActual);
 	    }
 	    else if (puntajeActual >= 800) {
 	    	nivelActual = 2;
+	    	miGui.aumentarNivel(nivelActual);
 	    }
 	    else if(puntajeActual >= 500) {
 	    	nivelActual = 1;
+	    	miGui.aumentarNivel(nivelActual);
 	    }
     }
 
