@@ -1,6 +1,5 @@
 package PartesGraficas;
 
-// Clase TetriminoGrafico: Discutir si es necesario durante la integración.
 public class TetriminoGrafico {
 	private BloqueGrafico [][] grafico ;
 	

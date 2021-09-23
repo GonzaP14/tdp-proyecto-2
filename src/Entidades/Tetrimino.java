@@ -2,7 +2,7 @@ package Entidades;
 
 import java.awt.Color;
 
-public abstract class Tetrimino{
+public abstract class Tetrimino {
 
     // Atributos de clase.
 	
@@ -24,10 +24,9 @@ public abstract class Tetrimino{
     	int rotacionSiguiente = (rotacionActual == 3) ? 0 : (rotacionActual + 1) % 4; 
     	boolean check = miGrilla.buscarColisiones (centroPieza.getX(), centroPieza.getY(), rotaciones [rotacionSiguiente]);
     	
-    	if (!check) { 
+    	if (!check) 
     		posicionesActuales = rotaciones [rotacionSiguiente];
     		rotacionActual = rotacionSiguiente;
-    	}
     	
     	return !check;
     }
@@ -39,10 +38,9 @@ public abstract class Tetrimino{
     	int rotacionSiguiente = (rotacionActual == 0) ? 3 : (rotacionActual - 1) % 4;
     	boolean check = miGrilla.buscarColisiones (centroPieza.getX(), centroPieza.getY(), rotaciones [rotacionSiguiente]);
     	
-    	if (!check) { 
+    	if (!check) 
     		posicionesActuales = rotaciones [rotacionSiguiente];
     		rotacionActual = rotacionSiguiente;
-    	}
     	
     	return !check;
     }
@@ -56,7 +54,7 @@ public abstract class Tetrimino{
         
         if (!check) 
             centroPieza.setX(centroPieza.getX() + 1);
-        
+        	
         return !check;
     }
     
@@ -75,7 +73,7 @@ public abstract class Tetrimino{
     public boolean moverAbajo() {
     	boolean check = miGrilla.buscarColisiones(centroPieza.getX(), centroPieza.getY() + 1, rotaciones[rotacionActual]);
     	if (!check) 
-    		centroPieza.setY(centroPieza.getY() + 1);	
+    		centroPieza.setY(centroPieza.getY() + 1);
     	return !check;
     }
 
@@ -99,9 +97,6 @@ public abstract class Tetrimino{
 		return centroPieza;
 	}
 	
-	public int getRotacionActual() {
-		return rotacionActual;
-	}
-	
 	public abstract Tetrimino clone();
+	
 }
