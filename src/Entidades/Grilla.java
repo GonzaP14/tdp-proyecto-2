@@ -51,14 +51,18 @@ import javax.swing.ImageIcon;
             grilla[x][y].setColor(color);
         }        
         
-        public void eliminarLinea(int fila) {
-            for (int j = fila - 1; j > 0; j--) {
+        public void eliminarLinea(int fila) {	     	
+        	Bloque auxiliar;
+        	
+        	for (int j = fila - 1; j >= 0; j--) {
                 for (int i = 0; i < 10; i++) {
-                    grilla[j+1][i] = grilla[j][i];
+                	auxiliar = new Bloque (negro);
+                	grilla[j + 1][i] = grilla [j][i];
+                	grilla [j][i] = auxiliar;
                 }
-            }
-
+            }    
         }
+        
         public void acoplarTetriminoAGrilla(Tetrimino t) {
             Par[] posicionesAOcupar = t.getPosicionesActuales();
 
