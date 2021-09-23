@@ -1,7 +1,11 @@
 package Logica;
 
 import java.awt.Color;
+import java.awt.Toolkit;
 import java.util.Random;
+
+import javax.swing.ImageIcon;
+
 import Entidades.*;
 import GUI.GUI;
 import PartesGraficas.GrillaGrafica;
@@ -22,6 +26,7 @@ public class Logica {
     private boolean estaPausado;
     private boolean gameOver;
     Thread relojThread;
+    protected final ImageIcon negro = new ImageIcon(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/Imagenes/CuadradoNegro.png")));
 
     //Constructores.
     
@@ -34,15 +39,7 @@ public class Logica {
     	this.miGui = miGui;
     	miGrilla = new Grilla ();
     	
-        arregloTetriminos = new Tetrimino[] { 
-        new FormaO(miGrilla), 
-        new FormaI(miGrilla), 
-        new FormaJ(miGrilla), 
-        new FormaL(miGrilla), 
-        new FormaS(miGrilla), 
-        new FormaT(miGrilla), 
-        new FormaZ(miGrilla) 
-        };   
+        arregloTetriminos = crearArregloTetriminos();
         
         tetriminoGuardado = null;
         nivelActual = 0;
@@ -55,6 +52,24 @@ public class Logica {
         iniciarJuego(); 
     }
 
+    /**
+     * 
+     * @return Devuelve un iterable con todos los tetriminos posibles
+     */
+    private Tetrimino[] crearArregloTetriminos(){
+    	Tetrimino[] arregloTetriminos;
+    	arregloTetriminos = new Tetrimino[] { 
+	        new FormaO(miGrilla), 
+	        new FormaI(miGrilla), 
+	        new FormaJ(miGrilla), 
+	        new FormaL(miGrilla), 
+	        new FormaS(miGrilla), 
+	        new FormaT(miGrilla), 
+	        new FormaZ(miGrilla) 
+    	};   
+    	return arregloTetriminos;
+    }
+    
     /**
      * Retorna si el juego esta pausado actualmente.
      * @return true si el jeugo esta pausado y false en caso contrario.
@@ -178,7 +193,7 @@ public class Logica {
     		hueco = false;
     		
     		for (int j = 0; j < 10; j ++) {
-    			if (miGrilla.getBloque(i, j).getColor() == Color.black) {
+    			if (miGrilla.getBloque(i, j).getColor() == miGrilla.getNegro()) {
     				hueco = true;
     				break;
     			}

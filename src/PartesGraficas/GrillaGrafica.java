@@ -104,17 +104,15 @@ public class GrillaGrafica extends JPanel{
 	 * @param fila fila a eliminar
 	 */
 	public void eliminarLinea(int fila) {
-		JLabel elDeArriba; JLabel elDeAbajo;
-		for (int i = fila - 1; i > 0; i--) {
-			for (int j = 1; j < 10; j++) {
-				for (int k = 0; k < 4; k++) {
-					elDeAbajo = getJLabelAt(fila + 1, posicionesAntiguas[k].getY());
-					elDeArriba = getJLabelAt(fila, posicionesAntiguas[k].getY());
-					elDeAbajo.setIcon(elDeArriba.getIcon());
-				}
-			}
-		}	
-	}		
+        JLabel elDeArriba; JLabel elDeAbajo;
+        for (int i = fila - 1; i > 0; i--) {
+            for (int j = 0; j < 9; j++) {
+                    elDeAbajo = getJLabelAt(i + 1, j);
+                    elDeArriba = getJLabelAt(i, j);
+                    elDeAbajo.setIcon(elDeArriba.getIcon());
+            }
+        }
+    }		
 }
 	
 
