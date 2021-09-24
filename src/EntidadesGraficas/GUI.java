@@ -31,6 +31,7 @@ public class GUI {
 	private JLabel nivel;
 	private JLabel pausaLbl;
 	private JLabel tiempo ;
+	private JLabel gameOverLbl;
 	
 	/**
 	 * (Llevar a clase Tetris)
@@ -118,6 +119,22 @@ public class GUI {
 		pausefoto.setIcon(img);
 		pausaLbl.add(pausefoto);
 		pausaLbl.setVisible(false);
+		
+		
+		gameOverLbl = new JLabel();
+		gameOverLbl.setForeground(new Color(51, 102, 204));
+		gameOverLbl.setBounds(200, 336, 260, 105);
+		
+		JLabel gameOverFoto = new JLabel();    
+		gameOverFoto.setBackground(Color.WHITE);
+		gameOverFoto.setBounds(0, 0,260, 105);                
+		ImageIcon ico2 = new ImageIcon(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/Imagenes/GameOver.png")));	
+		ImageIcon img2 = new ImageIcon(ico2.getImage().getScaledInstance(gameOverFoto.getWidth(), gameOverFoto.getHeight(), Image.SCALE_SMOOTH));
+		gameOverFoto.setIcon(img2);
+		gameOverLbl.add(gameOverFoto);
+		gameOverLbl.setVisible(false);
+		
+		frame.getContentPane().add(gameOverLbl);
 		frame.getContentPane().add(pausaLbl);
 		frame.getContentPane().add(miGrillaGrafica);
 		
@@ -191,6 +208,7 @@ public class GUI {
 	 * Muestra el cartel de 'GameOver' en pantalla.
 	 */
 	public void mostrarGameOver() {	
+		gameOverLbl.setVisible(true);
 	}
 	
 	/**
