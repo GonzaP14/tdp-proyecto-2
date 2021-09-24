@@ -13,30 +13,46 @@ import javax.swing.border.LineBorder;
 
 import EntidadesLogicas.Par;
 
+/**
+ * Class GrillaGrafica - Modela la GrillaGrafica del juego.
+ * @author Grupo N°2: Messina Nicolas, Mazzino Albano Manuel, Perez Gonzalo Martín, Mandolesi Bruno.
+ */
 public class GrillaGrafica extends JPanel{
 	
-	private static final long serialVersionUID = -3857957447580442863L;
-	private final ImageIcon negro = new ImageIcon(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/Imagenes/CuadradoNegro.png")));
-	private Par[] posicionesAntiguas;
-	private final List<JLabel> lista = new LinkedList<JLabel>();
+	// Atributos de Clase.
+	
+	protected static final long serialVersionUID = -3857957447580442863L;
+	protected static final int cantidadDeFilas = 22;
+	protected static final int cantidadDeColumas = 10;
+	
+	// Atributos de instancia.
+	
+	protected final ImageIcon negro = new ImageIcon(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/Imagenes/CuadradoNegro.png")));
+	protected Par[] posicionesAntiguas;
+	protected final List<JLabel> lista = new LinkedList<JLabel>();
 	 
+	// Constructor.
+	
 	 /**
-	  * Se inicializa la grilla grafica en negro
+	  * Crea una nueva GrillaGrafica.
 	  */
     public GrillaGrafica() {	
 		setBackground(Color.WHITE);
 		setBounds(23, 11, 320, 720);
-		setLayout(new GridLayout(22, 10, 0, 0));
-    	for (int i = 0; i < 10 * 22; i++) {
+		setLayout(new GridLayout(cantidadDeFilas, cantidadDeColumas, 0, 0));
+    	for (int i = 0; i < cantidadDeFilas * cantidadDeColumas; i++) {
     		JLabel cuadradoNegro = nuevoCuadradoNegro();
 			lista.add(cuadradoNegro);
 			this.add(cuadradoNegro);
         }
     	
     }
+    
+    // Métodos.
+    
     /**
-     * 
-     * @return Devuelve un nuevo cuadrado negro
+     * Retorna un nuevo cuadrado negro.
+     * @return JLabel asociado a un cuadrado negro.
      */
     private JLabel nuevoCuadradoNegro() {
     	JLabel cuadrado = new JLabel();
@@ -49,14 +65,13 @@ public class GrillaGrafica extends JPanel{
     }
     
     /**
-     * 
+     * Retorna el JLabel especifico de la Grilla.
      * @param f Indice fila del componente 
      * @param c Indice columna del componente
      * @return Devuelve el componente grafico en la posicion (f, c) de la grilla grafica. 
      */
     private JLabel getJLabelAt(int f, int c) {
-    	 int index = c * 10 + f;
-         return lista.get(index);
+         return lista.get(c * 10 + f);
     }
     
     /**
@@ -65,8 +80,9 @@ public class GrillaGrafica extends JPanel{
      * @param color El color del tetrimino a apilar
      */
 	public void acoplarTetriminoAGrillaGrafica(Par[] posicionesActuales, ImageIcon color) {
-		for	(Par parNuevoActual : posicionesActuales) 
+		for	(Par parNuevoActual : posicionesActuales) {
 			getJLabelAt(parNuevoActual.getX(), parNuevoActual.getY()).setIcon(color);
+		}
 	}
 
 	/**
@@ -75,11 +91,13 @@ public class GrillaGrafica extends JPanel{
 	 * @param color El color del en movimiento
 	 */
 	public void actualizar(Par[] posicionesNuevas, ImageIcon color) {
-		for	(Par parAntiguoActual : posicionesAntiguas) 
+		for	(Par parAntiguoActual : posicionesAntiguas) {
 			getJLabelAt(parAntiguoActual.getX(), parAntiguoActual.getY()).setIcon(negro);
+		}
 		
-		for	(Par parNuevoActual : posicionesNuevas) 
+		for	(Par parNuevoActual : posicionesNuevas) {
 			getJLabelAt(parNuevoActual.getX(), parNuevoActual.getY()).setIcon(color);
+		}
 		
 		posicionesAntiguas = posicionesNuevas;
 	}
@@ -91,25 +109,24 @@ public class GrillaGrafica extends JPanel{
 	 */
 	public void mostrarNuevoTetrimino(Par[] posicionesNuevas, ImageIcon color) {
 		posicionesAntiguas = posicionesNuevas.clone();
-
-		for	(Par parNuevoActual : posicionesNuevas) 
+		
+		for	(Par parNuevoActual : posicionesNuevas) {
 			getJLabelAt(parNuevoActual.getX(), parNuevoActual.getY()).setIcon(color);
+		}
 	}
 
 	
 	/**
 	 * Elimina una linea completa de la grilla grafica
-	 * @param fila fila a eliminar
+	 * @param fila Fila a eliminar
 	 */
 	public void eliminarLinea(int fila) {
-		for(int i = fila; i > 0; i --) {
-            for (int j = 0; j < 10; j++) {
+		for (int i = fila; i > 0; i --) {
+            for (int j = 0; j < cantidadDeColumas; j++) {
                 getJLabelAt(j, i).setIcon(getJLabelAt(j, i-1).getIcon());
             }
         }
     }		
 	
-	
 }
 	
-

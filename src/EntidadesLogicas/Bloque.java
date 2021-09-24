@@ -2,19 +2,42 @@ package EntidadesLogicas;
 
 import javax.swing.ImageIcon;
 
+/**
+ * Class Bloque - Modela un Bloque de la Grilla lógica.
+ * @author Grupo N°2: Messina Nicolas, Mazzino Albano Manuel, Perez Gonzalo Martín, Mandolesi Bruno.
+ */
 public class Bloque {
-		private ImageIcon color;
+	
+	// Atributos de instancia.
+	
+	private ImageIcon color;
+	
+	// Constructor.
+	
+	/**
+	 * Crea un nuevo Bloque con un color asociado.
+	 * @param color Color del bloque.
+	 */
+	public Bloque(ImageIcon color) {
+		this.color = color;
+	}
+	
+	// Métodos.
 		
-		public Bloque(ImageIcon color) {
-			this.color = color;
-		}
-		
-		public ImageIcon getColor() {
-			return color;
-		}
+	/**
+	 * Retorna la imagen del color asociado al Bloque.
+	 * @return ImageIcon asociado al bloque.
+	 */
+	public ImageIcon getColor() {
+		return color;
+	}
 
-		public void setColor(ImageIcon color) {
-			this.color = color;
-		}
+	/**
+	 * Establece la imagen del color asociado al Bloque.
+	 * @param color ImageIcon a establecer.
+	 */
+	public void setColor(ImageIcon color) {
+		this.color = color;
+	}
 		
 }
