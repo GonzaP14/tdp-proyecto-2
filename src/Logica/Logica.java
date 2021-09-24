@@ -1,11 +1,7 @@
 package Logica;
-
-import java.awt.Color;
 import java.awt.Toolkit;
 import java.util.Random;
-
 import javax.swing.ImageIcon;
-
 import Entidades.*;
 import GUI.GUI;
 import PartesGraficas.GrillaGrafica;
@@ -13,6 +9,7 @@ import PartesGraficas.GrillaGrafica;
 public class Logica {
 	
     //Atributos de instancia.
+	final static Object objetoPausa = new Object(); 
     private GrillaGrafica miGrillaGrafica;
 	private Grilla miGrilla;
     private Reloj miReloj;
@@ -126,7 +123,14 @@ public class Logica {
     public void pausar_despausar() {
         if (!estaPausado()) {
         	estaPausado = true;
-        } else estaPausado = false;
+        	miGui.pausar();
+        } else {
+        	synchronized(objetoPausa) {
+                objetoPausa.notify(); // Despausa el juego
+            }
+        	estaPausado = false;
+        	miGui.despausar();
+        }
     }
    
     /**
@@ -146,46 +150,6 @@ public class Logica {
     		tetriminoGuardado = null;
     	}
     }    
-    
-    
-    /*private void borrarLineas() {
-		boolean lineaCompleta;
-		int lineasBorradas = 0, limiteSuperior, limiteInferior, valorCentroEnX;
-		valorCentroEnX = tetriminoActual.getCentroPieza().getX();
-		limiteSuperior = (valorCentroEnX == 0)? valorCentroEnX : valorCentroEnX - 1;
-		limiteInferior = (valorCentroEnX > 18)? 21 : valorCentroEnX + 2;
-
-		for (int j = limiteInferior; j > limiteSuperior; j--) {
-			lineaCompleta = true;
-			for (int i = 1; i < 11; i++) {
-				if (miGrilla.getBloque(i, j).getColor() == Color.black) {
-					lineaCompleta = false;
-					break;
-				}
-			}
-			if (lineaCompleta) {
-				limpiarFila(j);
-				j++;
-				lineasBorradas++;
-			}
-		}
-    
-		switch (lineasBorradas) {
-		case 1:
-			aumentarPuntaje(100);
-			break;
-		case 2:
-			aumentarPuntaje(300);
-			break;
-		case 3:
-			aumentarPuntaje(500);
-			break;
-		case 4:
-			aumentarPuntaje(800);
-			break;
-		}
-
-    }*/
     
     public void borrarLineas() {
     	boolean hueco;
@@ -261,10 +225,12 @@ public class Logica {
     	if (tetriminoActual.moverAbajo()) {
     		Par[] posicionesNuevas = tetriminoActual.getPosicionesActuales();
     		miGrillaGrafica.actualizar(posicionesParaGUI(posicionesNuevas), tetriminoActual.getColor());
+    		aumentarPuntaje(1);
     	}
     	// Si no puede mover abajo, y además colisiona en el spawn / origen de la grilla, pierde
     	else if (tetriminoActual.getCentroPieza().getX() == miGrilla.getOrigenGrilla().getX() && tetriminoActual.getCentroPieza().getY() == miGrilla.getOrigenGrilla().getY()){
     		terminarJuego();
+    		miGui.mostrarGameOver();
     	}
     	// Si no puede mover abajo, y colisiona en un lugar diferente al spawn / origen de la grilla, se acopla el tetrimino a la imagen de bloques apilados
     	else {
@@ -362,5 +328,7 @@ public class Logica {
     private void iniciarReloj() {
     	relojThread.start();
     }
-    
+    public Object obtenerObj() {
+    	return objetoPausa;
+    }
 }

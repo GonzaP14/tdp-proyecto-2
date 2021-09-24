@@ -19,8 +19,17 @@ public class Reloj implements Runnable{
 					e.printStackTrace();
 				}
 	        }
-	        else if (LOGICA.gameOver()) {
-	        	System.out.println("PERDIO");
+	        else if(LOGICA.estaPausado()) {
+	        	synchronized(LOGICA.obtenerObj()) {
+                    while (LOGICA.estaPausado()) {
+                    	try {
+                    		LOGICA.obtenerObj().wait();
+                        }
+                    	catch(InterruptedException e) {
+                    		e.printStackTrace();
+                    	}
+                    }
+                }
 	        }
 		}
 	}	
