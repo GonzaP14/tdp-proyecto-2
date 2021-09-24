@@ -152,7 +152,9 @@ public class Logica {
     		tetriminoGuardado = null;
     	}
     }    
-    
+    /**
+     * Comando para borrar las lineas que se completan cuando acoplamos un tetrimino
+     */
     public void borrarLineas() {
     	boolean hueco;
     	int filasEliminadas = 0;
@@ -191,7 +193,10 @@ public class Logica {
     	}
     	
     }
-    
+    /**
+     * Comando para eliminar una linea en especifico
+     * @param fila La linea o fila a eliminar 
+     */
     private void eliminarLinea(int fila) {
     	miGrilla.eliminarLinea(fila);
 		miGrillaGrafica.eliminarLinea(fila);
@@ -200,7 +205,10 @@ public class Logica {
 	} 
     
 	
-
+    /**
+     * Aumenta el puntaje actual en la cantidad que le decimos por parametro
+     * @param puntosNuevos puntos a sumarle al puntaje actual
+     */
     private void aumentarPuntaje(int puntosNuevos) {
     	puntajeActual += puntosNuevos;
     	miGui.aumentarPuntaje(puntajeActual);
@@ -221,12 +229,16 @@ public class Logica {
 	    	miGui.aumentarNivel(nivelActual);
 	    }
     }
-    
+    /**
+     * Aumenta el tiempo transcurrido del juego
+     */
     public void aumentarTiempo() {
     	tiempoActual++;
     	miGui.mostrarTiempo(tiempoActual);
     }
-
+    /**
+     * Permite mover abajo el tetrimino si es posible,de lo contrario puede perder o acoplar el tetrimino a la posicion que debe
+     */
     public void moverAbajo() {
     	// Si puede mover abajo
     	if (tetriminoActual.moverAbajo()) {
@@ -244,27 +256,36 @@ public class Logica {
     		agregarAGrilla();
     	}
     }
-
+    /**
+     * Permite mover a la izquierda el tetrimino y mostrar el movimiento
+     */
     public void moverIzquierda() {
     	if (tetriminoActual.moverIzquierda()) {
     		Par[] posicionesNuevas = tetriminoActual.getPosicionesActuales();
     		miGrillaGrafica.actualizar(posicionesParaGUI(posicionesNuevas), tetriminoActual.getColor());
     	}
     }
-
+    /**
+     * Permite mover a la derecha el tetrimino y mostrar el movimiento
+     */
     public void moverDerecha() {
     	if (tetriminoActual.moverDerecha()) {
     		Par[] posicionesNuevas = tetriminoActual.getPosicionesActuales();
     		miGrillaGrafica.actualizar(posicionesParaGUI(posicionesNuevas), tetriminoActual.getColor());
     	}
     }
-
+    /**
+     * Permite rotar a la derecha y mostrar la rotacion
+     */
 	public void rotarDerecha() {
 		if (tetriminoActual.rotarDerecha()) {
 			Par[] posicionesNuevas = tetriminoActual.getPosicionesActuales();
 			miGrillaGrafica.actualizar(posicionesParaGUI(posicionesNuevas), tetriminoActual.getColor());
 		}
 	}
+	/**
+	 * Permite rotar a la izquierda y mostrar la rotacion
+	 */
 	public void rotarIzquierda() {
 		if (tetriminoActual.rotarIzquierda()) {
 			Par[] posicionesNuevas = tetriminoActual.getPosicionesActuales();
@@ -287,7 +308,9 @@ public class Logica {
 		}
 		return posicionesParaGUI;
 	}
-	
+	/**
+	 * Permite acoplar el tetrimino,borrar las lineas si es necesario y agregar un nuevo tetrimino y mostrar todo esto
+	 */
 	private void agregarAGrilla() {
 		miGrilla.acoplarTetriminoAGrilla(tetriminoActual);
 		miGrillaGrafica.acoplarTetriminoAGrillaGrafica(posicionesParaGUI(tetriminoActual.getPosicionesActuales()), tetriminoActual.getColor());
