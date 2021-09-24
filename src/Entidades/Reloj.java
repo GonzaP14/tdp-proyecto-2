@@ -14,6 +14,7 @@ public class Reloj implements Runnable{
 	        if(!LOGICA.estaPausado() && !LOGICA.gameOver()) {
 	        	try {
 					LOGICA.moverAbajo();
+					LOGICA.aumentarTiempo();
 					Thread.sleep(1400 - 200* LOGICA.getNivelActual());
 				} catch (InterruptedException e) {
 					e.printStackTrace();

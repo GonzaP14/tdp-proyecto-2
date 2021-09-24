@@ -28,6 +28,7 @@ public class GUI {
 	private JLabel lineas;
 	private JLabel nivel;
 	private JLabel pausaLbl;
+	private JLabel tiempo ;
 	/**
 	 * Launch the application.
 	 */
@@ -72,14 +73,21 @@ public class GUI {
 		nivel.setFont(new Font("Ebrima", Font.BOLD, 41));
 		nivel.setBounds(515, 389, 129, 173);
 		frame.getContentPane().add(nivel);
+		
+		tiempo = new JLabel("0", SwingConstants.CENTER);
+		tiempo.setForeground(SystemColor.activeCaption);
+		tiempo.setFont(new Font("Ebrima", Font.BOLD, 41));
+		tiempo.setBounds(515, 573, 129, 173);
+		frame.getContentPane().add(tiempo);
 			
-		JLabel cuadrado=new JLabel();    
-		frame.getContentPane().add(cuadrado);
+		JLabel cuadrado=new JLabel();    		
 		cuadrado.setBounds(0, 0,658, 762);                
 		cuadrado.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		ImageIcon ico= new ImageIcon(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/Imagenes/fondo.png")));	
 		ImageIcon img =new ImageIcon(ico.getImage().getScaledInstance(cuadrado.getWidth(), cuadrado.getHeight(), Image.SCALE_SMOOTH));
 		cuadrado.setIcon(img);
+		frame.getContentPane().add(cuadrado);
+		
 		
 	}
 
@@ -147,9 +155,13 @@ public class GUI {
 	public void aumentarNivel(int nivelActual) {
 		nivel.setText(""+nivelActual);
 	}
+public void mostrarTiempo(int tiempoActual) {
+		tiempo.setText(""+tiempoActual);
+	}
 	public void mostrarGameOver() {
 		
 	}
+	
 	public void pausar() {
 		pausaLbl.setVisible(true);
 	}

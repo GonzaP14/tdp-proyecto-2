@@ -21,6 +21,7 @@ public class Logica {
     private int nivelActual;
     private int lineasEliminadas;
     private int puntajeActual;
+    private int tiempoActual;
     private boolean estaPausado;
     private boolean gameOver;
     Thread relojThread;
@@ -44,7 +45,8 @@ public class Logica {
         puntajeActual = 0;
         estaPausado = false;
         gameOver = false;
-
+        
+        tiempoActual=0;
         miReloj = new Reloj (this);
         relojThread = new Thread(miReloj);
         iniciarJuego(); 
@@ -91,6 +93,8 @@ public class Logica {
     public int getNivelActual() {
     	return nivelActual;
     }
+    
+    
  
     
     /**
@@ -218,6 +222,11 @@ public class Logica {
 	    	nivelActual = 1;
 	    	miGui.aumentarNivel(nivelActual);
 	    }
+    }
+    
+    public void aumentarTiempo() {
+    	tiempoActual++;
+    	miGui.mostrarTiempo(tiempoActual);
     }
 
     public void moverAbajo() {
