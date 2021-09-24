@@ -1,4 +1,4 @@
-package PartesGraficas;
+package EntidadesGraficas;
 
 import java.awt.EventQueue;
 import javax.swing.JFrame;
@@ -11,8 +11,11 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.ImageIcon;
 import java.awt.Color;
-import Logica.Logica;
+
 import javax.swing.border.BevelBorder;
+
+import EntidadesLogicas.Logica;
+
 import java.awt.Font;
 import java.awt.SystemColor;
 

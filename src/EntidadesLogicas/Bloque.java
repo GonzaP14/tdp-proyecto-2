@@ -1,4 +1,4 @@
-package Entidades;
+package EntidadesLogicas;
 
 import javax.swing.ImageIcon;
 

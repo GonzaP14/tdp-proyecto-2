@@ -1,6 +1,8 @@
-package Entidades;
+package EntidadesLogicas;
 import java.awt.Toolkit;
 import javax.swing.ImageIcon;
+
+import Tetrimino.Tetrimino;
  
 public class Grilla {
     	

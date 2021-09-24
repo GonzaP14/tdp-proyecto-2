@@ -1,6 +1,9 @@
-package Entidades;
+package Tetrimino;
 
 import javax.swing.ImageIcon;
+
+import EntidadesLogicas.Grilla;
+import EntidadesLogicas.Par;
 
 public abstract class Tetrimino {
 

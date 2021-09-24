@@ -1,4 +1,4 @@
-package PartesGraficas;
+package EntidadesGraficas;
 
 import java.awt.Color;
 import java.awt.GridLayout;
@@ -10,7 +10,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
-import Entidades.Par;
+
+import EntidadesLogicas.Par;
 
 public class GrillaGrafica extends JPanel{
 	

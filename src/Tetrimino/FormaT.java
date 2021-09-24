@@ -1,7 +1,10 @@
-package Entidades;
+package Tetrimino;
 
 import java.awt.Toolkit;
 import javax.swing.ImageIcon;
+
+import EntidadesLogicas.Grilla;
+import EntidadesLogicas.Par;
 
 public class FormaT extends Tetrimino {
 

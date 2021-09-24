@@ -1,6 +1,4 @@
-package Entidades;
-
-import Logica.Logica;
+package EntidadesLogicas;
 
 public class Reloj implements Runnable{
 	Logica LOGICA;

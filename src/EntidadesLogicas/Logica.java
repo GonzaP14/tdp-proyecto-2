@@ -1,10 +1,10 @@
-package Logica;
+package EntidadesLogicas;
 import java.awt.Toolkit;
 import java.util.Random;
 import javax.swing.ImageIcon;
-import Entidades.*;
-import PartesGraficas.GUI;
-import PartesGraficas.GrillaGrafica;
+import EntidadesGraficas.GUI;
+import EntidadesGraficas.GrillaGrafica;
+import Tetrimino.*;
 
 public class Logica {
 	

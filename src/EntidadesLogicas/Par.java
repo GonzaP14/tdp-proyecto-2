@@ -1,4 +1,4 @@
-package Entidades;
+package EntidadesLogicas;
 
 public class Par {
 	
