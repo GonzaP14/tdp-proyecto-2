@@ -9,6 +9,7 @@ import PartesGraficas.GrillaGrafica;
 public class Logica {
 	
     //Atributos de instancia.
+	
 	final static Object objetoPausa = new Object(); 
     private GrillaGrafica miGrillaGrafica;
 	private Grilla miGrilla;
@@ -93,9 +94,6 @@ public class Logica {
     public int getNivelActual() {
     	return nivelActual;
     }
-    
-    
- 
     
     /**
      * Retorna el puntaje actual de la partida en curso
@@ -300,7 +298,6 @@ public class Logica {
 	}
     	
 	/**
-	 * 
 	 * @return Devuelve un nuevo tetrimino aleatorio entre las siete formas posibles
 	 */
     private Tetrimino nuevoTetrimino() {
@@ -323,6 +320,9 @@ public class Logica {
     	}
     }
     
+    /**
+     * Inicia el juego.
+     */
     public void iniciarJuego() {
     	tetriminoSiguiente = nuevoTetrimino();
     	agregarNuevoTetrimino();
@@ -330,13 +330,24 @@ public class Logica {
     	iniciarReloj();
     }
     
+    /**
+     * Termina el juego.
+     */
     private void terminarJuego() {
     	gameOver = true;
     }
-
+    
+    /**
+     * Inicia la ejecución del reloj.
+     */
     private void iniciarReloj() {
     	relojThread.start();
     }
+    
+    /**
+     * Retorna el objecto asociado a la Pausa.
+     * @return Objeto de Pausa.
+     */
     public Object obtenerObj() {
     	return objetoPausa;
     }
