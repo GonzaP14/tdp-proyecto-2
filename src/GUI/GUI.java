@@ -94,10 +94,17 @@ public class GUI {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);		
 		
-		pausaLbl = new JLabel("PAUSADO", SwingConstants.CENTER);
-		pausaLbl.setForeground(SystemColor.activeCaption);
-		pausaLbl.setFont(new Font("Ebrima", Font.PLAIN, 32));
-		pausaLbl.setBounds(218, 336, 210, 105);
+		pausaLbl = new JLabel();
+		pausaLbl.setForeground(new Color(51, 102, 204));
+		pausaLbl.setBounds(200, 336, 260, 105);
+		
+		JLabel pausefoto=new JLabel();    
+		pausefoto.setBackground(Color.WHITE);
+		pausefoto.setBounds(0, 0,260, 105);                
+		ImageIcon ico= new ImageIcon(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/Imagenes/pausa.png")));	
+		ImageIcon img =new ImageIcon(ico.getImage().getScaledInstance(pausefoto.getWidth(), pausefoto.getHeight(), Image.SCALE_SMOOTH));
+		pausefoto.setIcon(img);
+		pausaLbl.add(pausefoto);
 		pausaLbl.setVisible(false);
 		frame.getContentPane().add(pausaLbl);
 		frame.getContentPane().add(miGrillaGrafica);

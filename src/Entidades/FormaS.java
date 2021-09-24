@@ -18,7 +18,7 @@ public class FormaS extends Tetrimino {
 		};
         rotacionActual = r;
         posicionesActuales = rotaciones[rotacionActual];
-        color = new ImageIcon(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/Imagenes/CuadradoRojo.png")));
+        color = new ImageIcon(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/Imagenes/CuadradoVerde.png")));
         centroPieza = centro;
         this.miGrilla = miGrilla;
     }
