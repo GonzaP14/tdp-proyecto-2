@@ -129,6 +129,10 @@ public abstract class Tetrimino {
 		return centroPieza;
 	}
 	
+	/**
+	 * Retorna un clone en profundidad asociado al Tetrimino.
+	 * @return Clone del Tetrimino.
+	 */
 	public abstract Tetrimino clone();
 	
 }
