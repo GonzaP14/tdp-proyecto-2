@@ -1,6 +1,6 @@
 package Launcher;
 
-import GUI.GUI;
+//import PartesGraficas.GUI;
 
 /**
  * Class Tetris - Modela el Launcher del juego.
@@ -13,9 +13,10 @@ public class Tetris {
         //creating and showing this application's GUI.
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-            	GUI window = new GUI();
+            	//GUI window = new GUI();
             	//window.setVisible(true);
             }
         });
     }
+	
 }

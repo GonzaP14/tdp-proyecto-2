@@ -3,18 +3,22 @@ import java.awt.Toolkit;
 import javax.swing.ImageIcon;
 
     public class Grilla {
-        // Atributos de clase
-        protected static final Par origenGrilla = new Par(3, 0);
+    	
+        // Atributos de Clase.
         
-		//Atributos de instancia
-        private Bloque grilla[][];
+    	protected static final Par origenGrilla = new Par(3, 0);
+        
+		// Atributos de instancia.
+        
+    	private Bloque grilla[][];
         protected final ImageIcon negro = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imagenes/CuadradoNegro.png")));
 
-        // Constructor
+        // Constructor.
+  
         public Grilla() {
             grilla = new Bloque[22][10];
-            for(int filas = 0; filas<22; filas++) {
-                for(int columnas = 0; columnas < 10; columnas++) {                    
+            for (int filas = 0; filas < 22; filas ++) {
+                for (int columnas = 0; columnas < 10; columnas++) {                    
                     grilla[filas][columnas] = new Bloque(negro);       
                 }
             }
@@ -54,11 +58,15 @@ import javax.swing.ImageIcon;
         public void eliminarLinea(int fila) {	     	
         	Bloque auxiliar;
         	
-        	for (int j = fila - 1; j >= 0; j--) {
-                for (int i = 0; i < 10; i++) {
-                	auxiliar = new Bloque (negro);
-                	grilla[j + 1][i] = grilla [j][i];
-                	grilla [j][i] = auxiliar;
+        	for (int col = 0; col <  10; col ++) {
+        		grilla [fila][col] = new Bloque (negro);
+        	}
+         	
+        	for (int i = fila - 1; i >= 0; i --) {
+                for (int j = 0; j < 10; j ++) {
+                	auxiliar = grilla [i + 1][j];
+                	grilla[i + 1][j] = grilla [i][j];
+                	grilla [i][j] = auxiliar;
                 }
             }    
         }

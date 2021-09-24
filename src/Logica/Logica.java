@@ -3,7 +3,7 @@ import java.awt.Toolkit;
 import java.util.Random;
 import javax.swing.ImageIcon;
 import Entidades.*;
-import GUI.GUI;
+import PartesGraficas.GUI;
 import PartesGraficas.GrillaGrafica;
 
 public class Logica {

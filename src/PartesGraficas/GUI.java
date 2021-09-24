@@ -1,11 +1,10 @@
-package GUI;
+package PartesGraficas;
 
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-import PartesGraficas.GrillaGrafica;
+
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
@@ -15,12 +14,12 @@ import java.awt.Color;
 import Logica.Logica;
 import javax.swing.border.BevelBorder;
 import java.awt.Font;
-import java.awt.Graphics;
 import java.awt.SystemColor;
-import javax.swing.JTextField;
 
 public class GUI {
-	// attributes
+	
+	// Atributos de instancia.
+	
 	private JFrame frame;
 	private GrillaGrafica miGrillaGrafica;
 	private Logica miLogica;
@@ -29,7 +28,9 @@ public class GUI {
 	private JLabel nivel;
 	private JLabel pausaLbl;
 	private JLabel tiempo ;
+	
 	/**
+	 * (Llevar a clase Tetris)
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
@@ -106,11 +107,11 @@ public class GUI {
 		pausaLbl.setForeground(new Color(51, 102, 204));
 		pausaLbl.setBounds(200, 336, 260, 105);
 		
-		JLabel pausefoto=new JLabel();    
+		JLabel pausefoto = new JLabel();    
 		pausefoto.setBackground(Color.WHITE);
 		pausefoto.setBounds(0, 0,260, 105);                
-		ImageIcon ico= new ImageIcon(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/Imagenes/pausa.png")));	
-		ImageIcon img =new ImageIcon(ico.getImage().getScaledInstance(pausefoto.getWidth(), pausefoto.getHeight(), Image.SCALE_SMOOTH));
+		ImageIcon ico = new ImageIcon(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/Imagenes/pausa.png")));	
+		ImageIcon img = new ImageIcon(ico.getImage().getScaledInstance(pausefoto.getWidth(), pausefoto.getHeight(), Image.SCALE_SMOOTH));
 		pausefoto.setIcon(img);
 		pausaLbl.add(pausefoto);
 		pausaLbl.setVisible(false);
@@ -118,8 +119,10 @@ public class GUI {
 		frame.getContentPane().add(miGrillaGrafica);
 		
 		frame.addKeyListener(new KeyListener () {
+			
             public void keyTyped(KeyEvent e) {
             }
+            
             public void keyPressed(KeyEvent e) {
                 switch (e.getKeyCode()) {
 	                case KeyEvent.VK_SPACE:
@@ -142,29 +145,61 @@ public class GUI {
 	                	break;
                 }
             }
+            
             public void keyReleased(KeyEvent e) {
             }
+            
 		});
 	}
+	
+	/**
+	 * Aumenta el puntaje en pantalla.
+	 * @param puntos Puntos a aumentar.
+	 */
 	public void aumentarPuntaje(int puntos) {
-		puntajeNum.setText(" " + puntos);
-	}
-	public void aumentarLineasEliminadas(int lineasEliminadas) {
-		lineas.setText(""+lineasEliminadas);
-	}
-	public void aumentarNivel(int nivelActual) {
-		nivel.setText(""+nivelActual);
-	}
-public void mostrarTiempo(int tiempoActual) {
-		tiempo.setText(""+tiempoActual);
-	}
-	public void mostrarGameOver() {
-		
+		puntajeNum.setText(String.valueOf(puntos));
 	}
 	
+	/**
+	 * Aumenta la cantidad de lineas eliminadas en pantalla.
+	 * @param lineasEliminadas Cantiadad de lineas eliminadas.
+	 */
+	public void aumentarLineasEliminadas(int lineasEliminadas) {
+		lineas.setText(String.valueOf(lineasEliminadas));
+	}
+	
+	/**
+	 * Aumenta el nivel actual mostrado en pantalla.
+	 * @param nivelActual Nivel actual de la partida.
+	 */
+	public void aumentarNivel(int nivelActual) {
+		nivel.setText(String.valueOf(nivelActual));
+	}
+	
+	/**
+	 * Aumenta el tiempo actual mostrado en pantalla.
+	 * @param tiempoActual Tiempo transcurrido de la partida.
+	 */
+	public void mostrarTiempo(int tiempoActual) {
+		tiempo.setText(String.valueOf(tiempoActual));
+	}
+	
+	/**
+	 * Muestra el cartel de 'GameOver' en pantalla.
+	 */
+	public void mostrarGameOver() {	
+	}
+	
+	/**
+	 * Muestra el cartel de 'Pause' en pantalla.
+	 */
 	public void pausar() {
 		pausaLbl.setVisible(true);
 	}
+	
+	/**
+	 * Quita el cartel de 'Pause' en pantalla.
+	 */
 	public void despausar() {
 		pausaLbl.setVisible(false);
 	}
