@@ -4,23 +4,20 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Toolkit;
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
-
 import Entidades.Par;
-
-
 
 public class GrillaGrafica extends JPanel{
 	
 	private static final long serialVersionUID = -3857957447580442863L;
 	private final ImageIcon negro = new ImageIcon(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/Imagenes/CuadradoNegro.png")));
 	private Par[] posicionesAntiguas;
-	private final List<JLabel> lista = new ArrayList<JLabel>();
+	private final List<JLabel> lista = new LinkedList<JLabel>();
 	 
 	 /**
 	  * Se inicializa la grilla grafica en negro
@@ -42,7 +39,7 @@ public class GrillaGrafica extends JPanel{
      */
     private JLabel nuevoCuadradoNegro() {
     	JLabel cuadrado = new JLabel();
-        cuadrado.setBounds(0, 0,30, 30);				
+        cuadrado.setBounds(0, 0, 30, 30);				
 		cuadrado.setBorder(new LineBorder(Color.gray));
 		ImageIcon imagenNegra = negro;
 		ImageIcon img = new ImageIcon(imagenNegra.getImage().getScaledInstance(cuadrado.getWidth(), cuadrado.getHeight(), Image.SCALE_SMOOTH));
@@ -52,7 +49,7 @@ public class GrillaGrafica extends JPanel{
     
     /**
      * 
-     * @param f Indice folumna del componente 
+     * @param f Indice fila del componente 
      * @param c Indice columna del componente
      * @return Devuelve el componente grafico en la posicion (f, c) de la grilla grafica. 
      */
@@ -104,9 +101,9 @@ public class GrillaGrafica extends JPanel{
 	 * @param fila fila a eliminar
 	 */
 	public void eliminarLinea(int fila) {
-		for(int filas=fila;filas>0;filas--) {
+		for(int i = fila; i > 0; i --) {
             for (int j = 0; j < 10; j++) {
-                getJLabelAt(j, filas).setIcon(getJLabelAt(j, filas-1).getIcon());
+                getJLabelAt(j, i).setIcon(getJLabelAt(j, i-1).getIcon());
             }
         }
     }		
