@@ -28,7 +28,6 @@ public class GrillaGrafica extends JPanel{
 	// Atributos de instancia.
 	
 	protected final ImageIcon negro = new ImageIcon(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/Imagenes/CuadradoNegro.png")));
-	protected Par[] posicionesAntiguas;
 	protected final List<JLabel> lista = new LinkedList<JLabel>();
 	 
 	// Constructor.
@@ -73,48 +72,18 @@ public class GrillaGrafica extends JPanel{
     private JLabel getJLabelAt(int f, int c) {
          return lista.get(c * 10 + f);
     }
-    
-    /**
-     * Al colisionar con los bloques ya apilados o llegar al suelo, el tetrimino se incorpora a la imagen de bloques apilados.
-     * @param posicionesActuales Las posiciones que ocupa el tetrimino en la grilla
-     * @param color El color del tetrimino a apilar
-     */
-	public void acoplarTetriminoAGrillaGrafica(Par[] posicionesActuales, ImageIcon color) {
-		for	(Par parNuevoActual : posicionesActuales) {
-			getJLabelAt(parNuevoActual.getX(), parNuevoActual.getY()).setIcon(color);
-		}
-	}
 
 	/**
-	 * Actualiza la imagen grafica luego del movimiento o rotacion del tetrimino
-	 * @param posicionesNuevas Las nuevas posiciones que ocupa el tetrimino en la grilla
-	 * @param color El color del en movimiento
+	 * Actualiza la imagen grafica por causa de un movimiento o rotacion del tetrimino
+	 * @param posiciones Las posiciones a las cuales se le debe actualizar el color
+	 * @param color El color con el que se actualizaran las posiciones
 	 */
-	public void actualizar(Par[] posicionesNuevas, ImageIcon color) {
-		for	(Par parAntiguoActual : posicionesAntiguas) {
-			getJLabelAt(parAntiguoActual.getX(), parAntiguoActual.getY()).setIcon(negro);
-		}
-		
-		for	(Par parNuevoActual : posicionesNuevas) {
+	public void actualizar(Par[] posiciones, ImageIcon color) {	
+		for	(Par parNuevoActual : posiciones) {
 			getJLabelAt(parNuevoActual.getX(), parNuevoActual.getY()).setIcon(color);
 		}
 		
-		posicionesAntiguas = posicionesNuevas;
 	}
-
-	/**
-	 * Muestra un nuevo tetrimino cayendo en pantalla
-	 * @param posicionesNuevas Las posiciones que ocupa el tetrimino en la grilla
-	 * @param color El color del tetrimino a mostrar en pantalla
-	 */
-	public void mostrarNuevoTetrimino(Par[] posicionesNuevas, ImageIcon color) {
-		posicionesAntiguas = posicionesNuevas.clone();
-
-		for	(Par parNuevoActual : posicionesNuevas) {
-			getJLabelAt(parNuevoActual.getX(), parNuevoActual.getY()).setIcon(color);
-		}
-	}
-
 	
 	/**
 	 * Elimina una linea completa de la grilla grafica
