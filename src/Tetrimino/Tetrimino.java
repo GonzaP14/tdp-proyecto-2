@@ -17,9 +17,10 @@ public abstract class Tetrimino {
     protected Par [][] rotaciones;
     protected Par [] posicionesActuales;
     protected ImageIcon color;
+    protected ImageIcon imagen;
     protected int rotacionActual;
     protected Par centroPieza;
-
+    
     /**
      * Rota el tetrimino hacia la derecha.
      * @return true si el Tetrimino pudo rotar a derecha y false en caso contrario.
@@ -132,6 +133,14 @@ public abstract class Tetrimino {
 		return centroPieza;
 	}
 	
+	/**
+	 * 
+	 * @return Imagen del tetrimino en cuestion
+	 */
+	public ImageIcon getImagen() {
+		return imagen;
+	}
+
 	/**
 	 * Retorna un clone en profundidad asociado al Tetrimino.
 	 * @return Clone del Tetrimino.

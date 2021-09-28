@@ -19,6 +19,7 @@ public class FormaI extends Tetrimino {
 		rotaciones = crearRotaciones();
 		posicionesActuales = rotaciones[rotacionActual];
 		color = new ImageIcon(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/Imagenes/CuadradoCyan.png")));
+		imagen = new ImageIcon(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/Imagenes/TetriminoI.png")));
 		centroPieza = centro;
 		this.miGrilla = miGrilla;
 	}
@@ -28,7 +29,7 @@ public class FormaI extends Tetrimino {
 	 * @param miGrilla Grilla a la cual el tetrimino pertenece
 	 */
 	public FormaI(Grilla miGrilla) {
-		this(miGrilla , 0 , miGrilla.getOrigenGrilla() );
+		this(miGrilla , 0 , miGrilla.getOrigenGrilla());
 	}
 	
 	/**

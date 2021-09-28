@@ -17,6 +17,7 @@ public class FormaO extends Tetrimino {
 		rotaciones = crearRotaciones();
 		posicionesActuales = rotaciones[rotacionActual];
 		color = new ImageIcon(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/Imagenes/CuadradoAmarillo.png")));
+		imagen = new ImageIcon(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/Imagenes/TetriminoO.png")));
 		centroPieza = centro;
 		this.miGrilla = miGrilla;
 	}

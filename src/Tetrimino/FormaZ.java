@@ -26,6 +26,7 @@ public class FormaZ extends Tetrimino {
         rotacionActual = rotacion;
         posicionesActuales = rotaciones[rotacionActual];
         color = new ImageIcon(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/Imagenes/CuadradoRojo.png")));
+        imagen = new ImageIcon(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/Imagenes/TetriminoZ.png")));
         centroPieza = centro;
         this.miGrilla = miGrilla;
     }

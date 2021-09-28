@@ -14,6 +14,7 @@ public class Logica {
     private GrillaGrafica miGrillaGrafica;
 	private Grilla miGrilla;
     private Reloj miReloj;
+    private Tiempo miTiempo;
     private Tetrimino tetriminoActual;
     private final Tetrimino[] arregloTetriminos;
     private Tetrimino tetriminoSiguiente;
@@ -22,10 +23,11 @@ public class Logica {
     private int nivelActual;
     private int lineasEliminadas;
     private int puntajeActual;
-    private int tiempoActual;
+    private int minutos, segundos;
     private boolean estaPausado;
     private boolean gameOver;
     Thread relojThread;
+    Thread tiempoThread;
     protected final ImageIcon negro = new ImageIcon(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/Imagenes/CuadradoNegro.png")));
 
     //Constructores.
@@ -47,9 +49,13 @@ public class Logica {
         estaPausado = false;
         gameOver = false;
         
-        tiempoActual=0;
+        minutos = 00;
+        segundos = 00;
+        
         miReloj = new Reloj (this);
+        miTiempo = new Tiempo(this);
         relojThread = new Thread(miReloj);
+        tiempoThread = new Thread(miTiempo);
         iniciarJuego(); 
     }
 
@@ -233,8 +239,18 @@ public class Logica {
      * Aumenta el tiempo transcurrido del juego
      */
     public void aumentarTiempo() {
-    	tiempoActual++;
-    	miGui.mostrarTiempo(tiempoActual);
+    	String segundosStr, minutosStr;
+    	if (segundos == 59) {
+			minutos ++;
+    		segundos = 0;
+    	}
+    	else {
+    		segundos++;
+    	}
+    	
+    	minutosStr =String.format("%02d", minutos);
+    	segundosStr = String.format("%02d", segundos);
+    	miGui.mostrarTiempo(minutosStr, segundosStr);
     }
     /**
      * Permite mover abajo el tetrimino si es posible,de lo contrario puede perder o acoplar el tetrimino a la posicion que debe
@@ -325,7 +341,7 @@ public class Logica {
 	 */
     private Tetrimino nuevoTetrimino() {
     	int aleatorio = new Random().nextInt(arregloTetriminos.length);
-    	return arregloTetriminos[aleatorio];
+    	return arregloTetriminos[aleatorio].clone();
     }
     
     /**
@@ -335,6 +351,8 @@ public class Logica {
     private void agregarNuevoTetrimino() {
     	tetriminoActual = tetriminoSiguiente.clone();
     	tetriminoSiguiente = nuevoTetrimino();
+    	miGui.mostrarTetriminoSiguiente(tetriminoSiguiente.getImagen());
+    	
     	boolean check = miGrilla.buscarColisiones(tetriminoActual.getCentroPieza().getX(), tetriminoActual.getCentroPieza().getY(), tetriminoActual.getPosicionesActuales());
     	if (check) {
     	}
@@ -351,6 +369,7 @@ public class Logica {
     	agregarNuevoTetrimino();
     	
     	iniciarReloj();
+    	iniciarTiempo();
     }
     
     /**
@@ -365,6 +384,13 @@ public class Logica {
      */
     private void iniciarReloj() {
     	relojThread.start();
+    }
+    
+    /**
+     * Inicia la ejecución del tiempo.
+     */
+    private void iniciarTiempo() {
+    	tiempoThread.start();
     }
     
     /**

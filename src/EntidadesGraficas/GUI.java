@@ -26,12 +26,14 @@ public class GUI {
 	private JFrame frame;
 	private GrillaGrafica miGrillaGrafica;
 	private Logica miLogica;
-	private JLabel puntajeNum ;
+	private JLabel puntajeNum;
 	private JLabel lineas;
 	private JLabel nivel;
 	private JLabel pausaLbl;
-	private JLabel tiempo ;
 	private JLabel gameOverLbl;
+	private JLabel tiempo;
+	private JLabel tetriminoSiguiente;
+	JLabel fondo;
 	
 	/**
 	 * (Llevar a clase Tetris)
@@ -85,13 +87,13 @@ public class GUI {
 		tiempo.setBounds(515, 573, 129, 173);
 		frame.getContentPane().add(tiempo);
 			
-		JLabel cuadrado=new JLabel();    		
-		cuadrado.setBounds(0, 0,658, 762);                
-		cuadrado.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		fondo = new JLabel();    		
+		fondo.setBounds(0, 0,658, 762);                
+		fondo.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		ImageIcon ico= new ImageIcon(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/Imagenes/fondo.png")));	
-		ImageIcon img =new ImageIcon(ico.getImage().getScaledInstance(cuadrado.getWidth(), cuadrado.getHeight(), Image.SCALE_SMOOTH));
-		cuadrado.setIcon(img);
-		frame.getContentPane().add(cuadrado);
+		ImageIcon img =new ImageIcon(ico.getImage().getScaledInstance(fondo.getWidth(), fondo.getHeight(), Image.SCALE_SMOOTH));
+		fondo.setIcon(img);
+		frame.getContentPane().add(fondo);
 		
 		
 	}
@@ -120,11 +122,9 @@ public class GUI {
 		pausaLbl.add(pausefoto);
 		pausaLbl.setVisible(false);
 		
-		
 		gameOverLbl = new JLabel();
 		gameOverLbl.setForeground(new Color(51, 102, 204));
 		gameOverLbl.setBounds(200, 336, 260, 105);
-		
 		JLabel gameOverFoto = new JLabel();    
 		gameOverFoto.setBackground(Color.WHITE);
 		gameOverFoto.setBounds(0, 0,260, 105);                
@@ -133,8 +133,12 @@ public class GUI {
 		gameOverFoto.setIcon(img2);
 		gameOverLbl.add(gameOverFoto);
 		gameOverLbl.setVisible(false);
+
+		tetriminoSiguiente = new JLabel("");
+		tetriminoSiguiente.setBounds(40, 111, 78, 105);
 		
 		frame.getContentPane().add(gameOverLbl);
+		frame.getContentPane().add(tetriminoSiguiente);
 		frame.getContentPane().add(pausaLbl);
 		frame.getContentPane().add(miGrillaGrafica);
 		
@@ -197,11 +201,12 @@ public class GUI {
 	}
 	
 	/**
-	 * Aumenta el tiempo actual mostrado en pantalla.
-	 * @param tiempoActual Tiempo transcurrido de la partida.
+	 * Muestra el tiempo total desde que se comenzo a jugar
+	 * @param minutos Minutos actuales transcurridos
+	 * @param segundos Segundos actuales transcurridos
 	 */
-	public void mostrarTiempo(int tiempoActual) {
-		tiempo.setText(String.valueOf(tiempoActual));
+	public void mostrarTiempo(String minutos, String segundos) {
+		tiempo.setText(minutos + ":" + segundos);
 	}
 	
 	/**
@@ -223,6 +228,15 @@ public class GUI {
 	 */
 	public void despausar() {
 		pausaLbl.setVisible(false);
+	}
+
+	/**
+	 * Muestra en pantalla el tetrimino siguiente que caera en la partida
+	 * @param imagen La imagen del tetrimino en cuestion
+	 */
+	public void mostrarTetriminoSiguiente(ImageIcon imagen) {	
+		ImageIcon img =new ImageIcon(imagen.getImage().getScaledInstance(tetriminoSiguiente.getWidth(), tetriminoSiguiente.getHeight(), Image.SCALE_SMOOTH));
+		tetriminoSiguiente.setIcon(img);
 	}
 }
 
