@@ -9,7 +9,11 @@ import Tetrimino.*;
 public class Logica {
 	
     //Atributos de instancia.
-	
+	public static final int moverAbajo = 1;
+	public static final int moverIzquierda = 2;
+	public static final int moverDerecha = 3;
+	public static final int rotarIzquierda = 4;
+	public static final int rotarDerecha = 5;
 	final static Object objetoPausa = new Object(); 
     private GrillaGrafica miGrillaGrafica;
 	private Grilla miGrilla;
@@ -18,7 +22,6 @@ public class Logica {
     private Tetrimino tetriminoActual;
     private final Tetrimino[] arregloTetriminos;
     private Tetrimino tetriminoSiguiente;
-    private Tetrimino tetriminoGuardado;
     private GUI miGui;
     private int nivelActual;
     private int lineasEliminadas;
@@ -42,8 +45,6 @@ public class Logica {
     	miGrilla = new Grilla ();
     	
         arregloTetriminos = crearArregloTetriminos();
-        
-        tetriminoGuardado = null;
         nivelActual = 0;
         puntajeActual = 0;
         estaPausado = false;
@@ -139,25 +140,7 @@ public class Logica {
         	estaPausado = false;
         	miGui.despausar();
         }
-    }
-   
-    /**
-     * Si no hay ningun tetrimino guardado, guarda el tetrimino actual.
-     */
-    public void guardarBloque() {	
-    	if (tetriminoGuardado == null) {
-    		tetriminoGuardado = tetriminoActual;
-    	} 
-    }
-    
-    /**
-     * Si hay un Tetrimino guardado, lo elimina.
-     */
-    public void quitarBloqueGuardado() {
-    	if (tetriminoGuardado != null) {
-    		tetriminoGuardado = null;
-    	}
-    }    
+    }   
     /**
      * Comando para borrar las lineas que se completan cuando acoplamos un tetrimino
      */
@@ -251,6 +234,21 @@ public class Logica {
     	minutosStr =String.format("%02d", minutos);
     	segundosStr = String.format("%02d", segundos);
     	miGui.mostrarTiempo(minutosStr, segundosStr);
+    }
+    
+    public synchronized void operar(int i) {
+    	switch(i) {
+    		case 1:moverAbajo();
+    		break;
+    		case 2:moverIzquierda();
+    		break;
+    		case 3:moverDerecha();
+    		break;
+    		case 4:rotarIzquierda();
+    		break;
+    		case 5:rotarDerecha();
+    		break;
+    	}
     }
     /**
      * Permite mover abajo el tetrimino si es posible,de lo contrario puede perder o acoplar el tetrimino a la posicion que debe

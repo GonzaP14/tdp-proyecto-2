@@ -109,7 +109,7 @@ public class GrillaGrafica extends JPanel{
 	 */
 	public void mostrarNuevoTetrimino(Par[] posicionesNuevas, ImageIcon color) {
 		posicionesAntiguas = posicionesNuevas.clone();
-		
+
 		for	(Par parNuevoActual : posicionesNuevas) {
 			getJLabelAt(parNuevoActual.getX(), parNuevoActual.getY()).setIcon(color);
 		}

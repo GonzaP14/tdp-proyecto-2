@@ -1,7 +1,7 @@
 package EntidadesLogicas;
 
 public class Tiempo implements Runnable{
-	Logica LOGICA;
+	private Logica LOGICA;
 	/**
 	 * Se crea un tiempo real para la Logica
 	 * @param LOGICA a la cual se le informa el tiempo transcurrido
@@ -12,15 +12,13 @@ public class Tiempo implements Runnable{
     
 	@Override
 	public void run() {
-		while (true) {
-	        if(!LOGICA.gameOver()) {
-	        	try {
-					Thread.sleep(1000);
-					LOGICA.aumentarTiempo();
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-	        }
+		while (!LOGICA.gameOver()) {
+        	try {
+				Thread.sleep(1000);
+				LOGICA.aumentarTiempo();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 		}
 	}	
 }

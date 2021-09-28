@@ -150,22 +150,25 @@ public class GUI {
             public void keyPressed(KeyEvent e) {
                 switch (e.getKeyCode()) {
 	                case KeyEvent.VK_SPACE:
-	                    miLogica.moverAbajo();
+	                	miLogica.operar(Logica.moverAbajo);
 	                    break;
 	                case KeyEvent.VK_LEFT:
-	                	miLogica.moverIzquierda();
+	                	miLogica.operar(Logica.moverIzquierda);
 	                    break;
 	                case KeyEvent.VK_RIGHT:
-	                	miLogica.moverDerecha();
+	                	miLogica.operar(Logica.moverDerecha);
 	                    break;
 	                case KeyEvent.VK_DOWN:
-	                	miLogica.rotarDerecha();
+	                	miLogica.operar(Logica.rotarDerecha);
 	                    break;
 	                case KeyEvent.VK_UP:
-	                	miLogica.rotarIzquierda();
+	                	miLogica.operar(Logica.rotarIzquierda);
 	                    break;
 	                case KeyEvent.VK_P:
 	                	miLogica.pausar_despausar();
+	                	break;
+	                case KeyEvent.VK_R:
+	                	//miLogica.restart();
 	                	break;
                 }
             }
