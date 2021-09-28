@@ -1,17 +1,20 @@
 package Tetrimino;
 
 import javax.swing.ImageIcon;
-
 import EntidadesLogicas.Grilla;
 import EntidadesLogicas.Par;
 
+/**
+ * Class Tetrimino - Modela un Tetrimino del Juego.
+ * @author Grupo N°2: Messina Nicolas, Mazzino Albano Manuel, Perez Gonzalo Martín, Mandolesi Bruno.
+ */
 public abstract class Tetrimino {
 
     // Atributos de clase.
 	
     protected static final int cantidadCuadrados = 4;
-    protected static final int rotarDerecha = 1;
-    protected static final int rotarIzquierda = -1;
+    protected static final int rotacionDerecha = 1;
+    protected static final int rotacionIzquierda = -1;
     protected static final int movimientoIzquierda = 1;
     protected static final int movimientoDerecha = 1;
     protected static final int movimientoAbajo = -1;
@@ -27,7 +30,7 @@ public abstract class Tetrimino {
     protected Par centroPieza;
     
     /**
-     * Retorna si es posible rotar en una dirección.
+     * Consulta si es posible rotar en una dirección (izquierda o derecha).
      * @param i: Rotación deseada.
      * @return true si puede realizar la rotación y false en caso contrario.
      */
@@ -36,25 +39,25 @@ public abstract class Tetrimino {
     }
     
     /**
-     * Calcula la rotacionSiguiente
-     * @param i
-     * @return
+     * Calcula la rotacionSiguiente del Tetrimino a partir de un parámetro determinado.
+     * @param i: Parámetro de rotación.
+     * @return Rotación siguiente del Tetrimino.
      */
     public int rotacionSiguiente (int i) {
     	int rotacionSiguiente = 0;
     	
-    	if (i == rotarDerecha) {
-    		rotacionSiguiente = (rotacionActual + rotarDerecha) % 4;
-    	} else if (i == rotarIzquierda) {
-    		rotacionSiguiente = (rotacionActual == 0) ? 3 : (rotacionActual + rotarIzquierda) ;
+    	if (i == rotacionDerecha) {
+    		rotacionSiguiente = (rotacionActual + movimientoDerecha) % 4;
+    	} else if (i == rotacionIzquierda) {
+    		rotacionSiguiente = (rotacionActual == 0) ? 3 : (rotacionActual + rotacionIzquierda) ;
     	}
     	
     	return rotacionSiguiente;
     }
     
     /**
-     * Rota el tetrimino a derecha o izquierda.
-     * @param i Parametro de rotacion: 1 (Rotación a Derecha) y -1 (Rotación a Izquierda).
+     * Rota el Tetrimino en una dirección (izquierda o derecha).
+     * @param i: Parametro de rotación.
      */
     public void rotar(int i) {
     	int nuevaRotacion = rotacionSiguiente(i);
@@ -63,6 +66,11 @@ public abstract class Tetrimino {
 		rotacionActual = nuevaRotacion;
     }
     
+    /**
+     * Consulta si es posible mover en una dirección (izquierda, derecha y abajo).
+     * @param i: Parámetro de movimiento.
+     * @return true si pudo realizar el movimiento y false en caso contrario.
+     */
     public boolean puedeMover (int i) {
     	boolean check = false;
     	
@@ -76,6 +84,10 @@ public abstract class Tetrimino {
     	return check;
     }
     
+    /**
+     * Realiza un movimiento en una dirección (izquierda, derecha y abajo).
+     * @param i: Parámetro de movimiento.
+     */
     public void mover (int i) {
     	if (i == movimientoDerecha || i == movimientoIzquierda) { 
     		centroPieza.setX(centroPieza.getX() + i);
