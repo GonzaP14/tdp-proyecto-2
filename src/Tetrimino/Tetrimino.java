@@ -10,6 +10,11 @@ public abstract class Tetrimino {
     // Atributos de clase.
 	
     protected static final int cantidadCuadrados = 4;
+    protected static final int rotarDerecha = 1;
+    protected static final int rotarIzquierda = -1;
+    protected static final int movimientoIzquierda = 1;
+    protected static final int movimientoDerecha = 1;
+    protected static final int movimientoAbajo = -1;
     
     // Atributos de instancia.
     
@@ -22,91 +27,62 @@ public abstract class Tetrimino {
     protected Par centroPieza;
     
     /**
-     * Rota el tetrimino hacia la derecha.
-     * @return true si el Tetrimino pudo rotar a derecha y false en caso contrario.
+     * Retorna si es posible rotar en una dirección.
+     * @param i: Rotación deseada.
+     * @return true si puede realizar la rotación y false en caso contrario.
      */
-    public boolean rotarDerecha() {
-    	return rotar(1);
+    public boolean puedeRotar (int i) {
+    	return miGrilla.buscarColisiones (centroPieza.getX(), centroPieza.getY(), rotaciones [rotacionSiguiente(i)]);
     }
-
+    
     /**
-     * Rota el tetrimino hacia la izquierda.
-     * @return true si el Tetrimino pudo rotar a izquierda y false en caso contrario.
+     * Calcula la rotacionSiguiente
+     * @param i
+     * @return
      */
-    public boolean rotarIzquierda() {
-    	return rotar(-1);
+    public int rotacionSiguiente (int i) {
+    	int rotacionSiguiente = 0;
+    	
+    	if (i == rotarDerecha) {
+    		rotacionSiguiente = (rotacionActual + rotarDerecha) % 4;
+    	} else if (i == rotarIzquierda) {
+    		rotacionSiguiente = (rotacionActual == 0) ? 3 : (rotacionActual + rotarIzquierda) ;
+    	}
+    	
+    	return rotacionSiguiente;
     }
     
     /**
      * Rota el tetrimino a derecha o izquierda.
      * @param i Parametro de rotacion: 1 (Rotación a Derecha) y -1 (Rotación a Izquierda).
-     * @return true si el Tetrimino pudo rotar y false en caso contrario.
      */
-    private boolean rotar(int i) {
-    	int rotacionSiguiente = 0;
-    	boolean check;
+    public void rotar(int i) {
+    	int nuevaRotacion = rotacionSiguiente(i);
     	
-    	if (i == 1) {
-    		rotacionSiguiente = (rotacionActual + 1) % 4;
-    	} else if (i == -1) {
-    		rotacionSiguiente = (rotacionActual == 0) ? 3 : (rotacionActual - 1) ;
+    	posicionesActuales = rotaciones [nuevaRotacion];
+		rotacionActual = nuevaRotacion;
+    }
+    
+    public boolean puedeMover (int i) {
+    	boolean check = false;
+    	
+    	if (i == movimientoDerecha || i == movimientoIzquierda) { 
+    		check = miGrilla.buscarColisiones(centroPieza.getX() + i, centroPieza.getY(), rotaciones[rotacionActual]);
+    	} 
+    	else if (i == movimientoAbajo) {
+    		check = miGrilla.buscarColisiones(centroPieza.getX(), centroPieza.getY() + i, rotaciones[rotacionActual]);
     	}
     	
-    	check = miGrilla.buscarColisiones (centroPieza.getX(), centroPieza.getY(), rotaciones [rotacionSiguiente]);
-    	
-    	if (!check) {
-    		posicionesActuales = rotaciones [rotacionSiguiente];
-    		rotacionActual = rotacionSiguiente;
-    	}
-    	
-    	
-    	return (!check);
+    	return check;
     }
     
-    
-    /**
-     * Mueve el Tetrimino hacia la derecha.
-     * @return true si el movimiento a derecha fue posible y false en caso contrario.
-     */
-    public boolean moverDerecha() {
-        return moverLateralmente(1);
-    }
-    
-    /**
-     * Mueve el Tetrimino hacia la izquierda.
-     * @return true si el movimiento a izquierda fue posible y false en caso contrario.
-     */
-    public boolean moverIzquierda() {
-        return moverLateralmente(-1);
-    }
-    
-    /**
-     * Mueve el Tetrimino lateralmente.
-     * @param i parametro de desplazamiento: 1 (movimiento a derecha) y -1 (movimiento a izquierda)
-     * @return true si el movimiento lateral fue posible y false en caso contrario.
-     */
-    private boolean moverLateralmente(int i) {
-    	boolean check = miGrilla.buscarColisiones(centroPieza.getX() + i, centroPieza.getY(), rotaciones[rotacionActual]);
-        
-        if (!check) {
-            centroPieza.setX(centroPieza.getX() + i);
-        }
-        
-        return (!check);	
-    }
-    
-    /**
-     * Mueve el Tetrimino hacia abajo.
-     * @return true si el movimiento hacia abajo fue posible y false en caso contrario.
-     */
-    public boolean moverAbajo() {
-    	boolean check = miGrilla.buscarColisiones(centroPieza.getX(), centroPieza.getY() + 1, rotaciones[rotacionActual]);
-    	
-    	if (!check) {
+    public void mover (int i) {
+    	if (i == movimientoDerecha || i == movimientoIzquierda) { 
+    		centroPieza.setX(centroPieza.getX() + i);
+    	} 
+    	else if (i == movimientoAbajo) {
     		centroPieza.setY(centroPieza.getY() + 1);
     	}
-    	
-    	return (!check);
     }
 
     /*
