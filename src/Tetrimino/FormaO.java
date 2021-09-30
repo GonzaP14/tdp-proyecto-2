@@ -5,6 +5,11 @@ import javax.swing.ImageIcon;
 import EntidadesLogicas.Grilla;
 import EntidadesLogicas.Par;
 
+
+/**
+ * Class FormaO - Modela un Tetrimino 'O' del Juego.
+ * @author Grupo N°2: Messina Nicolas, Mazzino Albano Manuel, Perez Gonzalo Martín, Mandolesi Bruno.
+ */
 public class FormaO extends Tetrimino {
 	 /**
 	  * Crea un nuevo tetrimino con la forma O

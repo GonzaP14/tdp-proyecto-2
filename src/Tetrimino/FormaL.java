@@ -5,6 +5,11 @@ import javax.swing.ImageIcon;
 import EntidadesLogicas.Grilla;
 import EntidadesLogicas.Par;
 
+
+/**
+ * Class FormaL - Modela un Tetrimino 'L' del Juego.
+ * @author Grupo N°2: Messina Nicolas, Mazzino Albano Manuel, Perez Gonzalo Martín, Mandolesi Bruno.
+ */
 public class FormaL extends Tetrimino {
 
 	/**

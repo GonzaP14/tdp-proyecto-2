@@ -87,8 +87,6 @@ public abstract class Tetrimino {
     	centroPieza.setX(centroPieza.getX() + i);
     }
     
-    
-
     /*
      * Retorna las posiciones actuales del tetrimino.
      * @return Posiciones del tetrimino.

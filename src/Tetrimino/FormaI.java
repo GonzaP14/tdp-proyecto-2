@@ -6,6 +6,10 @@ import javax.swing.ImageIcon;
 import EntidadesLogicas.Grilla;
 import EntidadesLogicas.Par;
 
+/**
+ * Class FormaI - Modela un Tetrimino 'I' del Juego.
+ * @author Grupo N°2: Messina Nicolas, Mazzino Albano Manuel, Perez Gonzalo Martín, Mandolesi Bruno.
+ */
 public class FormaI extends Tetrimino {
 	
 	/**
