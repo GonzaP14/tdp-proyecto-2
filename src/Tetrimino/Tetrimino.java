@@ -2,6 +2,7 @@ package Tetrimino;
 
 import javax.swing.ImageIcon;
 import EntidadesLogicas.Grilla;
+import EntidadesLogicas.Logica;
 import EntidadesLogicas.Par;
 
 /**
@@ -9,15 +10,6 @@ import EntidadesLogicas.Par;
  * @author Grupo N°2: Messina Nicolas, Mazzino Albano Manuel, Perez Gonzalo Martín, Mandolesi Bruno.
  */
 public abstract class Tetrimino {
-
-    // Atributos de clase.
-	
-    protected static final int cantidadCuadrados = 4;
-    protected static final int rotacionDerecha = 1;
-    protected static final int rotacionIzquierda = -1;
-    protected static final int movimientoIzquierda = 1;
-    protected static final int movimientoDerecha = 1;
-    protected static final int movimientoAbajo = -1;
     
     // Atributos de instancia.
     
@@ -46,10 +38,10 @@ public abstract class Tetrimino {
     public int rotacionSiguiente (int i) {
     	int rotacionSiguiente = 0;
     	
-    	if (i == rotacionDerecha) {
-    		rotacionSiguiente = (rotacionActual + movimientoDerecha) % 4;
-    	} else if (i == rotacionIzquierda) {
-    		rotacionSiguiente = (rotacionActual == 0) ? 3 : (rotacionActual + rotacionIzquierda) ;
+    	if (i == Logica.rotarDerecha) {
+    		rotacionSiguiente = (rotacionActual + 1) % 4;
+    	} else if (i == Logica.rotarIzquierda) {
+    		rotacionSiguiente = (rotacionActual == 0) ? 3 : (rotacionActual - 1) ;
     	}
     	
     	return rotacionSiguiente;
@@ -71,13 +63,16 @@ public abstract class Tetrimino {
      * @param i: Parámetro de movimiento.
      * @return true si pudo realizar el movimiento y false en caso contrario.
      */
-    public boolean puedeMover (int i) {
+    public boolean puedeMoverLateralmente (int i) {
     	boolean check = false;
     	
-    	if (i == movimientoDerecha || i == movimientoIzquierda) { 
-    		check = miGrilla.buscarColisiones(centroPieza.getX() + i, centroPieza.getY(), rotaciones[rotacionActual]);
+    	if (i == Logica.moverDerecha) { 
+    		check = miGrilla.buscarColisiones(centroPieza.getX() + 1, centroPieza.getY(), rotaciones[rotacionActual]);
     	} 
-    	else if (i == movimientoAbajo) {
+    	else if (i == Logica.moverIzquierda) {
+    		check = miGrilla.buscarColisiones(centroPieza.getX() - 1, centroPieza.getY(), rotaciones[rotacionActual]);
+    	}
+    	else if (i == Logica.moverAbajo) {
     		check = miGrilla.buscarColisiones(centroPieza.getX(), centroPieza.getY() + i, rotaciones[rotacionActual]);
     	}
     	
@@ -88,14 +83,11 @@ public abstract class Tetrimino {
      * Realiza un movimiento en una dirección (izquierda, derecha y abajo).
      * @param i: Parámetro de movimiento.
      */
-    public void mover (int i) {
-    	if (i == movimientoDerecha || i == movimientoIzquierda) { 
-    		centroPieza.setX(centroPieza.getX() + i);
-    	} 
-    	else if (i == movimientoAbajo) {
-    		centroPieza.setY(centroPieza.getY() + 1);
-    	}
+    public void moverLateralmente (int i) {
+    	centroPieza.setX(centroPieza.getX() + i);
     }
+    
+    
 
     /*
      * Retorna las posiciones actuales del tetrimino.
