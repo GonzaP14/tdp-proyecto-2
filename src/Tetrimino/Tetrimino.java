@@ -43,7 +43,6 @@ public abstract class Tetrimino {
     	} else if (i == Logica.rotarIzquierda) {
     		rotacionSiguiente = (rotacionActual == 0) ? 3 : (rotacionActual - 1) ;
     	}
-    	System.out.println(rotacionSiguiente);
     	return rotacionSiguiente;
     }
     
