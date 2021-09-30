@@ -61,8 +61,7 @@ public class GUI {
 		miGrillaGrafica.setSize(320, 704);
 		miGrillaGrafica.setLocation(172, 27);
 		initialize();
-		miLogica = new Logica(miGrillaGrafica, this);
-		 
+
 		puntajeNum = new JLabel("0",SwingConstants.CENTER);
 		puntajeNum.setFont(new Font("Ebrima", Font.BOLD, 41));
 		puntajeNum.setForeground(SystemColor.activeCaption);
@@ -95,7 +94,7 @@ public class GUI {
 		fondo.setIcon(img);
 		frame.getContentPane().add(fondo);
 		
-		
+		miLogica = new Logica(miGrillaGrafica, this);
 	}
 
 	/**

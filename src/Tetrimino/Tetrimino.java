@@ -27,7 +27,7 @@ public abstract class Tetrimino {
      * @return true si puede realizar la rotación y false en caso contrario.
      */
     public boolean puedeRotar (int i) {
-    	return miGrilla.buscarColisiones (centroPieza.getX(), centroPieza.getY(), rotaciones [rotacionSiguiente(i)]);
+    	return !miGrilla.buscarColisiones (centroPieza.getX(), centroPieza.getY(), rotaciones [rotacionSiguiente(i)]);
     }
     
     /**
@@ -43,7 +43,7 @@ public abstract class Tetrimino {
     	} else if (i == Logica.rotarIzquierda) {
     		rotacionSiguiente = (rotacionActual == 0) ? 3 : (rotacionActual - 1) ;
     	}
-    	
+    	System.out.println(rotacionSiguiente);
     	return rotacionSiguiente;
     }
     
@@ -63,7 +63,7 @@ public abstract class Tetrimino {
      * @param i: Parámetro de movimiento.
      * @return true si pudo realizar el movimiento y false en caso contrario.
      */
-    public boolean puedeMoverLateralmente (int i) {
+    public boolean puedeMover (int i) {
     	boolean check = false;
     	
     	if (i == Logica.moverDerecha) { 
@@ -73,18 +73,47 @@ public abstract class Tetrimino {
     		check = miGrilla.buscarColisiones(centroPieza.getX() - 1, centroPieza.getY(), rotaciones[rotacionActual]);
     	}
     	else if (i == Logica.moverAbajo) {
-    		check = miGrilla.buscarColisiones(centroPieza.getX(), centroPieza.getY() + i, rotaciones[rotacionActual]);
+    		check = miGrilla.buscarColisiones(centroPieza.getX(), centroPieza.getY() + 1, rotaciones[rotacionActual]);
     	}
     	
-    	return check;
+    	return !check;
     }
     
     /**
-     * Realiza un movimiento en una dirección (izquierda, derecha y abajo).
-     * @param i: Parámetro de movimiento.
+     * Mueve el tetrimino en el sentido correspondiente, segun el i dado.
+     * @param i Parametro de movimiento
      */
-    public void moverLateralmente (int i) {
-    	centroPieza.setX(centroPieza.getX() + i);
+    public void mover(int i) {
+    	if (i == Logica.moverDerecha) {
+			moverDerecha();
+		}
+    	else if (i == Logica.moverIzquierda){
+    		moverIzquierda();
+    	}
+    	else if (i == Logica.moverAbajo) {
+    		moverAbajo();
+    	}
+	}
+    
+    /**
+     * Mueve el tetrimino hacia la izquierda
+     */
+    private void moverIzquierda() {
+    	centroPieza.setX(centroPieza.getX() - 1);
+    }
+    
+    /**
+     * Mueve el tetrimino hacia la derecha
+     */
+    private void moverDerecha () {
+    	centroPieza.setX(centroPieza.getX() + 1);
+    }
+    
+    /**
+     * Mueve el tetrimino hacia abajo
+     */
+    public void moverAbajo () {
+    	centroPieza.setY(centroPieza.getY() + 1);
     }
     
     /*

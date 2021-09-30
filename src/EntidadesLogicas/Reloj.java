@@ -1,31 +1,31 @@
 package EntidadesLogicas;
 
 public class Reloj implements Runnable{
-	private Logica LOGICA;
+	private Logica miLogica;
 	/**
 	 * Se crea un reloj con una logica 
 	 * @param LOGICA asociada al reloj
 	 */
 	public Reloj(Logica LOGICA) {
-		this.LOGICA = LOGICA;
+		this.miLogica = LOGICA;
 	}
     
 	@Override
 	public void run() {
-		while (!LOGICA.gameOver()) {
-	        if(!LOGICA.estaPausado()) {
+		while (!miLogica.gameOver()) {
+	        if(!miLogica.estaPausado()) {
 	        	try {
-					LOGICA.moverAbajo();
-					Thread.sleep(1400 - 200* LOGICA.getNivelActual());
+					miLogica.operar(Logica.moverAbajo);
+					Thread.sleep(1400 - 200* miLogica.getNivelActual());
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
 	        }
 	        else {
-	        	synchronized(LOGICA.obtenerObj()) {
-                    while (LOGICA.estaPausado()) {
+	        	synchronized(miLogica.obtenerObj()) {
+                    while (miLogica.estaPausado()) {
                     	try {
-                    		LOGICA.obtenerObj().wait();
+                    		miLogica.obtenerObj().wait();
                         }
                     	catch(InterruptedException e) {
                     		e.printStackTrace();
