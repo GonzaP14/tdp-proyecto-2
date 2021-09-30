@@ -8,7 +8,6 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.io.File;
 import java.io.IOException;
 
 import javax.swing.ImageIcon;
@@ -33,6 +32,8 @@ public class GUI {
 	private JLabel gameOverLbl;
 	private JLabel tiempo;
 	private JLabel tetriminoSiguiente;
+	private AudioInputStream audio;
+	private Clip clip;
 	JLabel fondo;
 	
 	/**
@@ -216,6 +217,7 @@ public class GUI {
 	 */
 	public void mostrarGameOver() {	
 		gameOverLbl.setVisible(true);
+		clip.stop();
 	}
 	
 	/**
@@ -223,6 +225,7 @@ public class GUI {
 	 */
 	public void pausar() {
 		pausaLbl.setVisible(true);
+		clip.stop();
 	}
 	
 	/**
@@ -230,6 +233,7 @@ public class GUI {
 	 */
 	public void despausar() {
 		pausaLbl.setVisible(false);
+		clip.start();
 	}
 
 	/**
@@ -241,21 +245,31 @@ public class GUI {
 		tetriminoSiguiente.setIcon(img);
 	}
 	public void iniciarAudio() {
-
 		try {
-			AudioInputStream audio= AudioSystem.getAudioInputStream(getClass().getResource("/Musica/musica.wav"));
-			Clip clip =AudioSystem.getClip();
+			audio= AudioSystem.getAudioInputStream(getClass().getResource("/Musica/musica.wav"));		
+			clip =AudioSystem.getClip();
 			clip.open(audio);
 			clip.loop(Clip.LOOP_CONTINUOUSLY);
-			clip.start();
-			
+			FloatControl gainControl = 
+				    (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+				gainControl.setValue(-15.0f); // Reduce volume by 10 decibels.
+			clip.start();		
 		} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
-		
+	}
+	public void sonidoMovimiento() {
+		try {
+
+			AudioInputStream movimiento= AudioSystem.getAudioInputStream(getClass().getResource("/Musica/movimiento.wav"));		
+			Clip clipmovimiento =AudioSystem.getClip();
+			clipmovimiento.open(movimiento);
+			clipmovimiento.start();		
+		} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
 

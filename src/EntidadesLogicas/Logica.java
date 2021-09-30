@@ -246,14 +246,17 @@ public class Logica {
     	switch(i) {
     		case moverAbajo:
     			moverAbajo(i);
+    			
     		break;
     		case moverIzquierda:
     		case moverDerecha: 
     			moverLateralmente(i);
+
     		break;
     		case rotarIzquierda:
     		case rotarDerecha: 
     			rotar(i);
+
     		break;
     	}
     }
@@ -262,13 +265,14 @@ public class Logica {
      * Mueve el tetrimino actual hacia abajo
      */
     public void moverAbajo(int i) {
-   	
+    	
     	// Si puede mover abajo
     	if (tetriminoActual.puedeMover(i)) {
     		miGrillaGrafica.actualizar(posicionesParaGUI(tetriminoActual.getPosicionesActuales()), miGrilla.getNegro());
     		tetriminoActual.mover(i);
     		miGrillaGrafica.actualizar(posicionesParaGUI(tetriminoActual.getPosicionesActuales()), tetriminoActual.getColor());
     		aumentarPuntaje(1);
+    		miGui.sonidoMovimiento();
     	}
     	// Si no puede mover abajo, y además colisiona en el spawn / origen de la grilla, pierde
     	else if (tetriminoActual.getCentroPieza().getX() == miGrilla.getOrigenGrilla().getX() && tetriminoActual.getCentroPieza().getY() == miGrilla.getOrigenGrilla().getY()) {
@@ -289,6 +293,7 @@ public class Logica {
     		miGrillaGrafica.actualizar(posicionesParaGUI(tetriminoActual.getPosicionesActuales()), miGrilla.getNegro());
     		tetriminoActual.mover(i);
     		miGrillaGrafica.actualizar(posicionesParaGUI(tetriminoActual.getPosicionesActuales()), tetriminoActual.getColor());
+    		miGui.sonidoMovimiento();
     	}
     }
   
@@ -300,6 +305,7 @@ public class Logica {
     		miGrillaGrafica.actualizar(posicionesParaGUI(tetriminoActual.getPosicionesActuales()), miGrilla.getNegro());
     		tetriminoActual.rotar(i);
     		miGrillaGrafica.actualizar(posicionesParaGUI(tetriminoActual.getPosicionesActuales()), tetriminoActual.getColor());
+    		miGui.sonidoMovimiento();
     	}
 	}
 	
