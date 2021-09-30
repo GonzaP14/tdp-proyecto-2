@@ -5,7 +5,6 @@ import javax.swing.ImageIcon;
 import EntidadesLogicas.Grilla;
 import EntidadesLogicas.Par;
 
-
 /**
  * Class FormaO - Modela un Tetrimino 'O' del Juego.
  * @author Grupo N°2: Messina Nicolas, Mazzino Albano Manuel, Perez Gonzalo Martín, Mandolesi Bruno.
@@ -37,7 +36,7 @@ public class FormaO extends Tetrimino {
 
 	/**
 	 * 
-	 * @return Devuelve las rotaciones posibles del tetrimino en cuestion
+	 * @return Devuelve las rotaciones posibles del Tetrimino 'O'.
 	 */
 	public Par[][] crearRotaciones() {
 		Par[][] rotaciones = new Par[][]{
@@ -49,9 +48,7 @@ public class FormaO extends Tetrimino {
 		return rotaciones;
 	}
 	
-	public void rotar (int i) {
-	}
-
+	@Override
 	public Tetrimino clone() {
         return new FormaO (miGrilla, rotacionActual, centroPieza.clone());
     }

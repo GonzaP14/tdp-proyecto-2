@@ -13,17 +13,17 @@ public class FormaZ extends Tetrimino {
 
 	/**
 	 * Crea un nuevo tetrimino con la forma Z, rotacion y centro de pieza por defecto.
-	 * @param miGrilla Grilla a la cual el tetrimino pertenece
+	 * @param miGrilla Grilla a la cual el tetrimino pertenece.
 	 */
     public FormaZ (Grilla miGrilla) {
         this (miGrilla, 0, miGrilla.getOrigenGrilla());
     }
 
     /**
-	 * Crea un nuevo tetrimino con la forma Z
-	 * @param miGrilla Grilla a la cual el tetrimino pertenece
-	 * @param r Rotacion actual del tetrimino
-	 * @param centro Coordenadas actuales del bloque central del tetrimino en cuestion
+	 * Crea un nuevo tetrimino con la forma Z.
+	 * @param miGrilla Grilla a la cual el tetrimino pertenece.
+	 * @param r Rotacion actual del tetrimino.
+	 * @param centro Coordenadas actuales del bloque central del tetrimino en cuestion.
 	 */
     public FormaZ (Grilla miGrilla, int rotacion, Par centro) {
         rotaciones = crearRotaciones();
@@ -36,10 +36,9 @@ public class FormaZ extends Tetrimino {
     }
 	
 	/**
-	 * 
-	 * @return Devuelve las rotaciones posibles del tetrimino en cuestion
+	 * @return Devuelve las rotaciones posibles del Tetrimino 'Z'.
 	 */
-	public Par[][] crearRotaciones() {
+	private Par[][] crearRotaciones() {
 		Par[][] rotaciones = new Par[][]{
 	    	{ new Par(0, 0), new Par(1, 0), new Par(1, 1), new Par(2, 1) },
 			{ new Par(1, 0), new Par(0, 1), new Par(1, 1), new Par(0, 2) },
@@ -49,6 +48,7 @@ public class FormaZ extends Tetrimino {
 		return rotaciones;
 	}
 	
+	@Override
     public Tetrimino clone() {
         return new FormaZ (miGrilla, rotacionActual, centroPieza.clone());
     }

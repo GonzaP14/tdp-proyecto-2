@@ -5,7 +5,6 @@ import javax.swing.ImageIcon;
 import EntidadesLogicas.Grilla;
 import EntidadesLogicas.Par;
 
-
 /**
  * Class FormaJ - Modela un Tetrimino 'J' del Juego.
  * @author Grupo N°2: Messina Nicolas, Mazzino Albano Manuel, Perez Gonzalo Martín, Mandolesi Bruno.
@@ -29,10 +28,9 @@ public class FormaJ extends Tetrimino {
 	}
 	
 	/**
-	 * 
-	 * @return Devuelve las rotaciones posibles del tetrimino en cuestion
+	 * @return Devuelve las rotaciones posibles del Tetrimino 'J'.
 	 */
-	public Par[][] crearRotaciones() {
+	private Par[][] crearRotaciones() {
 		Par[][] rotaciones = new Par[][]{
 			{ new Par(0, 1), new Par(1, 1), new Par(2, 1), new Par(2, 0) },
 			{ new Par(1, 0), new Par(1, 1), new Par(1, 2), new Par(2, 2) },
