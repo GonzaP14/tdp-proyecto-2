@@ -40,16 +40,16 @@ public class FormaO extends Tetrimino {
 	 * @return Devuelve las rotaciones posibles del tetrimino en cuestion
 	 */
 	public Par[][] crearRotaciones() {
-		Par[][] rotaciones = new Par[][]{{ new Par(0, 0), new Par(0, 1), new Par(1, 0), new Par(1, 1) }};
+		Par[][] rotaciones = new Par[][]{
+			{ new Par(0, 0), new Par(0, 1), new Par(1, 0), new Par(1, 1) },
+            { new Par(0, 0), new Par(0, 1), new Par(1, 0), new Par(1, 1) },
+            { new Par(0, 0), new Par(0, 1), new Par(1, 0), new Par(1, 1) },
+            { new Par(0, 0), new Par(0, 1), new Par(1, 0), new Par(1, 1) }
+		};
 		return rotaciones;
 	}
 	
-	public boolean rotarDerecha() {
-		return false;
-	}
-	
-	public boolean rotarIzquierda() {
-		return false;
+	public void rotar (int i) {
 	}
 
 	public Tetrimino clone() {

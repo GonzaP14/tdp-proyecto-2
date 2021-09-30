@@ -2,7 +2,6 @@ package Tetrimino;
 
 import java.awt.Toolkit;
 import javax.swing.ImageIcon;
-
 import EntidadesLogicas.Grilla;
 import EntidadesLogicas.Par;
 
@@ -43,34 +42,12 @@ public class FormaI extends Tetrimino {
 	public Par[][] crearRotaciones() {
 		Par[][] rotaciones = new Par[][]{
 			{ new Par(0, 1), new Par(1, 1), new Par(2, 1), new Par(3, 1) },
-			{ new Par(1, 0), new Par(1, 1), new Par(1, 2), new Par(1, 3) },	
-			{ new Par(0, 1), new Par(1, 1), new Par(2, 1), new Par(3, 1) },
-			{ new Par(1, 0), new Par(1, 1), new Par(1, 2), new Par(1, 3) }
+            { new Par(1, 0), new Par(1, 1), new Par(1, 2), new Par(1, 3) },
+            { new Par(0, 1), new Par(1, 1), new Par(2, 1), new Par(3, 1) },
+            { new Par(1, 0), new Par(1, 1), new Par(1, 2), new Par(1, 3) }
 		};
+		
 		return rotaciones;
-	}
-	
-	public boolean rotarDerecha() {
-		int rotacionSiguiente = (rotacionActual == 0)? 1 : 0 ;
-    	boolean check = miGrilla.buscarColisiones (centroPieza.getX(), centroPieza.getY(), rotaciones [rotacionSiguiente]);
-    	
-    	if (!check) {
-    		posicionesActuales = rotaciones [rotacionSiguiente];
-    		rotacionActual = rotacionSiguiente;
-    	}
-    	
-    	return !check;
-	}
-	
-	public boolean rotarIzquierda() {
-		int rotacionSiguiente = (rotacionActual == 1)? 0 : 1 ;
-    	boolean check = miGrilla.buscarColisiones (centroPieza.getX(), centroPieza.getY(), rotaciones [rotacionSiguiente]);
-    	
-    	if (!check) {
-    		posicionesActuales = rotaciones [rotacionSiguiente];
-    		rotacionActual = rotacionSiguiente;
-    	}
-    	return !check;
 	}
 	
 	public Tetrimino clone() {
