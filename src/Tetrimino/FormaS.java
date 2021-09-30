@@ -5,7 +5,6 @@ import javax.swing.ImageIcon;
 import EntidadesLogicas.Grilla;
 import EntidadesLogicas.Par;
 
-
 /**
  * Class FormaS - Modela un Tetrimino 'S' del Juego.
  * @author Grupo N°2: Messina Nicolas, Mazzino Albano Manuel, Perez Gonzalo Martín, Mandolesi Bruno.
@@ -37,8 +36,7 @@ public class FormaS extends Tetrimino {
     }
 
     /**
-	 * 
-	 * @return Devuelve las rotaciones posibles del tetrimino en cuestion
+	 * @return Devuelve las rotaciones posibles del Tetrimino 'S'.
 	 */
 	public Par[][] crearRotaciones() {
 		Par[][] rotaciones = new Par[][]{ 
@@ -50,6 +48,7 @@ public class FormaS extends Tetrimino {
 		return rotaciones;
 	}
     
+	@Override
     public Tetrimino clone() {
         return new FormaS (miGrilla, rotacionActual, centroPieza.clone());
     }
