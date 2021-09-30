@@ -4,20 +4,20 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
-
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.File;
+import java.io.IOException;
+
 import javax.swing.ImageIcon;
 import java.awt.Color;
-
 import javax.swing.border.BevelBorder;
-
 import EntidadesLogicas.Logica;
-
 import java.awt.Font;
 import java.awt.SystemColor;
+import javax.sound.sampled.*;
 
 public class GUI {
 	
@@ -237,8 +237,25 @@ public class GUI {
 	 * @param imagen La imagen del tetrimino en cuestion
 	 */
 	public void mostrarTetriminoSiguiente(ImageIcon imagen) {	
-		ImageIcon img =new ImageIcon(imagen.getImage().getScaledInstance(tetriminoSiguiente.getWidth(), tetriminoSiguiente.getHeight(), Image.SCALE_SMOOTH));
+		ImageIcon img =new ImageIcon(imagen.getImage().getScaledInstance(tetriminoSiguiente.getWidth(), 70, Image.SCALE_SMOOTH));
 		tetriminoSiguiente.setIcon(img);
+	}
+	public void iniciarAudio() {
+
+		try {
+			AudioInputStream audio= AudioSystem.getAudioInputStream(getClass().getResource("/Musica/musica.wav"));
+			Clip clip =AudioSystem.getClip();
+			clip.open(audio);
+			clip.loop(Clip.LOOP_CONTINUOUSLY);
+			clip.start();
+			
+		} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
 	}
 }
 
