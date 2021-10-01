@@ -13,10 +13,11 @@ public class Logica {
 	public static final int moverDerecha = 3;
 	public static final int rotarIzquierda = 4;
 	public static final int rotarDerecha = 5;
+	private final static Object objetoPausa = new Object(); 
+	private final static Object objetoTiempo = new Object();
 	
     //Atributos de instancia.
 
-	final static Object objetoPausa = new Object(); 
     private GrillaGrafica miGrillaGrafica;
 	private Grilla miGrilla;
     private Reloj miReloj;
@@ -31,8 +32,8 @@ public class Logica {
     private int minutos, segundos;
     private boolean estaPausado;
     private boolean gameOver;
-    Thread relojThread;
-    Thread tiempoThread;
+    private Thread relojThread;
+    private Thread tiempoThread;
     protected final ImageIcon negro = new ImageIcon(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/Imagenes/CuadradoNegro.png")));
 
     //Constructores.
@@ -141,6 +142,9 @@ public class Logica {
             }
         	estaPausado = false;
         	miGui.despausar();
+        	synchronized(objetoTiempo){
+        		objetoTiempo.notify();
+        	}
         }
     }   
     /**
@@ -411,6 +415,9 @@ public class Logica {
 	    synchronized(objetoPausa) {
 	        objetoPausa.notify(); // Despausa el juego
 	    }
+	    synchronized(objetoTiempo) {
+	        objetoTiempo.notify(); 
+	    }
 	    tetriminoSiguiente = nuevoTetrimino();
 		agregarNuevoTetrimino();
 		
@@ -422,4 +429,11 @@ public class Logica {
 			tiempoThread.start();
 	    }
     }
+    /**
+     * Retorna el objeto del tiempo transcurrido
+     * @return el objeto del tiempo transcurrido
+     */
+	public Object obtenerObjTiempo() {
+		return objetoTiempo;
+	}
 }

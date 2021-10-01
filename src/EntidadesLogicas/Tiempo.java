@@ -16,12 +16,25 @@ public class Tiempo implements Runnable{
 	@Override
 	public void run() {
 		while (!miLogica.gameOver()) {
-        	try {
-				Thread.sleep(1000);
-				miLogica.aumentarTiempo();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
+			if(!miLogica.estaPausado()) {
+	        	try {
+					Thread.sleep(1000);
+					miLogica.aumentarTiempo();
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+        	}else {
+        		synchronized(miLogica.obtenerObjTiempo()) {
+                    while (miLogica.estaPausado()) {
+                    	try {
+                    		miLogica.obtenerObjTiempo().wait();
+                        }
+                    	catch(InterruptedException e) {
+                    		e.printStackTrace();
+                    	}
+                    }
+                }
+        	}
 		}	
 	}	
 }

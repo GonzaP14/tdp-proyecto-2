@@ -32,7 +32,7 @@ public class GUI {
 	private JLabel tetriminoSiguiente;
 	private AudioInputStream audio;
 	private Clip clip;
-	JLabel fondo;
+	private JLabel fondo;
 
 	/**
 	 * Create the application.
@@ -120,9 +120,7 @@ public class GUI {
 		frame.getContentPane().add(gameOverLbl);
 		frame.getContentPane().add(tetriminoSiguiente);
 		frame.getContentPane().add(pausaLbl);
-		frame.getContentPane().add(miGrillaGrafica);
-		frame.setVisible(true);
-		
+		frame.getContentPane().add(miGrillaGrafica);		
 		frame.addKeyListener(new KeyListener () {
 			
             public void keyTyped(KeyEvent e) {
@@ -263,7 +261,6 @@ public class GUI {
 			clip.loop(Clip.LOOP_CONTINUOUSLY);
 			clip.start();	
 		} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -278,9 +275,12 @@ public class GUI {
 			clipmovimiento.open(movimiento);
 			clipmovimiento.start();		
 		} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public void hacerVisibleVentana() {
+		frame.setVisible(true);
 	}
 }
 
