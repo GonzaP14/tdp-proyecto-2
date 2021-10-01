@@ -9,7 +9,6 @@ import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.IOException;
-
 import javax.swing.ImageIcon;
 import java.awt.Color;
 import javax.swing.border.BevelBorder;
@@ -17,9 +16,6 @@ import EntidadesLogicas.Logica;
 import java.awt.Font;
 import java.awt.SystemColor;
 import javax.sound.sampled.*;
-import javax.swing.JTextField;
-import javax.swing.JTextPane;
-import javax.swing.DropMode;
 
 public class GUI {
 	
@@ -38,24 +34,6 @@ public class GUI {
 	private AudioInputStream audio;
 	private Clip clip;
 	JLabel fondo;
-	
-	/**
-	 * (Llevar a clase Tetris)
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					GUI window = new GUI();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-				
-			}
-		});
-	}
 
 	/**
 	 * Create the application.
@@ -171,7 +149,7 @@ public class GUI {
 	                	miLogica.pausar_despausar();
 	                	break;
 	                case KeyEvent.VK_R:
-	                	//miLogica.restart();
+	                	reset();
 	                	break;
 	                case KeyEvent.VK_M:	            
 	                	if(clip.isRunning()) {
@@ -255,6 +233,17 @@ public class GUI {
 		ImageIcon img =new ImageIcon(imagen.getImage().getScaledInstance(tetriminoSiguiente.getWidth(), 70, Image.SCALE_SMOOTH));
 		tetriminoSiguiente.setIcon(img);
 	}
+	
+	/**
+	 * Reinicializa el juego
+	 */
+	public void reset() {	
+		pausaLbl.setVisible(false);
+		gameOverLbl.setVisible(false);
+		miLogica.reset();
+		miGrillaGrafica.reset();
+	}
+	
 	public void iniciarAudio() {
 		try {
 			audio= AudioSystem.getAudioInputStream(getClass().getResource("/Musica/musica.wav"));		
@@ -270,6 +259,7 @@ public class GUI {
 			e.printStackTrace();
 		}
 	}
+	
 	public void sonidoMovimiento() {
 		try {
 

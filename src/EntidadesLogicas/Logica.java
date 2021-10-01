@@ -243,21 +243,22 @@ public class Logica {
      * @param i Indica el tipo de operacion a realizar
      */
     public synchronized void operar(int i) {
-    	switch(i) {
-    		case moverAbajo:
-    			moverAbajo(i);
-    			
-    		break;
-    		case moverIzquierda:
-    		case moverDerecha: 
-    			moverLateralmente(i);
-
-    		break;
-    		case rotarIzquierda:
-    		case rotarDerecha: 
-    			rotar(i);
-
-    		break;
+    	if (!gameOver && !estaPausado) {
+	    	switch(i) {
+	    		case moverAbajo:
+	    			moverAbajo(i);
+	    		break;
+	    		
+	    		case moverIzquierda:
+	    		case moverDerecha: 
+	    			moverLateralmente(i);
+	    		break;
+	    		
+	    		case rotarIzquierda:
+	    		case rotarDerecha: 
+	    			rotar(i);
+	    		break;
+	    	}
     	}
     }
     
@@ -394,5 +395,31 @@ public class Logica {
      */
     public Object obtenerObj() {
     	return objetoPausa;
+    }
+    
+    /**
+     * Reinicia el juego
+     */
+    public void reset() {
+		miGrilla.reset();
+	    nivelActual = 0;
+	    puntajeActual = 0;
+	    
+	    minutos = 00;
+	    segundos = 00;
+	    estaPausado = false;
+	    synchronized(objetoPausa) {
+	        objetoPausa.notify(); // Despausa el juego
+	    }
+	    tetriminoSiguiente = nuevoTetrimino();
+		agregarNuevoTetrimino();
+		
+	    if (gameOver) {
+	    	gameOver = false;
+	    	relojThread = new Thread(miReloj);
+	        tiempoThread = new Thread(miTiempo);
+	    	relojThread.start();
+			tiempoThread.start();
+	    }
     }
 }
