@@ -13,17 +13,17 @@ public class FormaS extends Tetrimino {
 
 	/**
 	 * Crea un nuevo tetrimino con la forma S, rotacion y centro de pieza por defecto.
-	 * @param miGrilla Grilla a la cual el tetrimino pertenece
+	 * @param miGrilla Grilla a la cual el tetrimino pertenece.
 	 */
     public FormaS (Grilla miGrilla) {
         this (miGrilla, 0, miGrilla.getOrigenGrilla());
     }
     
     /**
-	 * Crea un nuevo tetrimino con la forma S
-	 * @param miGrilla Grilla a la cual el tetrimino pertenece
-	 * @param r Rotacion actual del tetrimino
-	 * @param centro Coordenadas actuales del bloque central del tetrimino en cuestion
+	 * Crea un nuevo tetrimino con la forma S.
+	 * @param miGrilla Grilla a la cual el tetrimino pertenece.
+	 * @param r Rotacion actual del tetrimino.
+	 * @param centro Coordenadas actuales del bloque central del tetrimino en cuestion.
 	 */
     public FormaS (Grilla miGrilla, int r, Par centro) {
         rotaciones = crearRotaciones();

@@ -12,10 +12,10 @@ import EntidadesLogicas.Par;
 public class FormaJ extends Tetrimino {	
 	
 	/**
-	 * Crea un nuevo tetrimino con la forma J
-	 * @param miGrilla Grilla a la cual el tetrimino pertenece
-	 * @param r Rotacion actual del tetrimino
-	 * @param centro Coordenadas actuales del bloque central del tetrimino en cuestion
+	 * Crea un nuevo tetrimino con la forma J.
+	 * @param miGrilla Grilla a la cual el tetrimino pertenece.
+	 * @param r Rotacion actual del tetrimino.
+	 * @param centro Coordenadas actuales del bloque central del tetrimino en cuestion.
 	 */
 	public FormaJ (Grilla miGrilla , int r , Par centro ) {		
 		rotacionActual = r;
@@ -42,7 +42,7 @@ public class FormaJ extends Tetrimino {
 	
 	/**
 	 * Crea un nuevo tetrimino con la forma J, rotacion y centro de pieza por defecto.
-	 * @param miGrilla Grilla a la cual el tetrimino pertenece
+	 * @param miGrilla Grilla a la cual el tetrimino pertenece.
 	 */
 	public FormaJ( Grilla miGrilla ) {
 		this(miGrilla, 0, miGrilla.getOrigenGrilla());

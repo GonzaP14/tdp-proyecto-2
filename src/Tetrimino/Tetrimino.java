@@ -79,8 +79,8 @@ public abstract class Tetrimino {
     }
     
     /**
-     * Mueve el tetrimino en el sentido correspondiente, segun el i dado.
-     * @param i Parametro de movimiento
+     * Mueve el Tetrimino en el sentido correspondiente, segun el i dado.
+     * @param i Parametro de movimiento.
      */
     public void mover(int i) {
     	if (i == Logica.moverDerecha) {
@@ -95,29 +95,29 @@ public abstract class Tetrimino {
 	}
     
     /**
-     * Mueve el tetrimino hacia la izquierda
+     * Mueve el Tetrimino hacia la izquierda.
      */
     private void moverIzquierda() {
     	centroPieza.setX(centroPieza.getX() - 1);
     }
     
     /**
-     * Mueve el tetrimino hacia la derecha
+     * Mueve el Tetrimino hacia la derecha.
      */
     private void moverDerecha () {
     	centroPieza.setX(centroPieza.getX() + 1);
     }
     
     /**
-     * Mueve el tetrimino hacia abajo
+     * Mueve el Tetrimino hacia abajo.
      */
     public void moverAbajo () {
     	centroPieza.setY(centroPieza.getY() + 1);
     }
     
     /*
-     * Retorna las posiciones actuales del tetrimino.
-     * @return Posiciones del tetrimino.
+     * Retorna las posiciones actuales del Tetrimino.
+     * @return Posiciones del Tetrimino.
      */
     public Par [] getPosicionesActuales() {
         return posicionesActuales;
@@ -133,15 +133,15 @@ public abstract class Tetrimino {
  
     /**
      * Retorna el par centro del Tetrimino. 
-     * @return Par asociado al centro Tetrimino
+     * @return Par asociado al centro Tetrimino.
      */
 	public Par getCentroPieza() {
 		return centroPieza;
 	}
 	
 	/**
-	 * 
-	 * @return Imagen del tetrimino en cuestion
+	 * Retorna la imagen de color asociada al Tetrimino.
+	 * @return Imagen del Tetrimino en cuestion.
 	 */
 	public ImageIcon getImagen() {
 		return imagen;
