@@ -11,10 +11,10 @@ import EntidadesLogicas.Par;
  */
 public class FormaO extends Tetrimino {
 	 /**
-	  * Crea un nuevo tetrimino con la forma O
-	  * @param miGrilla Grilla a la cual el tetrimino pertenece
-	  * @param r Rotacion actual del tetrimino
-	  * @param centro Coordenadas actuales del bloque central del tetrimino en cuestion
+	  * Crea un nuevo tetrimino con la forma O.
+	  * @param miGrilla Grilla a la cual el tetrimino pertenece.
+	  * @param r Rotacion actual del tetrimino.
+	  * @param centro Coordenadas actuales del bloque central del tetrimino en cuestion.
 	  */
 	public FormaO (Grilla miGrilla , int r , Par centro) {
 		rotacionActual = r;
@@ -28,7 +28,7 @@ public class FormaO extends Tetrimino {
 	
 	/**
 	 * Crea un nuevo tetrimino con la forma O, rotacion y centro de pieza por defecto.
-	 * @param miGrilla Grilla a la cual el tetrimino pertenece
+	 * @param miGrilla Grilla a la cual el tetrimino pertenece.
 	 */
 	public FormaO (Grilla miGrilla) {
         this (miGrilla, 0, miGrilla.getOrigenGrilla());
