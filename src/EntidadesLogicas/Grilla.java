@@ -129,5 +129,12 @@ public class Grilla {
     		grilla[p.getY() + t.getCentroPieza().getY()][p.getX() + t.getCentroPieza().getX()].setColor(t.getColor());
         }       
     }
-        
+    
+    public void reset() {
+		for(int filas = 0; filas<22; filas++) {
+            for(int columnas = 0; columnas < 10; columnas++) {                    
+                grilla[filas][columnas].setColor(negro);     
+            }
+        }
+	}    
 }

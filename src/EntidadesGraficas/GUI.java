@@ -80,7 +80,7 @@ public class GUI {
 		nivel.setBounds(515, 389, 129, 173);
 		frame.getContentPane().add(nivel);
 		
-		tiempo = new JLabel("0", SwingConstants.CENTER);
+		tiempo = new JLabel("00:00", SwingConstants.CENTER);
 		tiempo.setForeground(SystemColor.activeCaption);
 		tiempo.setFont(new Font("Ebrima", Font.BOLD, 41));
 		tiempo.setBounds(515, 573, 129, 173);
@@ -167,7 +167,7 @@ public class GUI {
 	                	miLogica.pausar_despausar();
 	                	break;
 	                case KeyEvent.VK_R:
-	                	//miLogica.restart();
+	                	reset();
 	                	break;
                 }
             }
@@ -239,6 +239,17 @@ public class GUI {
 	public void mostrarTetriminoSiguiente(ImageIcon imagen) {	
 		ImageIcon img =new ImageIcon(imagen.getImage().getScaledInstance(tetriminoSiguiente.getWidth(), tetriminoSiguiente.getHeight(), Image.SCALE_SMOOTH));
 		tetriminoSiguiente.setIcon(img);
+	}
+	
+	/**
+	 * Reinicializa el juego
+	 */
+	public void reset() {	
+		pausaLbl.setVisible(false);
+		gameOverLbl.setVisible(false);
+		
+		miLogica.reset();
+		miGrillaGrafica.reset();
 	}
 }
 

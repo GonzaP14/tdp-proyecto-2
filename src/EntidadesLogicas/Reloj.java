@@ -10,6 +10,9 @@ public class Reloj implements Runnable{
 		this.miLogica = LOGICA;
 	}
     
+	/**
+	 * Inicia el reloj para la gravedad del juego
+	 */
 	@Override
 	public void run() {
 		while (!miLogica.gameOver()) {

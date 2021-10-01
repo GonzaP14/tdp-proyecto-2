@@ -97,5 +97,15 @@ public class GrillaGrafica extends JPanel{
         }
     }		
 	
+	/**
+	 * Reinicializa la grilla grafica
+	 */
+	public void reset() {
+    	for(int filas=21; filas >= 0; filas--) {
+            for (int j = 0; j < 10; j++) {
+                getJLabelAt(j, filas).setIcon(negro);
+            }
+        }
+    }
 }
 	
