@@ -17,7 +17,6 @@ public class Tetris {
 			public void run() {
 				try {
 					GUI window = new GUI();
-					//window.visualizar(); // SetVisible  frame
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

@@ -1,6 +1,5 @@
 package EntidadesGraficas;
 
-import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
@@ -122,6 +121,7 @@ public class GUI {
 		frame.getContentPane().add(tetriminoSiguiente);
 		frame.getContentPane().add(pausaLbl);
 		frame.getContentPane().add(miGrillaGrafica);
+		frame.setVisible(true);
 		
 		frame.addKeyListener(new KeyListener () {
 			
@@ -156,6 +156,7 @@ public class GUI {
 	                		clip.stop();
 	                	}
 	                	else if(!clip.isRunning()){
+	                		clip.loop(Clip.LOOP_CONTINUOUSLY);
 	                		clip.start();
 	                	}
 	                	break;
@@ -206,7 +207,7 @@ public class GUI {
 	 */
 	public void mostrarGameOver() {	
 		gameOverLbl.setVisible(true);
-		clip.stop();
+		clip.close();
 	}
 	
 	/**
@@ -222,6 +223,7 @@ public class GUI {
 	 */
 	public void despausar() {
 		pausaLbl.setVisible(false);
+		clip.loop(Clip.LOOP_CONTINUOUSLY);
 		clip.start();
 	}
 
@@ -240,31 +242,39 @@ public class GUI {
 	public void reset() {	
 		pausaLbl.setVisible(false);
 		gameOverLbl.setVisible(false);
+		clip.close();
+		iniciarMusica();
 		miLogica.reset();
 		miGrillaGrafica.reset();
 	}
 	
-	public void iniciarAudio() {
+	/**
+	 * Inicia la musica del juego.
+	 */
+	public void iniciarMusica() {
 		try {
 			audio= AudioSystem.getAudioInputStream(getClass().getResource("/Musica/musica.wav"));		
-			clip =AudioSystem.getClip();
+			clip = AudioSystem.getClip();
 			clip.open(audio);
 			clip.loop(Clip.LOOP_CONTINUOUSLY);
 			FloatControl gainControl = 
 				    (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-				gainControl.setValue(-15.0f); // Reduce volume by 10 decibels.
-			clip.start();		
+				gainControl.setValue(-15.0f); // Reduce el volumen en 15 decibeles.
+			clip.loop(Clip.LOOP_CONTINUOUSLY);
+			clip.start();	
 		} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	
+	/**
+	 * Reproduce el sonido de un movimiento o rotacion del tetrimino.
+	 */
 	public void sonidoMovimiento() {
 		try {
-
-			AudioInputStream movimiento= AudioSystem.getAudioInputStream(getClass().getResource("/Musica/movimiento.wav"));		
-			Clip clipmovimiento =AudioSystem.getClip();
+			AudioInputStream movimiento = AudioSystem.getAudioInputStream(getClass().getResource("/Musica/movimiento.wav"));		
+			Clip clipmovimiento = AudioSystem.getClip();
 			clipmovimiento.open(movimiento);
 			clipmovimiento.start();		
 		} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {

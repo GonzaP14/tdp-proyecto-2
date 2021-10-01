@@ -363,7 +363,7 @@ public class Logica {
     public void iniciarJuego() {
     	tetriminoSiguiente = nuevoTetrimino();
     	agregarNuevoTetrimino();
-    	miGui.iniciarAudio();
+    	miGui.iniciarMusica();
     	iniciarReloj();
     	iniciarTiempo();
     }
