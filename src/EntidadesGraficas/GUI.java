@@ -17,6 +17,9 @@ import EntidadesLogicas.Logica;
 import java.awt.Font;
 import java.awt.SystemColor;
 import javax.sound.sampled.*;
+import javax.swing.JTextField;
+import javax.swing.JTextPane;
+import javax.swing.DropMode;
 
 public class GUI {
 	
@@ -169,6 +172,14 @@ public class GUI {
 	                	break;
 	                case KeyEvent.VK_R:
 	                	//miLogica.restart();
+	                	break;
+	                case KeyEvent.VK_M:	            
+	                	if(clip.isRunning()) {
+	                		clip.stop();
+	                	}
+	                	else if(!clip.isRunning()){
+	                		clip.start();
+	                	}
 	                	break;
                 }
             }
