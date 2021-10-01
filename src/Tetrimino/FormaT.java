@@ -5,7 +5,6 @@ import javax.swing.ImageIcon;
 import EntidadesLogicas.Grilla;
 import EntidadesLogicas.Par;
 
-
 /**
  * Class FormaT - Modela un Tetrimino 'T' del Juego.
  * @author Grupo N°2: Messina Nicolas, Mazzino Albano Manuel, Perez Gonzalo Martín, Mandolesi Bruno.
@@ -37,8 +36,7 @@ public class FormaT extends Tetrimino {
     }
     
     /**
-	 * 
-	 * @return Devuelve las rotaciones posibles del tetrimino en cuestion
+	 * @return Devuelve las rotaciones posibles del Tetrimino 'T'.
 	 */
 	public Par[][] crearRotaciones() {
 		Par[][] rotaciones = new Par[][]{
@@ -50,6 +48,7 @@ public class FormaT extends Tetrimino {
 		return rotaciones;
 	}
     
+	@Override
     public Tetrimino clone() {
         return new FormaT (miGrilla, rotacionActual, centroPieza.clone());
     }

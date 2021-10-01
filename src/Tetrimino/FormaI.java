@@ -36,10 +36,9 @@ public class FormaI extends Tetrimino {
 	}
 	
 	/**
-	 * 
-	 * @return Devuelve las rotaciones posibles del tetrimino en cuestion
+	 * @return Devuelve las rotaciones posibles del Tetrimino 'I'.
 	 */
-	public Par[][] crearRotaciones() {
+	private Par[][] crearRotaciones() {
 		Par[][] rotaciones = new Par[][]{
 			{ new Par(0, 1), new Par(1, 1), new Par(2, 1), new Par(3, 1) },
             { new Par(1, 0), new Par(1, 1), new Par(1, 2), new Par(1, 3) },
@@ -50,6 +49,7 @@ public class FormaI extends Tetrimino {
 		return rotaciones;
 	}
 	
+	@Override
 	public Tetrimino clone() {
 		return new FormaI(miGrilla , rotacionActual , centroPieza.clone() );
 	}

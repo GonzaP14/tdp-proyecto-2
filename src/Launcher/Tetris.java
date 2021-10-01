@@ -1,22 +1,29 @@
 package Launcher;
 
-//import PartesGraficas.GUI;
+import java.awt.EventQueue;
+import EntidadesGraficas.GUI;
 
 /**
  * Class Tetris - Modela el Launcher del juego.
- * @author Grupo N°.
+ * @author Grupo N°2: Messina Nicolas, Mazzino Albano Manuel, Perez Gonzalo Martín, Mandolesi Bruno.
  */
 public class Tetris {
 	
-	public static void main(String [] args) {
-        //Schedule a job for the event-dispatching thread:
-        //creating and showing this application's GUI.
-        javax.swing.SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-            	//GUI window = new GUI();
-            	//window.setVisible(true);
-            }
-        });
-    }
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					GUI window = new GUI();
+					//window.visualizar(); // SetVisible  frame
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				
+			}
+		});
+	}
 	
 }

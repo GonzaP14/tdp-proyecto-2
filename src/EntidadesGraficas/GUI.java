@@ -4,20 +4,22 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
-
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.IOException;
+
 import javax.swing.ImageIcon;
 import java.awt.Color;
-
 import javax.swing.border.BevelBorder;
-
 import EntidadesLogicas.Logica;
-
 import java.awt.Font;
 import java.awt.SystemColor;
+import javax.sound.sampled.*;
+import javax.swing.JTextField;
+import javax.swing.JTextPane;
+import javax.swing.DropMode;
 
 public class GUI {
 	
@@ -33,6 +35,8 @@ public class GUI {
 	private JLabel gameOverLbl;
 	private JLabel tiempo;
 	private JLabel tetriminoSiguiente;
+	private AudioInputStream audio;
+	private Clip clip;
 	JLabel fondo;
 	
 	/**
@@ -80,7 +84,7 @@ public class GUI {
 		nivel.setBounds(515, 389, 129, 173);
 		frame.getContentPane().add(nivel);
 		
-		tiempo = new JLabel("00:00", SwingConstants.CENTER);
+		tiempo = new JLabel("0", SwingConstants.CENTER);
 		tiempo.setForeground(SystemColor.activeCaption);
 		tiempo.setFont(new Font("Ebrima", Font.BOLD, 41));
 		tiempo.setBounds(515, 573, 129, 173);
@@ -167,7 +171,15 @@ public class GUI {
 	                	miLogica.pausar_despausar();
 	                	break;
 	                case KeyEvent.VK_R:
-	                	reset();
+	                	//miLogica.restart();
+	                	break;
+	                case KeyEvent.VK_M:	            
+	                	if(clip.isRunning()) {
+	                		clip.stop();
+	                	}
+	                	else if(!clip.isRunning()){
+	                		clip.start();
+	                	}
 	                	break;
                 }
             }
@@ -216,6 +228,7 @@ public class GUI {
 	 */
 	public void mostrarGameOver() {	
 		gameOverLbl.setVisible(true);
+		clip.stop();
 	}
 	
 	/**
@@ -223,6 +236,7 @@ public class GUI {
 	 */
 	public void pausar() {
 		pausaLbl.setVisible(true);
+		clip.stop();
 	}
 	
 	/**
@@ -230,6 +244,7 @@ public class GUI {
 	 */
 	public void despausar() {
 		pausaLbl.setVisible(false);
+		clip.start();
 	}
 
 	/**
@@ -237,19 +252,35 @@ public class GUI {
 	 * @param imagen La imagen del tetrimino en cuestion
 	 */
 	public void mostrarTetriminoSiguiente(ImageIcon imagen) {	
-		ImageIcon img =new ImageIcon(imagen.getImage().getScaledInstance(tetriminoSiguiente.getWidth(), tetriminoSiguiente.getHeight(), Image.SCALE_SMOOTH));
+		ImageIcon img =new ImageIcon(imagen.getImage().getScaledInstance(tetriminoSiguiente.getWidth(), 70, Image.SCALE_SMOOTH));
 		tetriminoSiguiente.setIcon(img);
 	}
-	
-	/**
-	 * Reinicializa el juego
-	 */
-	public void reset() {	
-		pausaLbl.setVisible(false);
-		gameOverLbl.setVisible(false);
-		
-		miLogica.reset();
-		miGrillaGrafica.reset();
+	public void iniciarAudio() {
+		try {
+			audio= AudioSystem.getAudioInputStream(getClass().getResource("/Musica/musica.wav"));		
+			clip =AudioSystem.getClip();
+			clip.open(audio);
+			clip.loop(Clip.LOOP_CONTINUOUSLY);
+			FloatControl gainControl = 
+				    (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+				gainControl.setValue(-15.0f); // Reduce volume by 10 decibels.
+			clip.start();		
+		} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	public void sonidoMovimiento() {
+		try {
+
+			AudioInputStream movimiento= AudioSystem.getAudioInputStream(getClass().getResource("/Musica/movimiento.wav"));		
+			Clip clipmovimiento =AudioSystem.getClip();
+			clipmovimiento.open(movimiento);
+			clipmovimiento.start();		
+		} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
 
