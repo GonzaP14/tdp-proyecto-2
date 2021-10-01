@@ -122,8 +122,8 @@ public class Logica {
     }
     
     /**
-     * Posiblemente necesario
-     * @return
+     * Retorna el tetrimino siguiente a caer en el juego
+     * @return Tetrimino siguiente a caer en el juego
      */
     public Tetrimino getTetriminoSiguiente () {
     	return tetriminoSiguiente;
@@ -150,7 +150,7 @@ public class Logica {
     /**
      * Comando para borrar las lineas que se completan cuando acoplamos un tetrimino
      */
-    public void borrarLineas() {
+    private void borrarLineas() {
     	boolean hueco;
     	int filasEliminadas = 0;
     	
@@ -269,7 +269,7 @@ public class Logica {
     /**
      * Mueve el tetrimino actual hacia abajo
      */
-    public void moverAbajo(int i) {
+    private void moverAbajo(int i) {
     	
     	// Si puede mover abajo
     	if (tetriminoActual.puedeMover(i)) {
@@ -293,7 +293,7 @@ public class Logica {
     /**
      * Mueve el tetrimino lateralmente y actualizar el estado del juego en base a este cambio
      */
-    public void moverLateralmente(int i) {
+    private void moverLateralmente(int i) {
     	if (tetriminoActual.puedeMover(i)) {
     		miGrillaGrafica.actualizar(posicionesParaGUI(tetriminoActual.getPosicionesActuales()), miGrilla.getNegro());
     		tetriminoActual.mover(i);
@@ -305,7 +305,7 @@ public class Logica {
     /**
      * Permite rotar el tetrimino y actualizar el estado del juego en base a ello
      */
-	public void rotar(int i) {
+	private void rotar(int i) {
 		if (tetriminoActual.puedeRotar(i)) {
     		miGrillaGrafica.actualizar(posicionesParaGUI(tetriminoActual.getPosicionesActuales()), miGrilla.getNegro());
     		tetriminoActual.rotar(i);

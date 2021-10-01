@@ -111,7 +111,7 @@ public abstract class Tetrimino {
     /**
      * Mueve el Tetrimino hacia abajo.
      */
-    public void moverAbajo () {
+    private void moverAbajo () {
     	centroPieza.setY(centroPieza.getY() + 1);
     }
     
